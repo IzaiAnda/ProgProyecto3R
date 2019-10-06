@@ -1,5 +1,6 @@
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
@@ -88,12 +89,36 @@ public class BD {
 		System.out.println("Table created successfully");
 	}
 	
+	public String select(String code) {
+		String i = "No hay nada";
+		try { 
+			startBD();
+			stmt = c.createStatement();
+			ResultSet rs = stmt.executeQuery( "SELECT * FROM "+ code +";" );
+			
+			i = rs.getString(2);
+			
+			rs.close();
+			stmt.close();
+			c.close();
+		} catch ( Exception e ) {
+			logger.log(Level.SEVERE,  e.getClass().getName() + ": " + e.getMessage() );
+			System.exit(0);
+		}
+		logger.log(Level.FINER, "Operation done successfully");
+
+
+		return i;
+	}
+	
 	public static void main(String[] args) {
 		BD b= new BD();
 		
 		//b.create();
 		
-		b.insert("PLAYER(NAME_P, PASSWORD)", "('IZAI','123')");
+		//b.insert("PLAYER(NAME_P, PASSWORD)", "('IZAI','123')");
+		
+		System.out.println(b.select("PLAYER"));
 		
 	}
 	
