@@ -43,6 +43,7 @@ public class BD {
 			c.close();
 		} catch ( Exception e ) {
 			logger.log(Level.SEVERE,  e.getClass().getName() + ": " + e.getMessage() );
+			System.out.println(e);
 			System.exit(0);
 		}
 		logger.log(Level.FINER, "Records created successfully");
@@ -57,6 +58,7 @@ public class BD {
 					"("+code+");"; 
 			stmt.executeUpdate(sql);
 			stmt.close();
+			c.commit();
 			c.close();
 		} catch ( Exception e ) {
 			logger.log(Level.SEVERE,  e.getClass().getName() + ": " + e.getMessage() );
@@ -77,6 +79,7 @@ public class BD {
 			//String sql = "CREATE TABLE LM ( NAME_L VARCHAR(30) NOT NULL PRIMARY KEY,NAME_M VARCHAR(30) NOT NULL, PI INTEGER NOT NULL);";
 			stmt.executeUpdate(sql);
 			stmt.close();
+			c.commit();
 			c.close();
 		} catch ( Exception e ) {
 			logger.log(Level.SEVERE,  e.getClass().getName() + ": " + e.getMessage() );
@@ -88,7 +91,9 @@ public class BD {
 	public static void main(String[] args) {
 		BD b= new BD();
 		
-		b.create();
+		//b.create();
+		
+		b.insert("PLAYER(NAME_P, PASSWORD)", "('IZAI','123')");
 		
 	}
 	
