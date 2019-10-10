@@ -1,5 +1,6 @@
 package ventanas;
 
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.FlowLayout;
 
@@ -32,15 +33,20 @@ public class VentanaInicioJuego extends JFrame {
 		contentpane.setLayout(null);
 		
 		labelPkm.setIcon(new ImageIcon(VentanaInicioJuego.class.getResource("/images/pkm.png")));
-		labelPkm.setBounds(0, 0, 750, 500);
+		labelPkm.setBounds(25, -50, altura, anchura);
 		contentpane.add(labelPkm);
+		
+		btnJugar.setText("Pulse para jugar");
+		btnJugar.setBackground(new Color(255, 175, 175));
+		btnJugar.setBounds(250, 300, 200, 20);
+		contentpane.add(btnJugar);
 		
 		labelfondo.setIcon(new ImageIcon(VentanaInicioJuego.class.getResource("/images/background.png")));
 		labelfondo.setBounds(0, 0, altura, anchura);
 		contentpane.add(labelfondo);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setSize(750, 500);
+		setSize(altura, anchura);
 		setTitle("DeustMon");
 	}
 
