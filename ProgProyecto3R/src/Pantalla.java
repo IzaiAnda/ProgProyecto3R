@@ -28,6 +28,8 @@ public class Pantalla extends JFrame{
 		this.setTitle("ChalMonsters");
 		this.setVisible(true);
 	}
+	
+
 
 	
 }

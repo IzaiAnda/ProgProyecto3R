@@ -1,22 +1,13 @@
-import javax.swing.SwingUtilities;
+import ventanas.VentanaInicioJuego;
+
 
 public class Main {
 
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-
-		SwingUtilities.invokeLater(new Runnable() {
-
-			@Override
-			public void run() {
-
-				new Pantalla();
-
-			}
-		});
-
+		VentanaInicioJuego ventana = new VentanaInicioJuego(750,487);
+		
+		ventana.setVisible(true);
 
 	}
 
