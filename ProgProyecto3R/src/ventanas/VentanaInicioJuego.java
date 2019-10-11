@@ -1,12 +1,8 @@
 package ventanas;
 
 import java.awt.Color;
-import java.awt.Container;
-import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -25,11 +21,12 @@ public class VentanaInicioJuego extends JFrame {
 
 	private JPanel contentpane = new JPanel();
 	
-	JButton btnJugar = new JButton();
-	JLabel labelPkm = new JLabel();
-	JLabel labelfondo = new JLabel();
-	JLabel labelLogin = new JLabel();
-	JTextField textLogin = new JTextField();
+	private JButton btnJugar = new JButton();
+	private JButton btnAceptar = new JButton();
+	private JLabel labelPkm = new JLabel();
+	private JLabel labelfondo = new JLabel();
+	private JLabel labelLogin = new JLabel();
+	private JTextField textLogin = new JTextField();
 	
 
 	public VentanaInicioJuego(int altura, int anchura) {
@@ -48,6 +45,9 @@ public class VentanaInicioJuego extends JFrame {
 		btnJugar.setBounds(250, 300, 200, 20);
 		contentpane.add(btnJugar);
 		
+		labelfondo.setIcon(new ImageIcon(VentanaInicioJuego.class.getResource("/images/background.png")));
+		labelfondo.setBounds(0, 0, altura, anchura);
+		contentpane.add(labelfondo);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(altura, anchura);
@@ -67,44 +67,33 @@ public class VentanaInicioJuego extends JFrame {
 				textLogin.setText("Introduce usuario:");
 				contentpane.add(textLogin);
 				
+				btnAceptar.setText("Aceptar");
+				btnAceptar.setBackground(new Color(255, 175, 175));
+				btnAceptar.setBounds(500, 300, 100, 20);
+				contentpane.add(btnAceptar);
+				btnAceptar.setVisible(true);
+				
 				//No consigo que se vea
 				
-				/*labelLogin.setText("Introduzca usuario:");
+				labelLogin.setText("Introduzca usuario:");
 				labelLogin.setBounds(0, 0, 200, 20);
 				labelLogin.setBackground(new Color(255,175,175));
-				contentpane.add(labelLogin);*/
+				contentpane.add(labelLogin);
 				
 			}
 		});
-		textLogin.addKeyListener(new KeyListener() {
+		btnAceptar.addActionListener(new ActionListener() {
 			
 			@Override
-			public void keyTyped(KeyEvent e) {
-				switch (e.getKeyCode()) {
-					case KeyEvent.VK_ENTER:
-						//Abrir ventana seleccion
-						
-						break;
-				}
-				
-			}
-			
-			@Override
-			public void keyReleased(KeyEvent e) {
+			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void keyPressed(KeyEvent e) {
-				// TODO Auto-generated method stub
-				
+				VentanaSeleccion ventana2 = new VentanaSeleccion(750,422);
+				ventana2.setVisible(true);
+				VentanaInicioJuego.this.dispose();
 			}
 		});
 	
-		labelfondo.setIcon(new ImageIcon(VentanaInicioJuego.class.getResource("/images/background.png")));
-		labelfondo.setBounds(0, 0, altura, anchura);
-		contentpane.add(labelfondo);
+		
 	}
 
 }
