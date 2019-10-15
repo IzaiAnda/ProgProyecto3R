@@ -11,9 +11,9 @@ public class VentanaOpciones extends JFrame{
 
 	public VentanaOpciones(int altura, int anchura) {
 		
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
 		setSize(altura, anchura);
-		setTitle("DeustMon");
+		setTitle("Options");
 	}
 
 }

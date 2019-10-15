@@ -11,9 +11,8 @@ public class VentanaPkdex extends JFrame{
 
 	public VentanaPkdex(int altura, int anchura) {
 		
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(altura, anchura);
-		setTitle("DeustMon");
+		setTitle("MonsterWiki");
 	}
 
 }

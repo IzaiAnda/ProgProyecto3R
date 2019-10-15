@@ -11,10 +11,10 @@ public class VentanaMovimientos extends JFrame{
 
 	public VentanaMovimientos(int altura, int anchura) {
 		
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
 		setSize(altura, anchura);
 		setLocation(400, 250);
-		setTitle("DeustMon");
+		setTitle("Moves");
 	}
 
 }
