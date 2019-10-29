@@ -21,6 +21,7 @@ public class VentanaNiveles extends JFrame{
 	private JPanel contentpane = new JPanel();
 	private JLabel labelfondo = new JLabel();
 	private JButton botonCombate = new JButton();
+	private JButton botonAtras = new JButton();
 
 	public VentanaNiveles(int altura, int anchura) {
 		contentpane = new JPanel();
@@ -39,6 +40,12 @@ public class VentanaNiveles extends JFrame{
 		labelfondo.setBounds(0, 0, altura, anchura);
 		contentpane.add(labelfondo);
 		
+		botonAtras.setText("Atrás");
+		botonAtras.setBackground(new Color(255, 175, 175));
+		botonAtras.setBounds(150,250,100,20);
+		contentpane.add(botonAtras);
+		
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(altura, anchura);
 		setTitle("DeustMon");
@@ -49,6 +56,17 @@ public class VentanaNiveles extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				VentanaCombate ventanac = new VentanaCombate(750, 422);
+				ventanac.setVisible(true);
+				VentanaNiveles.this.dispose();
+				
+			}
+		});
+		
+		botonAtras.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				VentanaSeleccion ventanac = new VentanaSeleccion(750, 422);
 				ventanac.setVisible(true);
 				VentanaNiveles.this.dispose();
 				
