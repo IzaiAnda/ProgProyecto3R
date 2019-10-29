@@ -10,7 +10,7 @@ public class Monster {
 	public Monster(String name, int hP, int atk, int def, int vel) {
 		super();
 		this.name = name;
-		HP = hP;
+		this.HP = hP;
 		this.atk = atk;
 		this.def = def;
 		this.vel = vel;
@@ -19,7 +19,7 @@ public class Monster {
 	public Monster() {
 		super();
 		this.name = "";
-		HP = 0;
+		this.HP = 0;
 		this.atk = 0;
 		this.def = 0;
 		this.vel = 0;

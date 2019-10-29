@@ -27,6 +27,7 @@ public class VentanaInicioJuego extends JFrame {
 	private JLabel labelfondo = new JLabel();
 	private JLabel labelLogin = new JLabel();
 	private JTextField textLogin = new JTextField();
+	private JTextField textPass = new JTextField();
 	
 
 	public VentanaInicioJuego(int altura, int anchura) {
@@ -66,6 +67,10 @@ public class VentanaInicioJuego extends JFrame {
 				textLogin.setBounds(250, 300, 200, 20);
 				textLogin.setText("Introduce usuario:");
 				contentpane.add(textLogin);
+				
+				textPass.setBounds(250,350,200,20);
+				textPass.setText("Introduce contraseña");
+				contentpane.add(textPass);
 				
 				btnAceptar.setText("Aceptar");
 				btnAceptar.setBackground(new Color(255, 175, 175));
