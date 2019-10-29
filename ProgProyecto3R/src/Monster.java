@@ -67,7 +67,7 @@ public class Monster {
 
 	@Override
 	public String toString() {
-		return "Monster [name=" + name + ", HP=" + HP + ", atk=" + atk + ", def=" + def + ", vel=" + vel + "]";
+		return "Monster [" + name + ", " + HP + ", " + atk + ", " + def + ", " + vel + "]";
 	}
 	
 	
