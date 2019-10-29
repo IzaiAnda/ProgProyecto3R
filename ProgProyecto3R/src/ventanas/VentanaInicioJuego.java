@@ -76,7 +76,7 @@ public class VentanaInicioJuego extends JFrame {
 				//No consigo que se vea
 				
 				labelLogin.setText("Introduzca usuario:");
-				labelLogin.setBounds(0, 0, 200, 20);
+				labelLogin.setBounds(0, 0, 100, 20);
 				labelLogin.setBackground(new Color(255,175,175));
 				contentpane.add(labelLogin);
 				
