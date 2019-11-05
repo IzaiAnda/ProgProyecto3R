@@ -178,28 +178,28 @@ public class BD {
 		}	
 	}
 	
-	public static Monster selectMonster (String nom) {
-		Monster i = new Monster();
-		try {
-			startBD();
-			stmt2 = c.prepareStatement("SELECT * FROM MONSTER WHERE NAME_M = ? ");
-			stmt2.setString(1, nom);
-	
-			ResultSet rs = stmt2.executeQuery();
-			
-			i.setName(rs.getString(1));
-			i.setHP(rs.getInt(3));
-			i.setAtk(rs.getInt(4));
-			i.setDef(rs.getInt(5));
-			i.setVel(rs.getInt(6));
-			
-			stmt2.close();
-			c.close();
-		} catch (Exception e) {
-			System.out.println(e.getClass().getName() + ": " + e.getMessage());
-		}
-		return i;	
-	}
+//	public static Monster selectMonster (String nom) {
+//		Monster i = new Monster();
+//		try {
+//			startBD();
+//			stmt2 = c.prepareStatement("SELECT * FROM MONSTER WHERE NAME_M = ? ");
+//			stmt2.setString(1, nom);
+//	
+//			ResultSet rs = stmt2.executeQuery();
+//			
+//			i.setName(rs.getString(1));
+//			i.setHP(rs.getInt(3));
+//			i.setAtk(rs.getInt(4));
+//			i.setDef(rs.getInt(5));
+//			i.setVel(rs.getInt(6));
+//			
+//			stmt2.close();
+//			c.close();
+//		} catch (Exception e) {
+//			System.out.println(e.getClass().getName() + ": " + e.getMessage());
+//		}
+//		return i;	
+//	}
 	
 	public static void main(String[] args) throws SQLException {
 		BD b= new BD();
@@ -209,9 +209,9 @@ public class BD {
 		//b.insert("LEVEL(NAME_L, TXT)", "('MONTAÑA1','ES LA HORA DE LUCHAR')");
 		//b.insert("LP", "('IZA','MONTAÑA1')");
 		//System.out.println(b.select("PLAYER"));
-		Monster mon = new Monster("Popeye",100,100,100,100);
-		createMonster(mon);
-		System.out.println(selectMonster("Popeye"));
+		//Monster mon = new Monster("Popeye",100,100,100,100);
+		//createMonster(mon);
+		//System.out.println(selectMonster("Popeye"));
 		System.out.println(selectJugador("KEVIN", "PAPAYA"));
 		
 	}

@@ -1,6 +1,6 @@
 package monsters;
 
-public class Monster {
+public abstract class Monster {
 	
 	private String name;
 	private int HP;
@@ -71,5 +71,6 @@ public class Monster {
 		return "Monster [" + name + ", " + HP + ", " + atk + ", " + def + ", " + vel + "]";
 	}
 	
+	public abstract boolean efectividad(String type);
 	
 }

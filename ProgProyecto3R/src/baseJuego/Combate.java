@@ -4,8 +4,8 @@ import monsters.Monster;
 
 public class Combate extends Thread  {
 	
-	Monster mon1 = new Monster("Uno",200,20,20,20);
-	Monster mon2 = new Monster("Dos",200,20,20,20);
+//	Monster mon1 = new Monster("Uno",200,20,20,20);
+//	Monster mon2 = new Monster("Dos",200,20,20,20);
 	
 	//efectividad(1 normal, 2 ventaja), ataque del pokemon, poder del ataque, defensa del enemigo
 	
