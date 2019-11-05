@@ -1,22 +1,20 @@
 package monsters;
 
 public class MonsterFire extends Monster {
-	
+
 	public String type = "Fire";
 
-	public MonsterFire(String name, int hP, int atk, int def, int vel) {
-		super(name, hP, atk, def, vel);
+	public MonsterFire(String name, int lifePoints, int attack, int defense, int speed) {
+		super(name, lifePoints, attack, defense, speed);
 		this.type = "Fire";
 	}
 
 	@Override
 	public boolean efectividad(String type) {
-		if(type == "Water") {
+		if (type == "Water") {
 			return true;
 		}
 		return false;
 	}
-	
-	
-	
+
 }

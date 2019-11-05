@@ -1,4 +1,5 @@
 package baseJuego;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -13,127 +14,139 @@ import java.util.logging.Logger;
 import monsters.Monster;
 
 public class BD {
-	
+
 	static Connection c = null;
 	static Statement stmt = null;
 	static PreparedStatement stmt2 = null;
-	private static Logger logger = Logger.getLogger( "LoggerBD" );
+	private static Logger logger = Logger.getLogger("LoggerBD");
 
 	static {
 		try {
-			logger.setLevel( Level.FINEST);
-			logger.addHandler( new FileHandler( "LoggerBD.xml") );
-		} catch (Exception e) {}
+			logger.setLevel(Level.FINEST);
+			logger.addHandler(new FileHandler("LoggerBD.xml"));
+		} catch (Exception e) {
+		}
 	}
+
 	public static void startBD() {
 		try {
 			Class.forName("org.sqlite.JDBC");
 			c = DriverManager.getConnection("jdbc:sqlite:Deusmon.db");
 			c.setAutoCommit(false);
-			logger.log(Level.FINER,"Opened database successfully");
-		}catch (Exception e) {
-			
+			logger.log(Level.FINER, "Opened database successfully");
+		} catch (Exception e) {
+
 		}
 	}
-	
-	public void insert (String tName, String code) { //public String insert(String login, password, creation) {
+
+	public void insert(String tName, String code) { // public String insert(String login, password, creation) {
 
 		try {
 			startBD();
 
 			stmt = c.createStatement();
-			String sql = "INSERT INTO "+tName+
-					" VALUES "+ code+";"; 
-			
-			//PreparedStatement stmt = conn.prepareStatement("INSERT INTO USUARIO (LOGIN,PASSWORD,CREATION_DATE) VALUES (?,?,?)")
-			//stmt.setString(1, login)
-			//stmt.setString(1, password)
-			//stmt.setString(1, creation)
-			//stmt.executateUpdate();
-			
+			String sql = "INSERT INTO " + tName + " VALUES " + code + ";";
+
+			// PreparedStatement stmt = conn.prepareStatement("INSERT INTO USUARIO
+			// (LOGIN,PASSWORD,CREATION_DATE) VALUES (?,?,?)")
+			// stmt.setString(1, login)
+			// stmt.setString(1, password)
+			// stmt.setString(1, creation)
+			// stmt.executateUpdate();
+
 			stmt.executeUpdate(sql);
 			stmt.close();
 			c.commit();
 			c.close();
-		} catch ( Exception e ) {
-			logger.log(Level.SEVERE,  e.getClass().getName() + ": " + e.getMessage() );
+		} catch (Exception e) {
+			logger.log(Level.SEVERE, e.getClass().getName() + ": " + e.getMessage());
 			System.out.println(e);
 			System.exit(0);
 		}
 		logger.log(Level.FINER, "Records created successfully");
 
 	}
-	
-	public void create (String tName, String code) {
-		try { 
+
+	public void create(String tName, String code) {
+		try {
 			startBD();
 			stmt = c.createStatement();
-			String sql = "CREATE TABLE "+tName +
-					"("+code+");"; 
+			String sql = "CREATE TABLE " + tName + "(" + code + ");";
 			stmt.executeUpdate(sql);
 			stmt.close();
 			c.commit();
 			c.close();
-		} catch ( Exception e ) {
-			logger.log(Level.SEVERE,  e.getClass().getName() + ": " + e.getMessage() );
+		} catch (Exception e) {
+			logger.log(Level.SEVERE, e.getClass().getName() + ": " + e.getMessage());
 			System.exit(0);
 		}
 		System.out.println("Table created successfully");
 	}
-	
-	public void create () {
-		try { 
+
+	public void create() {
+		try {
 			startBD();
 			stmt = c.createStatement();
-			//String sql = "CREATE TABLE PLAYER ( NAME_P VARCHAR(30) NOT NULL PRIMARY KEY,PASSWORD VARCHAR(30) NOT NULL);";
-			//String sql = "CREATE TABLE MONSTER ( NAME_M VARCHAR(30) NOT NULL PRIMARY KEY,TYPE VARCHAR(30) NOT NULL, HP INTEGER NOT NULL, ATK INTEGER NOT NULL, DEF INTEGER NOT NULL, VEL INTEGER NOT NULL);";
-			//String sql = "CREATE TABLE MOVE ( NAME_MOV VARCHAR(30) NOT NULL PRIMARY KEY,TYPE VARCHAR(30) NOT NULL, DMG INTEGER NOT NULL, DESCRIPTION VARCHAR(30), PERCENT INTEGER);";
-			//String sql = "CREATE TABLE MM ( NAME_M VARCHAR(30) NOT NULL, NAME_MOV VARCHAR(30) NOT NULL, PRIMARY KEY (NAME_M, NAME_MOV), FOREIGN KEY (NAME_M) REFERENCES MONSTER(NAME_M),FOREIGN KEY (NAME_MOV) REFERENCES MOVE(NAME_MOV));";
-			//String sql = "CREATE TABLE LEVEL ( NAME_L VARCHAR(30) NOT NULL PRIMARY KEY,TXT VARCHAR(30) NOT NULL);";
-			//String sql = "CREATE TABLE LM ( NAME_L VARCHAR(30) NOT NULL,NAME_M VARCHAR(30) NOT NULL, PI INTEGER NOT NULL, PRIMARY KEY (NAME_L, NAME_M), FOREIGN KEY (NAME_M) REFERENCES MONSTER(NAME_M),FOREIGN KEY (NAME_L) REFERENCES LEVEL(NAME_L));";
+			// String sql = "CREATE TABLE PLAYER ( NAME_P VARCHAR(30) NOT NULL PRIMARY
+			// KEY,PASSWORD VARCHAR(30) NOT NULL);";
+			// String sql = "CREATE TABLE MONSTER ( NAME_M VARCHAR(30) NOT NULL PRIMARY
+			// KEY,TYPE VARCHAR(30) NOT NULL, HP INTEGER NOT NULL, ATK INTEGER NOT NULL, DEF
+			// INTEGER NOT NULL, VEL INTEGER NOT NULL);";
+			// String sql = "CREATE TABLE MOVE ( NAME_MOV VARCHAR(30) NOT NULL PRIMARY
+			// KEY,TYPE VARCHAR(30) NOT NULL, DMG INTEGER NOT NULL, DESCRIPTION VARCHAR(30),
+			// PERCENT INTEGER);";
+			// String sql = "CREATE TABLE MM ( NAME_M VARCHAR(30) NOT NULL, NAME_MOV
+			// VARCHAR(30) NOT NULL, PRIMARY KEY (NAME_M, NAME_MOV), FOREIGN KEY (NAME_M)
+			// REFERENCES MONSTER(NAME_M),FOREIGN KEY (NAME_MOV) REFERENCES
+			// MOVE(NAME_MOV));";
+			// String sql = "CREATE TABLE LEVEL ( NAME_L VARCHAR(30) NOT NULL PRIMARY
+			// KEY,TXT VARCHAR(30) NOT NULL);";
+			// String sql = "CREATE TABLE LM ( NAME_L VARCHAR(30) NOT NULL,NAME_M
+			// VARCHAR(30) NOT NULL, PI INTEGER NOT NULL, PRIMARY KEY (NAME_L, NAME_M),
+			// FOREIGN KEY (NAME_M) REFERENCES MONSTER(NAME_M),FOREIGN KEY (NAME_L)
+			// REFERENCES LEVEL(NAME_L));";
 			String sql = "CREATE TABLE LP ( NAME_P VARCHAR(30) NOT NULL,NAME_L VARCHAR(30) NOT NULL, PRIMARY KEY (NAME_P, NAME_L), FOREIGN KEY (NAME_P) REFERENCES PLAYER(NAME_P),FOREIGN KEY (NAME_L) REFERENCES LEVEL(NAME_L));";
 			stmt.executeUpdate(sql);
 			stmt.close();
 			c.commit();
 			c.close();
-		} catch ( Exception e ) {
-			logger.log(Level.SEVERE,  e.getClass().getName() + ": " + e.getMessage() );
+		} catch (Exception e) {
+			logger.log(Level.SEVERE, e.getClass().getName() + ": " + e.getMessage());
 			System.exit(0);
 		}
 		System.out.println("Table created successfully");
-	}	
-	
-	public String select(String code) { 
+	}
+
+	public String select(String code) {
 		String i = "No hay nada";
-		try { 
+		try {
 			startBD();
 			stmt = c.createStatement();
-			ResultSet rs = stmt.executeQuery( "SELECT * FROM "+ code +";" );
-			
+			ResultSet rs = stmt.executeQuery("SELECT * FROM " + code + ";");
+
 			i = rs.getString(1);
-			
+
 			rs.close();
 			stmt.close();
 			c.close();
-		} catch ( Exception e ) {
-			logger.log(Level.SEVERE,  e.getClass().getName() + ": " + e.getMessage() );
+		} catch (Exception e) {
+			logger.log(Level.SEVERE, e.getClass().getName() + ": " + e.getMessage());
 			System.exit(0);
 		}
 		logger.log(Level.FINER, "Operation done successfully");
 
-
 		return i;
 	}
-	
-	public static boolean selectJugador (String nom, String pass) {
+
+	public static boolean selectJugador(String nom, String pass) {
 		boolean i = false;
 		try {
 			startBD();
 			stmt2 = c.prepareStatement("SELECT NAME_P,PASSWORD FROM PLAYER WHERE NAME_P = ? AND PASSWORD = ?");
 			stmt2.setString(1, nom);
-			stmt2.setString(2, pass);	
+			stmt2.setString(2, pass);
 			ResultSet rs = stmt2.executeQuery();
-			if (rs.getString(1).equals(nom)&&rs.getString(2).equals(pass)) {
+			if (rs.getString(1).equals(nom) && rs.getString(2).equals(pass)) {
 				i = true;
 			}
 			stmt2.close();
@@ -141,43 +154,43 @@ public class BD {
 		} catch (Exception e) {
 			System.out.println(e.getClass().getName() + ": " + e.getMessage());
 		}
-		return i;	
+		return i;
 	}
-	
-	public static void createJugador (String nom, String pass) {
+
+	public static void createJugador(String nom, String pass) {
 		try {
 			startBD();
 			stmt2 = c.prepareStatement("INSERT INTO PLAYER (NAME_P,PASSWORD) VALUES (?, ?)");
 			stmt2.setString(1, nom);
 			stmt2.setString(2, pass);
 			stmt2.executeUpdate();
-			stmt2.close();	
+			stmt2.close();
 			c.commit();
 			c.close();
 		} catch (Exception e) {
 			System.out.println(e.getClass().getName() + ": " + e.getMessage());
-		}	
+		}
 	}
-	
-	public static void createMonster (Monster mon) {
+
+	public static void createMonster(Monster mon) {
 		try {
 			startBD();
 			stmt2 = c.prepareStatement("INSERT INTO MONSTER (NAME_M,TYPE,HP,ATK,DEF,VEL) VALUES (?,?,?,?,?,?)");
 			stmt2.setString(1, mon.getName());
 			stmt2.setString(2, "");
-			stmt2.setInt(3, mon.getHP());
-			stmt2.setInt(4, mon.getAtk());
-			stmt2.setInt(5, mon.getDef());
-			stmt2.setInt(6, mon.getVel());
+			stmt2.setInt(3, mon.getlifePoints());
+			stmt2.setInt(4, mon.getattack());
+			stmt2.setInt(5, mon.getdefense());
+			stmt2.setInt(6, mon.getspeed());
 			stmt2.executeUpdate();
-			stmt2.close();	
+			stmt2.close();
 			c.commit();
 			c.close();
 		} catch (Exception e) {
 			System.out.println(e.getClass().getName() + ": " + e.getMessage());
-		}	
+		}
 	}
-	
+
 //	public static Monster selectMonster (String nom) {
 //		Monster i = new Monster();
 //		try {
@@ -200,20 +213,20 @@ public class BD {
 //		}
 //		return i;	
 //	}
-	
+
 	public static void main(String[] args) throws SQLException {
-		BD b= new BD();
-		
-		//b.create();
-		//b.insert("PLAYER(NAME_P, PASSWORD)", "('IZAI','123')");
-		//b.insert("LEVEL(NAME_L, TXT)", "('MONTAÑA1','ES LA HORA DE LUCHAR')");
-		//b.insert("LP", "('IZA','MONTAÑA1')");
-		//System.out.println(b.select("PLAYER"));
-		//Monster mon = new Monster("Popeye",100,100,100,100);
-		//createMonster(mon);
-		//System.out.println(selectMonster("Popeye"));
+		BD b = new BD();
+
+		// b.create();
+		// b.insert("PLAYER(NAME_P, PASSWORD)", "('IZAI','123')");
+		// b.insert("LEVEL(NAME_L, TXT)", "('MONTAÑA1','ES LA HORA DE LUCHAR')");
+		// b.insert("LP", "('IZA','MONTAÑA1')");
+		// System.out.println(b.select("PLAYER"));
+		// Monster mon = new Monster("Popeye",100,100,100,100);
+		// createMonster(mon);
+		// System.out.println(selectMonster("Popeye"));
 		System.out.println(selectJugador("KEVIN", "PAPAYA"));
-		
+
 	}
-	
+
 }

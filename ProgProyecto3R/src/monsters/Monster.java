@@ -1,29 +1,29 @@
 package monsters;
 
 public abstract class Monster {
-	
-	private String name;
-	private int HP;
-	private int atk;
-	private int def;
-	private int vel;
 
-	public Monster(String name, int hP, int atk, int def, int vel) {
+	private String name;
+	private int lifePoints;
+	private int attack;
+	private int defense;
+	private int speed;
+
+	public Monster(String name, int lifePoints, int attack, int defense, int speed) {
 		super();
 		this.name = name;
-		this.HP = hP;
-		this.atk = atk;
-		this.def = def;
-		this.vel = vel;
+		this.lifePoints = lifePoints;
+		this.attack = attack;
+		this.defense = defense;
+		this.speed = speed;
 	}
-	
+
 	public Monster() {
 		super();
 		this.name = "";
-		this.HP = 0;
-		this.atk = 0;
-		this.def = 0;
-		this.vel = 0;
+		this.lifePoints = 0;
+		this.attack = 0;
+		this.defense = 0;
+		this.speed = 0;
 	}
 
 	public String getName() {
@@ -34,43 +34,43 @@ public abstract class Monster {
 		this.name = name;
 	}
 
-	public int getHP() {
-		return HP;
+	public int getlifePoints() {
+		return lifePoints;
 	}
 
-	public void setHP(int hP) {
-		HP = hP;
+	public void setlifePoints(int lifePoints) {
+		lifePoints = lifePoints;
 	}
 
-	public int getAtk() {
-		return atk;
+	public int getattack() {
+		return attack;
 	}
 
-	public void setAtk(int atk) {
-		this.atk = atk;
+	public void setattack(int attack) {
+		this.attack = attack;
 	}
 
-	public int getDef() {
-		return def;
+	public int getdefense() {
+		return defense;
 	}
 
-	public void setDef(int def) {
-		this.def = def;
+	public void setdefense(int defense) {
+		this.defense = defense;
 	}
 
-	public int getVel() {
-		return vel;
+	public int getspeed() {
+		return speed;
 	}
 
-	public void setVel(int vel) {
-		this.vel = vel;
+	public void setspeed(int speed) {
+		this.speed = speed;
 	}
 
 	@Override
 	public String toString() {
-		return "Monster [" + name + ", " + HP + ", " + atk + ", " + def + ", " + vel + "]";
+		return "Monster [" + name + ", " + lifePoints + ", " + attack + ", " + defense + ", " + speed + "]";
 	}
-	
+
 	public abstract boolean efectividad(String type);
-	
+
 }

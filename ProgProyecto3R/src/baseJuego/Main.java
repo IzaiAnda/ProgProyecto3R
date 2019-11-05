@@ -1,14 +1,13 @@
 package baseJuego;
-import ventanas.VentanaInicioJuego;
 
+import ventanas.StartGameWindow;
 
 public class Main {
 
-
 	public static void main(String[] args) {
-		VentanaInicioJuego ventana = new VentanaInicioJuego(750,422);
-		
-		ventana.setVisible(true);
+		StartGameWindow starWindow = new StartGameWindow(750, 422);
+
+		starWindow.setVisible(true);
 
 	}
 
