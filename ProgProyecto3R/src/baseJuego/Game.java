@@ -1,4 +1,4 @@
-package Base;
+package baseJuego;
 
 public class Game implements Runnable{
 

@@ -1,4 +1,6 @@
-package Base;
+package baseJuego;
+
+import monsters.Monster;
 
 public class Combate extends Thread  {
 	

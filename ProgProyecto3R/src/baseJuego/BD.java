@@ -1,4 +1,4 @@
-package Base;
+package baseJuego;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import monsters.Monster;
 
 public class BD {
 	

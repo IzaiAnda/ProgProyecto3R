@@ -1,4 +1,4 @@
-package Base;
+package baseJuego;
 import ventanas.VentanaInicioJuego;
 
 

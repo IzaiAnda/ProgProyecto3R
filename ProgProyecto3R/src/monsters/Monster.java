@@ -1,4 +1,4 @@
-package Base;
+package monsters;
 
 public class Monster {
 	
