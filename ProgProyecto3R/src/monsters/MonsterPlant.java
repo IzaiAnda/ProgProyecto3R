@@ -18,6 +18,5 @@ public class MonsterPlant extends Monster{
 			return true;
 		}
 		return false;
-	}
-	
+	}	
 }

@@ -6,7 +6,10 @@ public class MonsterFire extends Monster {
 
 	public MonsterFire(String name, int hP, int atk, int def, int vel) {
 		super(name, hP, atk, def, vel);
-		this.type = "Fire";
+	}
+
+	public String getType() {
+		return type;
 	}
 
 	@Override
