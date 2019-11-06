@@ -2,17 +2,17 @@ package ventanas;
 
 import javax.swing.JFrame;
 
-public class VentanaPkdex extends JFrame{
-	
+public class OptionsWindow extends JFrame {
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public VentanaPkdex(int altura, int anchura) {
-		
+	public OptionsWindow(int altura, int anchura) {
+
 		setSize(altura, anchura);
-		setTitle("MonsterWiki");
+		setTitle("Options");
 	}
 
 }
