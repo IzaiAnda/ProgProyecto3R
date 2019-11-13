@@ -16,6 +16,8 @@ import java.util.logging.Logger;
 import monsters.Monster;
 import monsters.MonsterFire;
 import monsters.MonsterPlant;
+import monsters.MonsterWater;
+import monsters.Monster.Type;
 
 public class BD {
 
@@ -175,13 +177,13 @@ public class BD {
 			System.out.println(e.getClass().getName() + ": " + e.getMessage());
 		}
 	}
-
-	public static void createMonster(Monster mon) {
+	
+	public static void createMonster(MonsterPlant mon) {
 		try {
 			startBD();
 			stmt2 = c.prepareStatement("INSERT INTO MONSTER (NAME_M,TYPE,HP,ATK,DEF,VEL) VALUES (?,?,?,?,?,?)");
 			stmt2.setString(1, mon.getName());
-			stmt2.setString(2, "");
+			stmt2.setString(2, "PLANT");
 			stmt2.setInt(3, mon.getlifePoints());
 			stmt2.setInt(4, mon.getattack());
 			stmt2.setInt(5, mon.getdefense());
@@ -194,7 +196,47 @@ public class BD {
 			System.out.println(e.getClass().getName() + ": " + e.getMessage());
 		}
 	}
-
+	
+	public static void createMonster(MonsterFire mon) {
+		try {
+			startBD();
+			stmt2 = c.prepareStatement("INSERT INTO MONSTER (NAME_M,TYPE,HP,ATK,DEF,VEL) VALUES (?,?,?,?,?,?)");
+			stmt2.setString(1, mon.getName());
+			stmt2.setString(2, "FIRE");
+			stmt2.setInt(3, mon.getlifePoints());
+			stmt2.setInt(4, mon.getattack());
+			stmt2.setInt(5, mon.getdefense());
+			stmt2.setInt(6, mon.getspeed());
+			stmt2.executeUpdate();
+			stmt2.close();
+			c.commit();
+			c.close();
+		} catch (Exception e) {
+			System.out.println(e.getClass().getName() + ": " + e.getMessage());
+		}
+	}
+	
+	public static void createMonster(MonsterWater mon) {
+		try {
+			startBD();
+			stmt2 = c.prepareStatement("INSERT INTO MONSTER (NAME_M,TYPE,HP,ATK,DEF,VEL) VALUES (?,?,?,?,?,?)");
+			stmt2.setString(1, mon.getName());
+			stmt2.setString(2, "WATER");
+			stmt2.setInt(3, mon.getlifePoints());
+			stmt2.setInt(4, mon.getattack());
+			stmt2.setInt(5, mon.getdefense());
+			stmt2.setInt(6, mon.getspeed());
+			stmt2.executeUpdate();
+			stmt2.close();
+			c.commit();
+			c.close();
+		} catch (Exception e) {
+			System.out.println(e.getClass().getName() + ": " + e.getMessage());
+		}
+	}
+	
+	
+	
 	//	public static Monster selectMonster (String nom) {
 	//		Monster i = new Monster();
 	//		try {
@@ -236,8 +278,14 @@ public class BD {
 					int attack = rs.getInt(4);
 					int defense = rs.getInt(5);
 					int speed = rs.getInt(6);
-					s.add(new MonsterFire(name, lifePoints, attack, defense, speed));
-				System.out.println("");
+					
+					if (type.equals("WATER")) {
+						s.add(new MonsterWater(name, lifePoints, attack, defense, speed));
+					}else if (type.equals("FIRE")) {
+						s.add(new MonsterFire(name, lifePoints, attack, defense, speed));
+					}else if (type.equals("PLANT")) {
+						s.add(new MonsterPlant(name, lifePoints, attack, defense, speed));
+					}
 			}
 
 			stmt2.close();
@@ -258,11 +306,17 @@ public class BD {
 		// b.insert("LEVEL(NAME_L, TXT)", "('MONTAÑA1','ES LA HORA DE LUCHAR')");
 		// b.insert("LP", "('IZA','MONTAÑA1')");
 		// System.out.println(b.select("PLAYER"));
-		// Monster mon = new MonsterPlant("Popeye",100,100,100,100);
-		// createMonster(mon);
+		MonsterPlant mon = new MonsterPlant("Plantita",100,100,100,100);
+		MonsterFire mon2 = new MonsterFire("Fuegillo",10,10,10,10);
+		MonsterWater mon3 = new MonsterWater("Gotita",50,50,50,50);
+		createMonster(mon2);
+		createMonster(mon3);
 		// System.out.println(selectMonster("Popeye"));
 		ArrayList<Monster> s = selectAllMonsters();
 		System.out.println(s.get(0));
+		System.out.println(s.get(1));
+		System.out.println(s.get(2));
+		
 		//System.out.println(selectJugador("KEVIN", "PAPAYA"));
 
 	}
