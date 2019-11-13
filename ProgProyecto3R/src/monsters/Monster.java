@@ -1,13 +1,22 @@
 package monsters;
 
+import monsters.Monster.Tipe;
+
 public abstract class Monster {
 
+	public enum Tipe{
+		FIRE,
+		PLANT,
+		WATER
+	}
+	
 	private String name;
 	private int lifePoints;
 	private int attack;
 	private int defense;
 	private int speed;
-
+	protected monsters.Monster.Tipe tipe;
+	
 	public Monster(String name, int lifePoints, int attack, int defense, int speed) {
 		super();
 		this.name = name;
@@ -15,6 +24,7 @@ public abstract class Monster {
 		this.attack = attack;
 		this.defense = defense;
 		this.speed = speed;
+		this.tipe = null;
 	}
 
 	public Monster() {
@@ -65,12 +75,16 @@ public abstract class Monster {
 	public void setspeed(int speed) {
 		this.speed = speed;
 	}
+	
+	public Tipe getTipe() {
+		return tipe;
+	}
 
 	@Override
 	public String toString() {
 		return "Monster [" + name + ", " + lifePoints + ", " + attack + ", " + defense + ", " + speed + "]";
 	}
 
-	public abstract boolean efectividad(String type);
+	public abstract boolean efectividad(Tipe tipe);
 
 }

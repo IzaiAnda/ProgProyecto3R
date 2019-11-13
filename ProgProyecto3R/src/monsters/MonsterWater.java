@@ -1,23 +1,21 @@
 package monsters;
 
-public class MonsterWater extends Monster {
+import monsters.Monster.Tipe;
 
-	public String type = "Water";
+public class MonsterWater extends Monster {
 
 	public MonsterWater(String name, int lifePoints, int attack, int defense, int speed) {
 		super(name, lifePoints, attack, defense, speed);
-	}
-
-	public String getType() {
-		return type;
+		this.tipe = Tipe.WATER;
 	}
 
 	@Override
-	public boolean efectividad(String type) {
-		if (type == "Plant") {
+	public boolean efectividad(Tipe tipe) {
+		if (tipe == Tipe.PLANT) {
 			return true;
 		}
 		return false;
 	}
+
 
 }
