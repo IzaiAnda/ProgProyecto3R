@@ -4,14 +4,18 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import monsters.Monster;
+import monsters.MonsterFire;
+import monsters.MonsterPlant;
 
 public class BD {
 
@@ -191,28 +195,60 @@ public class BD {
 		}
 	}
 
-//	public static Monster selectMonster (String nom) {
-//		Monster i = new Monster();
-//		try {
-//			startBD();
-//			stmt2 = c.prepareStatement("SELECT * FROM MONSTER WHERE NAME_M = ? ");
-//			stmt2.setString(1, nom);
-//	
-//			ResultSet rs = stmt2.executeQuery();
-//			
-//			i.setName(rs.getString(1));
-//			i.setHP(rs.getInt(3));
-//			i.setAtk(rs.getInt(4));
-//			i.setDef(rs.getInt(5));
-//			i.setVel(rs.getInt(6));
-//			
-//			stmt2.close();
-//			c.close();
-//		} catch (Exception e) {
-//			System.out.println(e.getClass().getName() + ": " + e.getMessage());
-//		}
-//		return i;	
-//	}
+	//	public static Monster selectMonster (String nom) {
+	//		Monster i = new Monster();
+	//		try {
+	//			startBD();
+	//			stmt2 = c.prepareStatement("SELECT * FROM MONSTER WHERE NAME_M = ? ");
+	//			stmt2.setString(1, nom);
+	//	
+	//			ResultSet rs = stmt2.executeQuery();
+	//			
+	//			i.setName(rs.getString(1));
+	//			i.setHP(rs.getInt(3));
+	//			i.setAtk(rs.getInt(4));
+	//			i.setDef(rs.getInt(5));
+	//			i.setVel(rs.getInt(6));
+	//			
+	//			stmt2.close();
+	//			c.close();
+	//		} catch (Exception e) {
+	//			System.out.println(e.getClass().getName() + ": " + e.getMessage());
+	//		}
+	//		return i;	
+	//	}
+
+	public static ArrayList selectAllMonsters () {
+		ArrayList<Monster> s = new ArrayList();
+		try {
+			startBD();
+			stmt2 = c.prepareStatement("SELECT * FROM MONSTER");
+			ResultSet rs = stmt2.executeQuery();
+
+			ResultSetMetaData rsmd = rs.getMetaData();
+			int columnsNumber = rsmd.getColumnCount();
+			
+			while (rs.next()) {
+
+					String name = rs.getString(1);
+					String type = rs.getString(2);
+					int lifePoints = rs.getInt(3);
+					int attack = rs.getInt(4);
+					int defense = rs.getInt(5);
+					int speed = rs.getInt(6);
+					s.add(new MonsterFire(name, lifePoints, attack, defense, speed));
+				System.out.println("");
+			}
+
+			stmt2.close();
+			c.close();
+		} catch (Exception e) {
+			System.out.println(e.getClass().getName() + ": " + e.getMessage());
+		}
+
+
+		return s;
+	}
 
 	public static void main(String[] args) throws SQLException {
 		BD b = new BD();
@@ -222,10 +258,12 @@ public class BD {
 		// b.insert("LEVEL(NAME_L, TXT)", "('MONTAÑA1','ES LA HORA DE LUCHAR')");
 		// b.insert("LP", "('IZA','MONTAÑA1')");
 		// System.out.println(b.select("PLAYER"));
-		// Monster mon = new Monster("Popeye",100,100,100,100);
+		// Monster mon = new MonsterPlant("Popeye",100,100,100,100);
 		// createMonster(mon);
 		// System.out.println(selectMonster("Popeye"));
-		System.out.println(selectJugador("KEVIN", "PAPAYA"));
+		ArrayList<Monster> s = selectAllMonsters();
+		System.out.println(s.get(0));
+		//System.out.println(selectJugador("KEVIN", "PAPAYA"));
 
 	}
 

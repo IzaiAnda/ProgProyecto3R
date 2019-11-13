@@ -82,7 +82,7 @@ public abstract class Monster {
 
 	@Override
 	public String toString() {
-		return "Monster [" + name + ", " + lifePoints + ", " + attack + ", " + defense + ", " + speed + "]";
+		return "Monster [" + name + ", " + type + ", " + lifePoints + ", " + attack + ", " + defense + ", " + speed + "]";
 	}
 
 	public abstract boolean efectividad(Type type);
