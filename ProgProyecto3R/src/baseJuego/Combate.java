@@ -1,15 +1,22 @@
 package baseJuego;
 
 import monsters.Monster;
+import monsters.MonsterFire;
+import monsters.MonsterPlant;
+import monsters.MonsterWater;
+import moves.Move;
 
-public class Combate extends Thread {
+public class Combate{
 
-//	Monster mon1 = new Monster("Uno",200,20,20,20);
-//	Monster mon2 = new Monster("Dos",200,20,20,20);
+	MonsterPlant mon = new MonsterPlant("Plantita",100,100,100,100);
+	MonsterFire mon2 = new MonsterFire("Fuegillo",10,10,10,10);
+	MonsterWater mon3 = new MonsterWater("Gotita",50,50,50,50);
 
+	Move move = new Move("Llamarada", 10);
+	
 	// efectividad(1 normal, 2 ventaja), ataque del pokemon, poder del ataque,
 	// defensa del enemigo
-
+	
 	public static int calculo(boolean advantage, int attack, int power, int defense) {
 
 		int exit = 0;
@@ -24,11 +31,19 @@ public class Combate extends Thread {
 
 		return exit;
 	}
-
-	@Override
-	public void run() {
-		// TODO Auto-generated method stub
-		super.run();
+	
+	public static int damageTaken(Monster attacker, Monster defender, Move action) {
+		
+		boolean advantage = defender.efectividad(attacker.getTipe());
+		System.out.println(advantage);
+		
+		calculo(advantage, attacker.getattack(), action.getDamage(), defender.getdefense());
+		
+		return 0;
+	}
+	
+	public static void main(String[] args) {
+		
 	}
 
 }
