@@ -13,6 +13,7 @@ public class Move {
 		this.damage = damage;
 		//this.percent = percent;
 	}
+	
 
 	public Move() {
 		super();
