@@ -103,7 +103,8 @@ public class StartGameWindow extends JFrame {
 				/*labelLogin.setText("Introduzca usuario:");
 				labelLogin.setBounds(0, 0, 100, 20);
 				labelLogin.setBackground(new Color(255,175,175));
-				contentpane.add(labelLogin);*/
+				contentpane.add(labelLogin);
+				hola*/
 				
 			}
 		});
