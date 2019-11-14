@@ -8,11 +8,11 @@ import moves.Move;
 
 public class Combate{
 
-	MonsterPlant mon = new MonsterPlant("Plantita",100,100,100,100);
-	MonsterFire mon2 = new MonsterFire("Fuegillo",10,10,10,10);
-	MonsterWater mon3 = new MonsterWater("Gotita",50,50,50,50);
+	static MonsterPlant mon = new MonsterPlant("Plantita",100,100,100,100);
+	static MonsterFire mon2 = new MonsterFire("Fuegillo",100,100,100,100);
+	static MonsterWater mon3 = new MonsterWater("Gotita",50,50,50,50);
 
-	Move move = new Move("Llamarada", 10);
+	static Move move = new Move("Llamarada", 10);
 	
 	// efectividad(1 normal, 2 ventaja), ataque del pokemon, poder del ataque,
 	// defensa del enemigo
@@ -37,12 +37,13 @@ public class Combate{
 		boolean advantage = defender.efectividad(attacker.getTipe());
 		System.out.println(advantage);
 		
-		calculo(advantage, attacker.getattack(), action.getDamage(), defender.getdefense());
+		return calculo(advantage, attacker.getattack(), action.getDamage(), defender.getdefense());
 		
-		return 0;
 	}
 	
 	public static void main(String[] args) {
+		
+		System.out.println(damageTaken(mon, mon2, move));
 		
 	}
 
