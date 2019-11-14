@@ -20,7 +20,6 @@ public class Move {
 		this.damage = 0;
 		//this.percent = 0;
 	}
-	
 
 	public String getName() {
 		return name;
