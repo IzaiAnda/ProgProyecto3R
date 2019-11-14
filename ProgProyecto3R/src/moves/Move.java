@@ -21,7 +21,6 @@ public class Move {
 		//this.percent = 0;
 	}
 	
-	
 
 	public String getName() {
 		return name;
