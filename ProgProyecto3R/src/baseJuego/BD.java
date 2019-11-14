@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -260,8 +261,8 @@ public class BD {
 	//		return i;	
 	//	}
 
-	public static ArrayList selectAllMonsters () {
-		ArrayList<Monster> s = new ArrayList();
+	public static LinkedList selectAllMonsters () {
+		LinkedList<Monster> s = new LinkedList();
 		try {
 			startBD();
 			stmt2 = c.prepareStatement("SELECT * FROM MONSTER");
@@ -312,7 +313,7 @@ public class BD {
 		createMonster(mon2);
 		createMonster(mon3);
 		// System.out.println(selectMonster("Popeye"));
-		ArrayList<Monster> s = selectAllMonsters();
+		LinkedList<Monster> s = selectAllMonsters();
 		System.out.println(s.get(0));
 		System.out.println(s.get(1));
 		System.out.println(s.get(2));
