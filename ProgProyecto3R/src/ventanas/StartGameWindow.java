@@ -103,8 +103,7 @@ public class StartGameWindow extends JFrame {
 				/*labelLogin.setText("Introduzca usuario:");
 				labelLogin.setBounds(0, 0, 100, 20);
 				labelLogin.setBackground(new Color(255,175,175));
-				contentpane.add(labelLogin);
-				hola*/
+				contentpane.add(labelLogin);*/
 				
 			}
 		});
@@ -114,15 +113,20 @@ public class StartGameWindow extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				if(str == " Juan") {
+				if(str == "Juan") {
 				SelectionWindow ventana2 = new SelectionWindow(750,422);
 				ventana2.setVisible(true);
 				StartGameWindow.this.dispose();
 				}else {str = textLogin.getText();}
+				SelectionWindow ventana2 = new SelectionWindow(750,422);
+				ventana2.setVisible(true);
+				StartGameWindow.this.dispose();
 			}
+			
 		});	
 	
 		
 	}
+	
 
 }
