@@ -1,16 +1,23 @@
 package ventanas;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.List;
+import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 import javax.swing.ImageIcon;
-
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import baseJuego.JPanelBackground;
 import monsters.Monster;
 import monsters.MonsterFire;
 import monsters.MonsterPlant;
@@ -22,70 +29,109 @@ public class CombatWindow extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	MonsterPlant mon = new MonsterPlant("Plantita",100,100,100,100);
-	MonsterFire mon2 = new MonsterFire("Fuegillo",10,10,10,10);
-	MonsterWater mon3 = new MonsterWater("Gotita",50,50,50,50);
-	ArrayList<Monster> monstruos= new ArrayList<Monster>();
+	MonsterPlant mon = new MonsterPlant("Plantita", 100, 100, 100, 100);
+	MonsterFire mon2 = new MonsterFire("Fuegillo", 10, 10, 10, 10);
+	MonsterWater mon3 = new MonsterWater("Gotita", 50, 50, 50, 50);
+	ArrayList<Monster> monstruos = new ArrayList<Monster>();
 
-	private JPanel contentpane = new JPanel();
-	private JLabel labelBackground = new JLabel();
+	private JPanelBackground contentpane;
+	private JTextArea historial = new JTextArea();
+	private JTextField consola = new JTextField();
+	private JButton ingresar = new JButton();
+	private JButton fight = new JButton();
+	private JButton run = new JButton();
+	private JLabel labelBackGround = new JLabel();
 	private int seleccion;
 	private int hacer;
 	private Scanner teclado;
+	private JScrollPane scroll;
 
 	public CombatWindow(int altura, int anchura) {
-		contentpane = new JPanel();
+		contentpane = new JPanelBackground();
 
 		contentpane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentpane);
 		contentpane.setLayout(null);
-
-		labelBackground.setIcon(new ImageIcon(StartGameWindow.class.getResource("/images/images.jpg")));
-		labelBackground.setBounds(0, 0, altura, anchura);
-		contentpane.add(labelBackground);
+		
+		scroll = new JScrollPane(historial);
+		scroll.setBounds(new Rectangle(400,0,300,300));
+		contentpane.add(scroll);
+		
+		consola.setBounds(400,320, 100, 20);
+		contentpane.add(consola);
+		
+		ingresar.setBounds(520, 320, 100, 20);
+		ingresar.setText("Ingresar");
+		contentpane.add(ingresar);
+		
+		fight.setBounds(100, 320, 100, 20);
+		fight.setText("Luchar");
+		contentpane.add(fight);
+		
+		run.setBounds(220, 320, 100, 20);
+		run.setText("Huir");
+		contentpane.add(run);
+		
+		labelBackGround.setIcon(new ImageIcon(StartGameWindow.class.getResource("/images/escenario.png")));
+		labelBackGround.setBounds(0, -100, altura, anchura);
+		contentpane.add(labelBackGround);
+		
+		String imagepath = ("/images/background.png");
+		contentpane.setOpaque(false);
+		contentpane.setBackgroundd(imagepath);
+	
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(altura, anchura);
 		setTitle("DeustMon");
-		
-		startCombat();
+
+		historial.append("CARLES PUIGDEMONT te desafia!!\n");
+		historial.append("Carles: Arriba Españ...perdón\n");
+
 	}
 
 	public void startCombat() {
 		teclado = new Scanner(System.in);
+
+		historial.append("Estás luchando contra Santiago!");
+		historial.append("Santiago: Arriba Espa...perdón");
 		
-		System.out.println("Estás luchando contra Santiago!");
-		System.out.println("Santiago: Arriba Espa...perdón");
 		monstruos.add(mon);
 		monstruos.add(mon2);
 		monstruos.add(mon3);
-		System.out.println("Santiago saca a " + mon3.getName());
-		System.out.println("---------------------");
-		System.out.println("Que pokemon quiere sacar? (0/1/2)");
-		for (int i = 0; i < monstruos.size(); i++) {
-			System.out.println(i + ": " + monstruos.get(i).getName());
+		historial.append("Santiago saca a " + mon3.getName());
+		historial.append("---------------------");
+		selectMonster();
+		historial.append("---------------------");
+		while (seleccion > monstruos.size()) {
+			selectMonster();
 		}
-		seleccion = teclado.nextInt();	
-		System.out.println("---------------------");
-		System.out.println("Has seleccionado a:" + monstruos.get(seleccion).getName());
-		System.out.println("      ");
-		System.out.println("¿Que quieres hacer? (1/2)");
-		System.out.println("     1.Luchar");
-		System.out.println("     2.Huir");
+		historial.append("Has seleccionado a: " + monstruos.get(seleccion).getName());
+		historial.append("      ");
+		historial.append("¿Que quieres hacer? (1/2)");
+		historial.append("     1.Luchar");
+		historial.append("     2.Huir");
 		hacer = teclado.nextInt();
-		if(hacer==1) {
+		if (hacer == 1) {
 			menuAttack();
+
 		}
-		
+
 	}
-	
+
+	public void selectMonster() {
+		historial.append("Que pokemon quiere sacar? (0/1/2)");
+		for (int i = 0; i < monstruos.size(); i++) {
+			historial.append(i + ": " + monstruos.get(i).getName());
+		}
+		seleccion = teclado.nextInt();
+	}
+
 	public void menuAttack() {
-		System.out.println("Atacar:");
-		System.out.println("1.Placaje");
-		System.out.println("2.Ascuas");
-		System.out.println("3.Ataque rapido");
-		System.out.println("4.Malicioso");
+		historial.append("Atacar:");
+		historial.append("1.Placaje");
+		historial.append("2.Ascuas");
+		historial.append("3.Ataque rapido");
+		historial.append("4.Malicioso");
 	}
 }
-
-
