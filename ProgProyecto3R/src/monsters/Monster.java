@@ -49,7 +49,7 @@ public abstract class Monster {
 	}
 
 	public void setlifePoints(int lifePoints) {
-		lifePoints = lifePoints;
+		this.lifePoints = lifePoints;
 	}
 
 	public int getattack() {
