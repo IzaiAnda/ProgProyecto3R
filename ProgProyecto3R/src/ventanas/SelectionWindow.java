@@ -35,22 +35,22 @@ public class SelectionWindow extends JFrame {
 
 		buttonCombat.setText("COMBATE");
 		buttonCombat.setBackground(new Color(255, 175, 175));
-		buttonCombat.setBounds(150, 100, 100, 20);
+		buttonCombat.setBounds(200, 100, 100, 20);
 		contentpane.add(buttonCombat);
 
 		buttonPokedex.setText("DEUSTMON");
 		buttonPokedex.setBackground(new Color(255, 175, 175));
-		buttonPokedex.setBounds(300, 100, 100, 20);
+		buttonPokedex.setBounds(350, 100, 100, 20);
 		contentpane.add(buttonPokedex);
 
 		buttonMovements.setText("MOVIMIENTOS");
 		buttonMovements.setBackground(new Color(255, 175, 175));
-		buttonMovements.setBounds(150, 200, 100, 20);
+		buttonMovements.setBounds(200, 200, 100, 20);
 		contentpane.add(buttonMovements);
 
 		buttonOptions.setText("OPCIONES");
 		buttonOptions.setBackground(new Color(255, 175, 175));
-		buttonOptions.setBounds(300, 200, 100, 20);
+		buttonOptions.setBounds(350, 200, 100, 20);
 		contentpane.add(buttonOptions);
 
 		buttonExit.setText("SALIR");
