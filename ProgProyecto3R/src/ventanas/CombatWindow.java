@@ -85,21 +85,21 @@ public class CombatWindow extends JFrame {
 		setSize(altura, anchura);
 		setTitle("DeustMon");
 
-		historial.append("CARLES PUIGDEMONT te desafia!!\n");
-		historial.append("Carles: Arriba Españ...perdón\n");
+		historial.append("Estas luchando contra Joven Chano!\n");
+		historial.append("Joven Chano: �Te desafio!\n");
 
 	}
 
 	public void startCombat() {
 		teclado = new Scanner(System.in);
 
-		historial.append("Estás luchando contra Santiago!");
-		historial.append("Santiago: Arriba Espa...perdón");
+		historial.append("Estás luchando contra Joven Chano!");
+		historial.append("Joven Chano: �Te desafio!");
 		
 		monstruos.add(mon);
 		monstruos.add(mon2);
 		monstruos.add(mon3);
-		historial.append("Santiago saca a " + mon3.getName());
+		historial.append("Joven Chano saca a " + mon3.getName());
 		historial.append("---------------------");
 		selectMonster();
 		historial.append("---------------------");
