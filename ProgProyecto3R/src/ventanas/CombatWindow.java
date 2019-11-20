@@ -87,6 +87,7 @@ public class CombatWindow extends JFrame {
 
 		historial.append("Estas luchando contra Joven Chano!\n");
 		historial.append("Joven Chano: ¡Te desafio!\n");
+		//testeando
 
 	}
 
