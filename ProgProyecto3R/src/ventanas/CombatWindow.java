@@ -38,8 +38,10 @@ public class CombatWindow extends JFrame {
 
 	private JPanelBackground contentpane;
 	private JTextArea historial = new JTextArea();
-	private JTextField consola = new JTextField();
-	private JButton ingresar = new JButton();
+	private JButton option1 = new JButton();
+	private JButton option2 = new JButton();
+	private JButton option3 = new JButton();
+	private JButton option4 = new JButton();
 	private JButton fight = new JButton();
 	private JButton run = new JButton();
 	private JLabel labelBackGround = new JLabel();
@@ -54,47 +56,56 @@ public class CombatWindow extends JFrame {
 		contentpane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentpane);
 		contentpane.setLayout(null);
-		
+
 		scroll = new JScrollPane(historial);
-		scroll.setBounds(new Rectangle(400,0,300,300));
+		scroll.setBounds(new Rectangle(420, 0, 300, 300));
 		contentpane.add(scroll);
-		
+
 		historial.setLineWrap(true);
 		historial.setWrapStyleWord(true);
-		
-		consola.setBounds(400,320, 100, 20);
-		contentpane.add(consola);
-		
-		ingresar.setBounds(520, 320, 100, 20);
-		ingresar.setText("Ingresar");
-		contentpane.add(ingresar);
-		
+		historial.setEditable(false);
+
+		option1.setBounds(420, 320, 100, 20);
+		option1.setText("1");
+		contentpane.add(option1);
+
+		option2.setBounds(540, 320, 100, 20);
+		option2.setText("2");
+		contentpane.add(option2);
+
+		option3.setBounds(420, 350, 100, 20);
+		option3.setText("3");
+		contentpane.add(option3);
+
+		option4.setBounds(540, 350, 100, 20);
+		option4.setText("4");
+		contentpane.add(option4);
+
 		fight.setBounds(100, 320, 100, 20);
 		fight.setText("Luchar");
 		contentpane.add(fight);
-		
+
 		run.setBounds(220, 320, 100, 20);
 		run.setText("Huir");
 		contentpane.add(run);
-		
-		labelBackGround.setIcon(new ImageIcon(StartGameWindow.class.getResource("/images/images.jpg")));
+
+		labelBackGround.setIcon(new ImageIcon(StartGameWindow.class.getResource("/images/escenario.png")));
 		labelBackGround.setBounds(0, -100, altura, anchura);
 		contentpane.add(labelBackGround);
-		
+
 		String imagepath = ("/images/background.png");
 		contentpane.setOpaque(false);
 		contentpane.setBackgroundd(imagepath);
-	
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(altura, anchura);
 		setTitle("DeustMon");
 
-		historial.append("Estas luchando contra Joven Chano!\n");
-		historial.append("Joven Chano: �Te desafio!\n");
-		//testeando
-		
-		
+		// historial.append("Estas luchando contra Joven Chano!\n");
+		// historial.append("Joven Chano: �Te desafio!\n");
+		// testeando
+		startCombat();
+
 		run.addActionListener(new ActionListener() {
 
 			@Override
@@ -105,31 +116,70 @@ public class CombatWindow extends JFrame {
 
 			}
 		});
+		
+		option1.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				historial.append("1\n");
+				seleccion = 1;
+
+			}
+		});
+
+		option2.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				historial.append("2\n");
+				seleccion = 2;
+
+			}
+		});
+
+		option3.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				historial.append("3\n");
+				seleccion = 3;
+
+			}
+		});
+
+		option4.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				historial.append("4\n");
+				seleccion = 4;
+
+			}
+		});
 
 	}
 
 	public void startCombat() {
-		teclado = new Scanner(System.in);
-
-		historial.append("Estás luchando contra Joven Chano!");
-		historial.append("Joven Chano: �Te desafio!");
-		
 		monstruos.add(mon);
 		monstruos.add(mon2);
 		monstruos.add(mon3);
-		historial.append("Joven Chano saca a " + mon3.getName());
-		historial.append("---------------------");
+
+		seleccion=0;
+
+		historial.append("Estás luchando contra Joven Chano!\n");
+		historial.append("Joven Chano: Te desafio!\n");
+
+		historial.append("Joven Chano saca a " + mon3.getName() + "\n");
+		historial.append("---------------------\n");
 		selectMonster();
-		historial.append("---------------------");
-		while (seleccion > monstruos.size()) {
-			selectMonster();
-		}
-		historial.append("Has seleccionado a: " + monstruos.get(seleccion).getName());
-		historial.append("      ");
-		historial.append("¿Que quieres hacer? (1/2)");
-		historial.append("     1.Luchar");
-		historial.append("     2.Huir");
-		hacer = teclado.nextInt();
+		historial.append("---------------------\n");
+
+		historial.append("Has seleccionado a: " + monstruos.get(seleccion).getName() + "\n");
+		historial.append("      \n");
+		historial.append("¿Que quieres hacer? (1/2)\n");
+		historial.append("     Luchar\n");
+		historial.append("     Huir\n");
+
 		if (hacer == 1) {
 			menuAttack();
 
@@ -138,20 +188,25 @@ public class CombatWindow extends JFrame {
 	}
 
 	public void selectMonster() {
-		historial.append("Que pokemon quiere sacar? (0/1/2)");
+		historial.append("Que pokemon quiere sacar? (0/1/2)\n");
 		for (int i = 0; i < monstruos.size(); i++) {
-			historial.append(i + ": " + monstruos.get(i).getName());
+			historial.append(i + ": " + monstruos.get(i).getName() + "\n");
 		}
-		seleccion = teclado.nextInt();
+		
 	}
 
 	public void menuAttack() {
-		historial.append("Atacar:");
-		historial.append("1.Placaje");
-		historial.append("2.Ascuas");
-		historial.append("3.Ataque rapido");
-		historial.append("4.Malicioso");
+		historial.append("Atacar:\n");
+		historial.append("1.Placaje\n");
+		historial.append("2.Ascuas\n");
+		historial.append("3.Ataque rapido\n");
+		historial.append("4.Malicioso\n");
 	}
-	
-	
+
+	public void selectOption() {
+
+		
+
+	}
+
 }
