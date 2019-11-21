@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.List;
 import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -88,21 +90,34 @@ public class CombatWindow extends JFrame {
 		setSize(altura, anchura);
 		setTitle("DeustMon");
 
-		historial.append("CARLES PUIGDEMONT te desafia!!\n");
-		historial.append("Carles: Arriba Españ...perdón\n");
+		historial.append("Estas luchando contra Joven Chano!\n");
+		historial.append("Joven Chano: �Te desafio!\n");
+		//testeando
+		
+		
+		run.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				SelectionWindow selectionWindow = new SelectionWindow(750, 422);
+				selectionWindow.setVisible(true);
+				CombatWindow.this.dispose();
+
+			}
+		});
 
 	}
 
 	public void startCombat() {
 		teclado = new Scanner(System.in);
 
-		historial.append("Estás luchando contra Santiago!");
-		historial.append("Santiago: Arriba Espa...perdón");
+		historial.append("Estás luchando contra Joven Chano!");
+		historial.append("Joven Chano: �Te desafio!");
 		
 		monstruos.add(mon);
 		monstruos.add(mon2);
 		monstruos.add(mon3);
-		historial.append("Santiago saca a " + mon3.getName());
+		historial.append("Joven Chano saca a " + mon3.getName());
 		historial.append("---------------------");
 		selectMonster();
 		historial.append("---------------------");
@@ -137,4 +152,6 @@ public class CombatWindow extends JFrame {
 		historial.append("3.Ataque rapido");
 		historial.append("4.Malicioso");
 	}
+	
+	
 }
