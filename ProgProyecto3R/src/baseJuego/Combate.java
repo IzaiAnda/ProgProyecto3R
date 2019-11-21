@@ -32,10 +32,10 @@ public class Combate{
 		
 		boolean advantage = defender.efectividad(attacker.getTipe());
 		
-		int damageDone = calculo(advantage, attacker.getattack(), action.getDamage(), defender.getdefense());
-		int defenderLifePoints = defender.getlifePoints() -damageDone ;
+		int damageDone = calculo(advantage, attacker.getAttack(), action.getDamage(), defender.getDefense());
+		int defenderLifePoints = defender.getLifePoints() -damageDone ;
 		
-		defender.setlifePoints(defenderLifePoints);
+		defender.setLifePoints(defenderLifePoints);
 		return defender;
 		
 	}
