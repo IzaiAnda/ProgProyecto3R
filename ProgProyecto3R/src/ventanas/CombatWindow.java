@@ -188,10 +188,22 @@ public class CombatWindow extends JFrame {
 	}
 
 	public void selectMonster() {
-		historial.append("Que pokemon quiere sacar? (0/1/2)\n");
-		for (int i = 0; i < monstruos.size(); i++) {
-			historial.append(i + ": " + monstruos.get(i).getName() + "\n");
+			historial.append("Que pokemon quiere sacar? (0/1/2)\n");
+			for (int i = 0; i < monstruos.size(); i++) {
+				historial.append(i + ": " + monstruos.get(i).getName() + "\n");
+			}
+
+		if(seleccion==0) {
+			try {
+				wait();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}else if(seleccion==1) {
+			historial.append("bien!");
 		}
+		
 		
 	}
 
