@@ -14,65 +14,51 @@ public abstract class Monster {
 	private int attack;
 	private int defense;
 	private int speed;
-	protected monsters.Monster.Type type;
+	private Type type;
 	
-	public Monster(String name, int lifePoints, int attack, int defense, int speed) {
+	public Monster(String name, int lifePoints, int attack, int defense, int speed, Type type) {
 		super();
 		this.name = name;
 		this.lifePoints = lifePoints;
 		this.attack = attack;
 		this.defense = defense;
 		this.speed = speed;
-		this.type = null;
-	}
-
-	public Monster() {
-		super();
-		this.name = "";
-		this.lifePoints = 0;
-		this.attack = 0;
-		this.defense = 0;
-		this.speed = 0;
-		this.type = null;
+		this.type = type;
 	}
 
 	public String getName() {
 		return name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public int getlifePoints() {
+	public int getLifePoints() {
 		return lifePoints;
 	}
 
-	public void setlifePoints(int lifePoints) {
+	public void setLifePoints(int lifePoints) {
 		this.lifePoints = lifePoints;
 	}
 
-	public int getattack() {
+	public int getAttack() {
 		return attack;
 	}
 
-	public void setattack(int attack) {
+	public void setAttack(int attack) {
 		this.attack = attack;
 	}
 
-	public int getdefense() {
+	public int getDefense() {
 		return defense;
 	}
 
-	public void setdefense(int defense) {
+	public void setDefense(int defense) {
 		this.defense = defense;
 	}
 
-	public int getspeed() {
+	public int getSpeed() {
 		return speed;
 	}
 
-	public void setspeed(int speed) {
+	public void setSpeed(int speed) {
 		this.speed = speed;
 	}
 	

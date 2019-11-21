@@ -3,8 +3,8 @@ package monsters;
 public class MonsterWater extends Monster {
 
 	public MonsterWater(String name, int lifePoints, int attack, int defense, int speed) {
-		super(name, lifePoints, attack, defense, speed);
-		this.type = Type.WATER;
+		super(name, lifePoints, attack, defense, speed,Type.WATER);
+
 	}
 
 	@Override

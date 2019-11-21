@@ -3,8 +3,7 @@ package monsters;
 public class MonsterPlant extends Monster {
 
 	public MonsterPlant(String name, int lifePoints, int attack, int defense, int speed) {
-		super(name, lifePoints, attack, defense, speed);
-		this.type = Type.PLANT;
+		super(name, lifePoints, attack, defense, speed,Type.PLANT);
 	}
 
 	@Override
