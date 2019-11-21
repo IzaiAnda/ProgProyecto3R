@@ -30,7 +30,7 @@ public class LevelsWindow extends JFrame {
 		setContentPane(contentpane);
 		contentpane.setLayout(null);
 
-		buttonCombat.setText("¡LUCHA!");
+		buttonCombat.setText("A LUCHAR!");
 		buttonCombat.setBackground(new Color(255, 175, 175));
 		buttonCombat.setBounds(150, 200, 100, 20);
 		contentpane.add(buttonCombat);
