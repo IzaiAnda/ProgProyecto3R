@@ -57,6 +57,9 @@ public class CombatWindow extends JFrame {
 		scroll.setBounds(new Rectangle(400,0,300,300));
 		contentpane.add(scroll);
 		
+		historial.setLineWrap(true);
+		historial.setWrapStyleWord(true);
+		
 		consola.setBounds(400,320, 100, 20);
 		contentpane.add(consola);
 		
@@ -72,7 +75,7 @@ public class CombatWindow extends JFrame {
 		run.setText("Huir");
 		contentpane.add(run);
 		
-		labelBackGround.setIcon(new ImageIcon(StartGameWindow.class.getResource("/images/escenario.png")));
+		labelBackGround.setIcon(new ImageIcon(StartGameWindow.class.getResource("/images/images.jpg")));
 		labelBackGround.setBounds(0, -100, altura, anchura);
 		contentpane.add(labelBackGround);
 		
