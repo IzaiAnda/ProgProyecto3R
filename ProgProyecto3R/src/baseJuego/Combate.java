@@ -30,7 +30,7 @@ public class Combate{
 	
 	public static Monster damageTaken(Monster attacker, Monster defender, Move action) {
 		
-		boolean advantage = defender.efectividad(attacker.getTipe());
+		boolean advantage = defender.efectividad(attacker.getType());
 		
 		int damageDone = calculo(advantage, attacker.getAttack(), action.getDamage(), defender.getDefense());
 		int defenderLifePoints = defender.getLifePoints() -damageDone ;

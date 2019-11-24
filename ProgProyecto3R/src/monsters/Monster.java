@@ -62,9 +62,14 @@ public abstract class Monster {
 		this.speed = speed;
 	}
 	
-	public Type getTipe() {
+	public Type getType() {
 		return type;
 	}
+	
+	public String getTypeString() {
+		return String.valueOf(this.getType());
+	}
+
 
 	@Override
 	public String toString() {
