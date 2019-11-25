@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Vector;
 
@@ -15,6 +16,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import monsters.*;
+import baseJuego.BD;
 
 public class PokedexWindow extends JFrame {
 
@@ -85,14 +87,8 @@ public class PokedexWindow extends JFrame {
 		modelo.addColumn("Attack");
 		modelo.addColumn("Defense");
 		modelo.addColumn("Speed");
-		
-		List<Monster> list = new ArrayList<>();
-		MonsterPlant mon = new MonsterPlant("Plantita",100,100,100,100);
-		MonsterFire mon2 = new MonsterFire("Fuegillo",10,10,10,10);
-		MonsterWater mon3 = new MonsterWater("Gotita",50,50,50,50);
-		list.add(mon);
-		list.add(mon2);
-		list.add(mon3);
+			
+		LinkedList<Monster> list = BD.selectAllMonsters();
 		
 		addMonsters(list);
 		
@@ -155,7 +151,7 @@ public class PokedexWindow extends JFrame {
 		setSize(altura, anchura);
 		setTitle("MonsterWiki");
 	}
-	
+
 	public static void compareAdd(List<? extends Monster> list, int i){
 		
 		if (i == 0) {
