@@ -2,7 +2,7 @@ package monsters;
 
 import java.util.Comparator;
 
-public class CompararMName implements Comparator<Monster>{
+public class CompareMName implements Comparator<Monster>{
 
 	@Override
 	public int compare(Monster a, Monster b) {

@@ -155,17 +155,17 @@ public class PokedexWindow extends JFrame {
 	public static void compareAdd(List<? extends Monster> list, int i){
 		
 		if (i == 0) {
-			Collections.sort(list, new CompararMName());
+			Collections.sort(list, new CompareMName());
 		}else if(i == 1) {
-			Collections.sort(list, new CompararMType());
+			Collections.sort(list, new CompareMType());
 		}else if(i == 2) {
-			Collections.sort(list, new CompararMLifePoints());
+			Collections.sort(list, new CompareMLifePoints());
 		}else if(i == 3) {
-			Collections.sort(list, new CompararMAttack());
+			Collections.sort(list, new CompareMAttack());
 		}else if(i == 4) {
-			Collections.sort(list, new CompararMDefense());
+			Collections.sort(list, new CompareMDefense());
 		}else if(i == 5) {
-			Collections.sort(list, new CompararMSpeed());
+			Collections.sort(list, new CompareMSpeed());
 		}
 		
 		removeAllRows();
