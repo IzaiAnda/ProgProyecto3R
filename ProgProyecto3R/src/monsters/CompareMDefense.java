@@ -8,12 +8,12 @@ public class CompareMDefense implements Comparator<Monster>{
 	public int compare(Monster a, Monster b) {
 		// TODO Auto-generated method stub
 		
-		if (Integer.compare(a.getDefense(), a.getDefense())==0) {
+		if (Integer.compare(a.getDefense(), b.getDefense())==0) {
 			CompareMName comp = new CompareMName();
 			return comp.compare(a, b);
 		}
 		
-		return Integer.compare(a.getDefense(), a.getDefense());
+		return Integer.compare(b.getDefense(), a.getDefense());
 	}
 
 }
