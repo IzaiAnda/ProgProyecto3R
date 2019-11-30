@@ -13,14 +13,6 @@ public class Move {
 		this.damage = damage;
 		//this.percent = percent;
 	}
-	
-
-	public Move() {
-		super();
-		this.name = "";
-		this.damage = 0;
-		//this.percent = 0;
-	}
 
 	public String getName() {
 		return name;
@@ -46,9 +38,9 @@ public class Move {
 //		this.percent = percent;
 //	}
 
-//	@Override
-//	public String toString() {
-//		return "Move [name=" + name + ", damage=" + damage + ", percent=" + percent + "]";
-//	}
+	@Override
+	public String toString() {
+		return name;
+	}
 
 }

@@ -2,13 +2,18 @@ package ventanas;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.List;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
+import javax.swing.Box;
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -16,16 +21,13 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.border.EmptyBorder;
-
-import baseJuego.JPanelBackground;
 import monsters.Monster;
 import monsters.MonsterFire;
 import monsters.MonsterPlant;
 import monsters.MonsterWater;
+import moves.Move;
 
-public class CombatWindow extends JFrame {
+public class CombatWindow<V> extends JFrame {
 
 	/**
 	 * 
@@ -34,9 +36,38 @@ public class CombatWindow extends JFrame {
 	MonsterPlant mon = new MonsterPlant("Plantita", 100, 100, 100, 100);
 	MonsterFire mon2 = new MonsterFire("Fuegillo", 10, 10, 10, 10);
 	MonsterWater mon3 = new MonsterWater("Gotita", 50, 50, 50, 50);
+	
 	ArrayList<Monster> monstruos = new ArrayList<Monster>();
-
-	private JPanelBackground contentpane;
+	HashMap<Monster, Move[]> moves = new HashMap<Monster, Move[]>();
+	
+	Move mp1= new Move("Hoja Afilada", 50);
+	Move mp2= new Move("Llueve Hojas", 50);
+	Move mp3= new Move("Canto Amor", 50);
+	Move mp4= new Move("Tamborrilero", 50);
+	Move[] mp = {mp1,mp2,mp3,mp4};
+	
+	Move mf1= new Move("Lanza llamas", 50);
+	Move mf2= new Move("Bola de fuego", 50);
+	Move mf3= new Move("Dia soleado", 50);
+	Move mf4= new Move("Mechero", 50);
+	Move[] mf = {mf1,mf2,mf3,mf4};
+	
+	Move mw1= new Move("Pistola Agua", 50);
+	Move mw2= new Move("Burbuja", 50);
+	Move mw3= new Move("LLovizna", 50);
+	Move mw4= new Move("Cascada", 50);
+	Move[] mw = {mw1,mw2,mw3,mw4};
+	
+	private GridLayout grid = new GridLayout(2, 2);
+	private JPanel arriba = new JPanel();
+	private JPanel abajo = new JPanel();
+	private JPanel arribaIzquierda = new JPanel();
+	private JPanel arribaDerecha = new JPanel();
+	private JPanel abajoIzquierda = new JPanel();
+	private JPanel abajoDerecha = new JPanel();
+	private JPanel botonesMonster = new JPanel();
+	private JPanel botonesJugar = new JPanel();
+	private JPanel botonesAtaques = new JPanel();
 	private JTextArea historial = new JTextArea();
 	private JButton option1 = new JButton();
 	private JButton option2 = new JButton();
@@ -45,22 +76,38 @@ public class CombatWindow extends JFrame {
 	private JButton fight = new JButton();
 	private JButton run = new JButton();
 	private JLabel labelBackGround = new JLabel();
-	private int seleccion;
-	private int hacer;
 	private Scanner teclado;
 	private JScrollPane scroll;
 	private boolean stop;
+	private int pokemonActual;
 
 	public CombatWindow(int altura, int anchura) {
-		contentpane = new JPanelBackground();
-
-		contentpane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentpane);
-		contentpane.setLayout(null);
-
+		
+		moves.put(mon, mp);
+		moves.put(mon2, mf);
+		moves.put(mon3, mw);
+		
+		add(arriba,BorderLayout.CENTER);
+		add(abajo,BorderLayout.SOUTH);
+		
+		arriba.add(arribaIzquierda);
+		arriba.add(arribaDerecha);
+		
+		abajo.add(abajoIzquierda);
+		abajo.add(abajoDerecha);
+		
+		abajoDerecha.add(botonesMonster);
+		botonesMonster.setVisible(false);
+		abajoIzquierda.add(botonesAtaques);
+		botonesAtaques.setVisible(false);
+		botonesAtaques.setLayout(new GridLayout(2,2));
+		abajoIzquierda.add(botonesJugar);
+		botonesJugar.setVisible(false);
+		
 		scroll = new JScrollPane(historial);
 		scroll.setBounds(new Rectangle(420, 0, 300, 300));
-		contentpane.add(scroll);
+		arribaDerecha.add(scroll);
+		scroll.setPreferredSize(new Dimension(300, 200));
 
 		historial.setLineWrap(true);
 		historial.setWrapStyleWord(true);
@@ -68,35 +115,31 @@ public class CombatWindow extends JFrame {
 
 		option1.setBounds(420, 320, 100, 20);
 		option1.setText("1");
-		contentpane.add(option1);
+		botonesMonster.add(option1);
 
 		option2.setBounds(540, 320, 100, 20);
 		option2.setText("2");
-		contentpane.add(option2);
+		botonesMonster.add(option2);
 
 		option3.setBounds(420, 350, 100, 20);
 		option3.setText("3");
-		contentpane.add(option3);
+		botonesMonster.add(option3);
 
 		option4.setBounds(540, 350, 100, 20);
 		option4.setText("4");
-		contentpane.add(option4);
+		botonesMonster.add(option4);
 
 		fight.setBounds(100, 320, 100, 20);
 		fight.setText("Luchar");
-		contentpane.add(fight);
+		botonesJugar.add(fight);
 
 		run.setBounds(220, 320, 100, 20);
 		run.setText("Huir");
-		contentpane.add(run);
+		botonesJugar.add(run);
 
 		labelBackGround.setIcon(new ImageIcon(StartGameWindow.class.getResource("/images/escenario.png")));
 		labelBackGround.setBounds(0, -100, altura, anchura);
-		contentpane.add(labelBackGround);
-
-		String imagepath = ("/images/background.png");
-		contentpane.setOpaque(false);
-		contentpane.setBackgroundd(imagepath);
+		arribaIzquierda.add(labelBackGround);
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(altura, anchura);
@@ -123,7 +166,8 @@ public class CombatWindow extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				historial.append("1\n");
-				seleccion = 1;
+				pokemonActual = 0;
+				post(0);
 
 			}
 		});
@@ -133,7 +177,8 @@ public class CombatWindow extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				historial.append("2\n");
-				seleccion = 2;
+				pokemonActual = 1;
+				post(1);
 
 			}
 		});
@@ -143,7 +188,8 @@ public class CombatWindow extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				historial.append("3\n");
-				seleccion = 3;
+				pokemonActual = 2;
+				post(2);
 
 			}
 		});
@@ -153,8 +199,19 @@ public class CombatWindow extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				historial.append("4\n");
-				seleccion = 4;
+				pokemonActual = 3;
+				post(3);
 
+			}
+		});
+		
+		fight.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				botonesJugar.setVisible(false);
+				botonesAtaques.setVisible(true);
+				ataques();
 			}
 		});
 
@@ -165,7 +222,6 @@ public class CombatWindow extends JFrame {
 		monstruos.add(mon2);
 		monstruos.add(mon3);
 
-		seleccion=0;
 		stop = true;
 
 		historial.append("Estás luchando contra Joven Chano!\n");
@@ -174,37 +230,43 @@ public class CombatWindow extends JFrame {
 		historial.append("Joven Chano saca a " + mon3.getName() + "\n");
 		historial.append("---------------------\n");
 		selectMonster();
+
+	}
+	
+	public void post(int i){
 		historial.append("---------------------\n");
 
-		historial.append("Has seleccionado a: " + monstruos.get(seleccion).getName() + "\n");
+		historial.append("Has ado a: " + monstruos.get(i).getName() + "\n");
 		historial.append("      \n");
 		historial.append("¿Que quieres hacer? (1/2)\n");
 		historial.append("     Luchar\n");
 		historial.append("     Huir\n");
-
-		if (hacer == 1) {
-			menuAttack();
-
+		
+		botonesJugar.setVisible(true);
+		
+	}
+	
+	public void ataques() {
+		historial.append("Que ataque quiere sacar?\n");
+		
+		Move[] movesm = moves.get(monstruos.get(pokemonActual));
+		
+		for (int i = 0; i < 4; i++) {
+			JButton a =  new JButton(movesm[i].getName());
+			botonesAtaques.add(a);
 		}
-
+		
+		botonesAtaques.setVisible(true);
+		
 	}
 
 	public void selectMonster() {
-		historial.append("Que pokemon quiere sacar? (0/1/2)\n");
-		for (int i = 0; i < monstruos.size(); i++) {
-			historial.append(i + ": " + monstruos.get(i).getName() + "\n");
+		historial.append("Que pokemon quiere sacar? (1/2/3)\n");
+		for (int i = 0; i < moves.size(); i++) {
+			historial.append(i+1 + ": " + monstruos.get(i).getName() + "\n");
 		}
-
-		Thread t = new Thread(new Runnable() {
-
-			@Override
-			public void run() {
-				historial.append("bien!");
-			}
-		});
 		
-		t.start();
-		
+		botonesMonster.setVisible(true);
 		
 	}
 
