@@ -12,7 +12,6 @@ public class Main {
 		StartGameWindow starWindow = new StartGameWindow(750, 422);
 
 		starWindow.setVisible(true);
-		
 
 	}
 

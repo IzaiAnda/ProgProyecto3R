@@ -2,7 +2,6 @@ package ventanas;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -110,7 +109,7 @@ public class PokedexWindow extends JFrame {
 				compareAdd(list,1);//1 = ordered by type
 			}
 		});
-		itemLifePoints = new JMenuItem("Type");
+		itemLifePoints = new JMenuItem("LifePoints");
 		menuOrder.add(itemLifePoints);
 		itemLifePoints.addActionListener(new ActionListener() {
 			

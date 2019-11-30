@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.lang.reflect.InvocationTargetException;
 
 import baseJuego.BD;
 import javax.swing.ImageIcon;
@@ -29,12 +28,10 @@ public class StartGameWindow extends JFrame {
 	private JButton buttonAccept = new JButton();
 	private JLabel labelMonster = new JLabel();
 	private JLabel labelBackGround = new JLabel();
-	private JLabel labelLogin = new JLabel();
 	private JTextField textLogin = new JTextField();
 	private JTextField textPass = new JTextField();
 	private JLabel labelUser = new JLabel();
 	private JLabel labelPass = new JLabel();
-	private String str = new String("");
 
 
 	public StartGameWindow(int altura, int anchura) {

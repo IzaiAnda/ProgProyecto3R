@@ -4,23 +4,17 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.naming.spi.DirStateFactory.Result;
-
 import monsters.Monster;
 import monsters.MonsterFire;
 import monsters.MonsterPlant;
 import monsters.MonsterWater;
-import monsters.Monster.Type;
 
 public class BD {
 
@@ -47,7 +41,7 @@ public class BD {
 
 		}
 	}
-	
+
 	public static void closeBD() {
 		try {
 			c.close();
@@ -60,7 +54,7 @@ public class BD {
 	public void insert(String tName, String code) { // public String insert(String login, password, creation) {
 
 		try {
-			
+
 
 			stmt = c.createStatement();
 			String sql = "INSERT INTO " + tName + " VALUES " + code + ";";
@@ -75,7 +69,7 @@ public class BD {
 			stmt.executeUpdate(sql);
 			stmt.close();
 			c.commit();
-			
+
 		} catch (Exception e) {
 			logger.log(Level.SEVERE, e.getClass().getName() + ": " + e.getMessage());
 			System.out.println(e);
@@ -87,13 +81,13 @@ public class BD {
 
 	public void create(String tName, String code) {
 		try {
-			
+
 			stmt = c.createStatement();
 			String sql = "CREATE TABLE " + tName + "(" + code + ");";
 			stmt.executeUpdate(sql);
 			stmt.close();
 			c.commit();
-			
+
 		} catch (Exception e) {
 			logger.log(Level.SEVERE, e.getClass().getName() + ": " + e.getMessage());
 			System.exit(0);
@@ -103,7 +97,7 @@ public class BD {
 
 	public static void create() {
 		try {
-			
+
 			stmt = c.createStatement();
 			String sql = "CREATE TABLE PLAYER ( NAME_P VARCHAR(30) NOT NULL PRIMARY KEY,PASSWORD VARCHAR(30) NOT NULL);";
 			String sql1 = "CREATE TABLE MONSTER ( NAME_M VARCHAR(30) NOT NULL PRIMARY KEY,TYPE VARCHAR(30) NOT NULL, HP INTEGER NOT NULL, ATK INTEGER NOT NULL, DEF INTEGER NOT NULL, VEL INTEGER NOT NULL);";
@@ -121,7 +115,7 @@ public class BD {
 			stmt.executeUpdate(sql6);
 			stmt.close();
 			c.commit();
-			
+
 		} catch (Exception e) {
 			logger.log(Level.SEVERE, e.getClass().getName() + ": " + e.getMessage());
 			System.exit(0);
@@ -132,7 +126,7 @@ public class BD {
 	public String select(String code) {
 		String i = "No hay nada";
 		try {
-			
+
 			stmt = c.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM " + code + ";");
 
@@ -140,7 +134,7 @@ public class BD {
 
 			rs.close();
 			stmt.close();
-			
+
 		} catch (Exception e) {
 			logger.log(Level.SEVERE, e.getClass().getName() + ": " + e.getMessage());
 			System.exit(0);
@@ -153,7 +147,7 @@ public class BD {
 	public static boolean selectJugador(String nom, String pass) {
 		boolean i = false;
 		try {
-			
+
 			stmt2 = c.prepareStatement("SELECT NAME_P,PASSWORD FROM PLAYER WHERE NAME_P<=? AND PASSWORD<=?");
 			stmt2.setString(1, nom);
 			stmt2.setString(2, pass);
@@ -163,7 +157,7 @@ public class BD {
 				i = true;
 			}
 			stmt2.close();
-			
+
 		} catch (Exception e) {
 			System.out.println(e.getClass().getName() + ": " + e.getMessage());
 			if(selectJugador(nom)) {
@@ -177,7 +171,7 @@ public class BD {
 	public static boolean selectJugador(String nom) {
 		boolean i = true;
 		try {
-			
+
 			System.out.println(nom);
 			stmt2 = c.prepareStatement("SELECT NAME_P,PASSWORD FROM PLAYER WHERE NAME_P<=? ");
 			stmt2.setString(1, nom);
@@ -185,7 +179,7 @@ public class BD {
 			System.out.println(rs.getString(1));
 			rs.close();
 			stmt2.close();
-			
+
 		} catch (Exception e) {
 			System.out.println(e.getClass().getName() + ": " + e.getMessage());
 			i=false;
@@ -195,14 +189,14 @@ public class BD {
 
 	public static void createJugador(String nom, String pass) {
 		try {
-			
+
 			stmt2 = c.prepareStatement("INSERT INTO PLAYER (NAME_P,PASSWORD) VALUES (?, ?)");
 			stmt2.setString(1, nom);
 			stmt2.setString(2, pass);
 			stmt2.executeUpdate();
 			stmt2.close();
 			c.commit();
-			
+
 		} catch (Exception e) {
 			System.out.println(e.getClass().getName() + ": " + e.getMessage());
 		}
@@ -210,7 +204,7 @@ public class BD {
 
 	public static void createMonster(MonsterPlant mon) {
 		try {
-			
+
 			stmt2 = c.prepareStatement("INSERT INTO MONSTER (NAME_M,TYPE,HP,ATK,DEF,VEL) VALUES (?,?,?,?,?,?)");
 			stmt2.setString(1, mon.getName());
 			stmt2.setString(2, "PLANT");
@@ -221,7 +215,7 @@ public class BD {
 			stmt2.executeUpdate();
 			stmt2.close();
 			c.commit();
-			
+
 		} catch (Exception e) {
 			System.out.println(e.getClass().getName() + ": " + e.getMessage());
 		}
@@ -229,7 +223,7 @@ public class BD {
 
 	public static void createMonster(MonsterFire mon) {
 		try {
-			
+
 			stmt2 = c.prepareStatement("INSERT INTO MONSTER (NAME_M,TYPE,HP,ATK,DEF,VEL) VALUES (?,?,?,?,?,?)");
 			stmt2.setString(1, mon.getName());
 			stmt2.setString(2, "FIRE");
@@ -240,7 +234,7 @@ public class BD {
 			stmt2.executeUpdate();
 			stmt2.close();
 			c.commit();
-			
+
 		} catch (Exception e) {
 			System.out.println(e.getClass().getName() + ": " + e.getMessage());
 		}
@@ -248,7 +242,7 @@ public class BD {
 
 	public static void createMonster(MonsterWater mon) {
 		try {
-			
+
 			stmt2 = c.prepareStatement("INSERT INTO MONSTER (NAME_M,TYPE,HP,ATK,DEF,VEL) VALUES (?,?,?,?,?,?)");
 			stmt2.setString(1, mon.getName());
 			stmt2.setString(2, "WATER");
@@ -259,7 +253,7 @@ public class BD {
 			stmt2.executeUpdate();
 			stmt2.close();
 			c.commit();
-			
+
 		} catch (Exception e) {
 			System.out.println(e.getClass().getName() + ": " + e.getMessage());
 		}
@@ -290,15 +284,12 @@ public class BD {
 	//		return i;	
 	//	}
 
-	public static LinkedList selectAllMonsters () {
-		LinkedList<Monster> s = new LinkedList();
+	public static LinkedList<Monster> selectAllMonsters () {
+		LinkedList<Monster> s = new LinkedList<>();
 		try {
-			
+
 			stmt2 = c.prepareStatement("SELECT * FROM MONSTER");
 			ResultSet rs = stmt2.executeQuery();
-
-			ResultSetMetaData rsmd = rs.getMetaData();
-			int columnsNumber = rsmd.getColumnCount();
 
 			while (rs.next()) {
 
@@ -319,7 +310,7 @@ public class BD {
 			}
 
 			stmt2.close();
-			
+
 		} catch (Exception e) {
 			System.out.println(e.getClass().getName() + ": " + e.getMessage());
 		}
@@ -329,25 +320,24 @@ public class BD {
 	}
 
 	public static void main(String[] args) throws SQLException {
-		BD b = new BD();
-
-		//b.create();
+		startBD();
 		// b.insert("PLAYER(NAME_P, PASSWORD)", "('IZAI','123')");
 		// b.insert("LEVEL(NAME_L, TXT)", "('MONTAÑA1','ES LA HORA DE LUCHAR')");
 		// b.insert("LP", "('IZA','MONTAÑA1')");
 		// System.out.println(b.select("PLAYER"));
-		//		MonsterPlant mon = new MonsterPlant("Plantita",100,100,100,100);
-		//		MonsterFire mon2 = new MonsterFire("Fuegillo",10,10,10,10);
-		//		MonsterWater mon3 = new MonsterWater("Gotita",50,50,50,50);
-		//		createMonster(mon2);
-		//		createMonster(mon3);
+		MonsterPlant mon = new MonsterPlant("Plantita",100,100,100,100);
+		MonsterFire mon2 = new MonsterFire("Fuegillo",10,10,10,10);
+		MonsterWater mon3 = new MonsterWater("Gotita",50,50,50,50);
+		createMonster(mon);
+		createMonster(mon2);
+		createMonster(mon3);
 		// System.out.println(selectMonster("Popeye"));
 		//		LinkedList<Monster> s = selectAllMonsters();
 		//		System.out.println(s.get(0));
 		//		System.out.println(s.get(1));
 		//		System.out.println(s.get(2));
 
-		createJugador("it", "po");
+		//createJugador("it", "po");
 
 		//System.out.println(selectJugador("KEVIN", "PAPAYA"));
 
