@@ -138,14 +138,10 @@ public class StartGameWindow extends JFrame {
 							}
 						});
 
-					}else if(x == 1) {
-						seguro++;
-
 					}
 				}
 				if(seguro == 10) {
 					buttonAccept.setVisible(false);
-					System.out.println("patata");
 				}
 			}
 

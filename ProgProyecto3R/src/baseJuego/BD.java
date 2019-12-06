@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -148,12 +149,10 @@ public class BD {
 	public static boolean selectJugador(String nom, String pass) {
 		boolean i = false;
 		try {
-
-			stmt2 = c.prepareStatement("SELECT NAME_P,PASSWORD FROM PLAYER WHERE NAME_P<=? AND PASSWORD<=?");
+			stmt2 = c.prepareStatement("SELECT NAME_P,PASSWORD FROM PLAYER WHERE NAME_P=? AND PASSWORD=?");
 			stmt2.setString(1, nom);
 			stmt2.setString(2, pass);
 			ResultSet rs = stmt2.executeQuery();
-			System.out.println(rs.getString(1));
 			if (rs.getString(1).equals(nom) && rs.getString(2).equals(pass)) {
 				i = true;
 			}
@@ -178,14 +177,14 @@ public class BD {
 		} catch (Exception e) {
 			System.out.println(e.getClass().getName() + ": " + e.getMessage());
 		}
-	}
-
-	public static void createMonster(MonsterPlant mon) {
+	}	
+	
+	public static void createMonster(Monster mon) {
 		try {
 
 			stmt2 = c.prepareStatement("INSERT INTO MONSTER (NAME_M,TYPE,HP,ATK,DEF,VEL) VALUES (?,?,?,?,?,?)");
 			stmt2.setString(1, mon.getName());
-			stmt2.setString(2, "PLANT");
+			stmt2.setString(2, mon.getTypeString());
 			stmt2.setInt(3, mon.getLifePoints());
 			stmt2.setInt(4, mon.getAttack());
 			stmt2.setInt(5, mon.getDefense());
@@ -199,45 +198,13 @@ public class BD {
 		}
 	}
 
-	public static void createMonster(MonsterFire mon) {
-		try {
-
-			stmt2 = c.prepareStatement("INSERT INTO MONSTER (NAME_M,TYPE,HP,ATK,DEF,VEL) VALUES (?,?,?,?,?,?)");
-			stmt2.setString(1, mon.getName());
-			stmt2.setString(2, "FIRE");
-			stmt2.setInt(3, mon.getLifePoints());
-			stmt2.setInt(4, mon.getAttack());
-			stmt2.setInt(5, mon.getDefense());
-			stmt2.setInt(6, mon.getSpeed());
-			stmt2.executeUpdate();
-			stmt2.close();
-			c.commit();
-
-		} catch (Exception e) {
-			System.out.println(e.getClass().getName() + ": " + e.getMessage());
+	public static void createAllMonsters(List<? extends Monster> lista){
+		
+		for (Monster monster : lista) {
+			createMonster(monster);
 		}
+		
 	}
-
-	public static void createMonster(MonsterWater mon) {
-		try {
-
-			stmt2 = c.prepareStatement("INSERT INTO MONSTER (NAME_M,TYPE,HP,ATK,DEF,VEL) VALUES (?,?,?,?,?,?)");
-			stmt2.setString(1, mon.getName());
-			stmt2.setString(2, "WATER");
-			stmt2.setInt(3, mon.getLifePoints());
-			stmt2.setInt(4, mon.getAttack());
-			stmt2.setInt(5, mon.getDefense());
-			stmt2.setInt(6, mon.getSpeed());
-			stmt2.executeUpdate();
-			stmt2.close();
-			c.commit();
-
-		} catch (Exception e) {
-			System.out.println(e.getClass().getName() + ": " + e.getMessage());
-		}
-	}
-
-
 
 	//	public static Monster selectMonster (String nom) {
 	//		Monster i = new Monster();
@@ -278,11 +245,11 @@ public class BD {
 				int defense = rs.getInt(5);
 				int speed = rs.getInt(6);
 
-				if (type.equals("WATER")) {
+				if (type.equals(Type.WATER.toString())) {
 					s.add(new MonsterWater(name, lifePoints, attack, defense, speed));
-				}else if (type.equals("FIRE")) {
+				}else if (type.equals(Type.FIRE.toString())) {
 					s.add(new MonsterFire(name, lifePoints, attack, defense, speed));
-				}else if (type.equals("PLANT")) {
+				}else if (type.equals(Type.PLANT.toString())) {
 					s.add(new MonsterPlant(name, lifePoints, attack, defense, speed));
 				}
 			}
@@ -319,8 +286,7 @@ public class BD {
 
 		//System.out.println(selectJugador("KEVIN", "PAPAYA"));
 
-		Type t = Type.FIRE;
-		System.out.println(t.toString());
+		
 
 	}
 
