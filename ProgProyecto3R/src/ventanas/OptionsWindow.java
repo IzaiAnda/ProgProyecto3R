@@ -3,12 +3,20 @@ package ventanas;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileInputStream;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -25,6 +33,26 @@ public class OptionsWindow extends JFrame {
 	private JLabel labelMusic = new JLabel();
 	private JButton buttonBack = new JButton();
 	private JCheckBox checkMusic = new JCheckBox();
+	
+	public static void playMusic(String filepath) {
+
+		try {
+			
+			File musicpath = new File(filepath);
+			
+			if (musicpath.exists()) {
+				AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicpath);
+				Clip clip = AudioSystem.getClip();
+				clip.start();
+			}else {
+				System.out.println("cant find file");
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+	}
+		
+	}
 
 	public OptionsWindow(int altura, int anchura) {
 		contentpane = new JPanel();
@@ -70,6 +98,14 @@ public class OptionsWindow extends JFrame {
 
 			}
 		});
+		
+		
 	}
-
+	
+	public static void main(String[] args) {
+		Path currentDir = Paths.get("/music/M1.mp3");
+		
+		playMusic("/music/M1.mp3");
+		
+	}
 }
