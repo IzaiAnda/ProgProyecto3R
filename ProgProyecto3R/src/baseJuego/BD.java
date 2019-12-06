@@ -12,6 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import monsters.Monster;
+import monsters.Monster.Type;
 import monsters.MonsterFire;
 import monsters.MonsterPlant;
 import monsters.MonsterWater;
@@ -160,29 +161,6 @@ public class BD {
 
 		} catch (Exception e) {
 			System.out.println(e.getClass().getName() + ": " + e.getMessage());
-			if(selectJugador(nom)) {
-				System.out.println("Contraseña incorrecta");
-			}else {
-				System.out.println("No existe Usuario con ese nombre");
-			}
-		}
-		return i;
-	}
-	public static boolean selectJugador(String nom) {
-		boolean i = true;
-		try {
-
-			System.out.println(nom);
-			stmt2 = c.prepareStatement("SELECT NAME_P,PASSWORD FROM PLAYER WHERE NAME_P<=? ");
-			stmt2.setString(1, nom);
-			ResultSet rs = stmt2.executeQuery();
-			System.out.println(rs.getString(1));
-			rs.close();
-			stmt2.close();
-
-		} catch (Exception e) {
-			System.out.println(e.getClass().getName() + ": " + e.getMessage());
-			i=false;
 		}
 		return i;
 	}
@@ -325,12 +303,12 @@ public class BD {
 		// b.insert("LEVEL(NAME_L, TXT)", "('MONTAÑA1','ES LA HORA DE LUCHAR')");
 		// b.insert("LP", "('IZA','MONTAÑA1')");
 		// System.out.println(b.select("PLAYER"));
-		MonsterPlant mon = new MonsterPlant("Plantita",100,100,100,100);
-		MonsterFire mon2 = new MonsterFire("Fuegillo",10,10,10,10);
-		MonsterWater mon3 = new MonsterWater("Gotita",50,50,50,50);
-		createMonster(mon);
-		createMonster(mon2);
-		createMonster(mon3);
+		//		MonsterPlant mon = new MonsterPlant("Plantita",100,100,100,100);
+		//		MonsterFire mon2 = new MonsterFire("Fuegillo",10,10,10,10);
+		//		MonsterWater mon3 = new MonsterWater("Gotita",50,50,50,50);
+		//		createMonster(mon);
+		//		createMonster(mon2);
+		//		createMonster(mon3);
 		// System.out.println(selectMonster("Popeye"));
 		//		LinkedList<Monster> s = selectAllMonsters();
 		//		System.out.println(s.get(0));
@@ -340,6 +318,9 @@ public class BD {
 		//createJugador("it", "po");
 
 		//System.out.println(selectJugador("KEVIN", "PAPAYA"));
+
+		Type t = Type.FIRE;
+		System.out.println(t.toString());
 
 	}
 

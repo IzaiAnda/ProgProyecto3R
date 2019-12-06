@@ -23,7 +23,9 @@ public class StartGameWindow extends JFrame {
 	private static final long serialVersionUID = 1L;
 
 	private JPanel contentpane = new JPanel();
-
+	private static int seguro = 0;  
+	//al alcanzar 10 intentos de inicio de sesion, 
+	//va a ddesaparecer el boton para que no pueda continuar buscando un usuario
 	private JButton buttonPlay = new JButton();
 	private JButton buttonAccept = new JButton();
 	private JLabel labelMonster = new JLabel();
@@ -120,20 +122,30 @@ public class StartGameWindow extends JFrame {
 				}else {
 					//					NewUserWindow newUserWindow = new NewUserWindow(750, 422,nom,pass);
 					//					newUserWindow.setVisible(true);
-					int x = JOptionPane.showConfirmDialog(null, "No existe Usuario con ese nombre. \nQuiere crear uno con los mismos datos?" );
+
+					//Por seguridad no especificamos si el nombre o la contraseña es incorrecta
+
+					int x = JOptionPane.showConfirmDialog(null, "Usuario ó contraseña incorrecta. \nQuiere crear uno con los mismos datos?" );
 					if (x == 0) {
 						BD.createJugador(nom, pass);
 						EventQueue.invokeLater(new Runnable() {
 
 							@Override
 							public void run() {
-								
+
 								JOptionPane.showInputDialog("DONE");
 
 							}
 						});
 
+					}else if(x == 1) {
+						seguro++;
+
 					}
+				}
+				if(seguro == 10) {
+					buttonAccept.setVisible(false);
+					System.out.println("patata");
 				}
 			}
 
