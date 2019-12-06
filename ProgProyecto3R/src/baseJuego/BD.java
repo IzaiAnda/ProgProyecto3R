@@ -17,6 +17,7 @@ import monsters.Monster.Type;
 import monsters.MonsterFire;
 import monsters.MonsterPlant;
 import monsters.MonsterWater;
+import moves.Move;
 
 public class BD {
 
@@ -102,7 +103,7 @@ public class BD {
 			stmt = c.createStatement();
 			String sql = "CREATE TABLE PLAYER ( NAME_P VARCHAR(30) NOT NULL PRIMARY KEY,PASSWORD VARCHAR(30) NOT NULL);";
 			String sql1 = "CREATE TABLE MONSTER ( NAME_M VARCHAR(30) NOT NULL PRIMARY KEY,TYPE VARCHAR(30) NOT NULL, HP INTEGER NOT NULL, ATK INTEGER NOT NULL, DEF INTEGER NOT NULL, VEL INTEGER NOT NULL);";
-			String sql2 = "CREATE TABLE MOVE ( NAME_MOV VARCHAR(30) NOT NULL PRIMARY KEY,TYPE VARCHAR(30) NOT NULL, DMG INTEGER NOT NULL, DESCRIPTION VARCHAR(30), PERCENT INTEGER);";
+			String sql2 = "CREATE TABLE MOVE ( NAME_MOV VARCHAR(30) NOT NULL PRIMARY KEY,DMG INTEGER NOT NULL);";
 			String sql3 = "CREATE TABLE MM ( NAME_M VARCHAR(30) NOT NULL, NAME_MOV VARCHAR(30) NOT NULL, PRIMARY KEY (NAME_M, NAME_MOV), FOREIGN KEY (NAME_M) REFERENCES MONSTER(NAME_M),FOREIGN KEY (NAME_MOV) REFERENCES MOVE(NAME_MOV));";
 			String sql4 = "CREATE TABLE LEVEL ( NAME_L VARCHAR(30) NOT NULL PRIMARY KEY,TXT VARCHAR(30) NOT NULL);";
 			String sql5 = "CREATE TABLE LM ( NAME_L VARCHAR(30) NOT NULL,NAME_M VARCHAR(30) NOT NULL, PI INTEGER NOT NULL, PRIMARY KEY (NAME_L, NAME_M), FOREIGN KEY (NAME_M) REFERENCES MONSTER(NAME_M),FOREIGN KEY (NAME_L) REFERENCES LEVEL(NAME_L));";
@@ -204,6 +205,30 @@ public class BD {
 		}
 
 	}
+	
+	public static void createMove(Move move) {
+		try {
+
+			stmt2 = c.prepareStatement("INSERT INTO MOVE (NAME_MOV,DMG,PERCENT) VALUES (?,?,?)");
+			stmt2.setString(1, move.getName());
+			stmt2.setInt(2,move.getDamage());
+			
+			stmt2.executeUpdate();
+			stmt2.close();
+			c.commit();
+
+		} catch (Exception e) {
+			System.out.println(e.getClass().getName() + ": " + e.getMessage());
+		}
+	}
+	
+	public static void createAllMoves(List<? extends Move> lista) {
+
+		for (Move move : lista) {
+			createMove(move);
+		}
+
+	}
 
 	// public static Monster selectMonster (String nom) {
 	// Monster i = new Monster();
@@ -265,6 +290,7 @@ public class BD {
 	public static void main(String[] args) throws SQLException {
 		startBD();
 		LinkedList<Monster> bdMonter = new LinkedList<>();
+		LinkedList<Move> bdMove = new LinkedList<>();
 
 		MonsterPlant catercute = new MonsterPlant("Catercute", 100, 100, 100, 100);
 		MonsterPlant weepinutor = new MonsterPlant("Weepinutor", 10, 10, 10, 10);
@@ -291,6 +317,18 @@ public class BD {
 		bdMonter.add(mutoise);
 
 		createAllMonsters(bdMonter);
+		
+		Move ascuas = new Move("Ascuas", 75);
+		Move lluevehojas = new Move("LlueveHojas", 75);
+		Move pistolaAgua = new Move("Pistola Agua", 75);
+
+		
+		bdMove.add(ascuas);
+		bdMove.add(lluevehojas);
+		bdMove.add(pistolaAgua);
+
+		
+		createAllMoves(bdMove);
 
 	}
 
