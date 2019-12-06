@@ -57,7 +57,6 @@ public class BD {
 
 		try {
 
-
 			stmt = c.createStatement();
 			String sql = "INSERT INTO " + tName + " VALUES " + code + ";";
 
@@ -177,8 +176,8 @@ public class BD {
 		} catch (Exception e) {
 			System.out.println(e.getClass().getName() + ": " + e.getMessage());
 		}
-	}	
-	
+	}
+
 	public static void createMonster(Monster mon) {
 		try {
 
@@ -198,38 +197,38 @@ public class BD {
 		}
 	}
 
-	public static void createAllMonsters(List<? extends Monster> lista){
-		
+	public static void createAllMonsters(List<? extends Monster> lista) {
+
 		for (Monster monster : lista) {
 			createMonster(monster);
 		}
-		
+
 	}
 
-	//	public static Monster selectMonster (String nom) {
-	//		Monster i = new Monster();
-	//		try {
-	//			
-	//			stmt2 = c.prepareStatement("SELECT * FROM MONSTER WHERE NAME_M = ? ");
-	//			stmt2.setString(1, nom);
-	//	
-	//			ResultSet rs = stmt2.executeQuery();
-	//			
-	//			i.setName(rs.getString(1));
-	//			i.setHP(rs.getInt(3));
-	//			i.setAtk(rs.getInt(4));
-	//			i.setDef(rs.getInt(5));
-	//			i.setVel(rs.getInt(6));
-	//			
-	//			stmt2.close();
-	//			
-	//		} catch (Exception e) {
-	//			System.out.println(e.getClass().getName() + ": " + e.getMessage());
-	//		}
-	//		return i;	
-	//	}
+	// public static Monster selectMonster (String nom) {
+	// Monster i = new Monster();
+	// try {
+	//
+	// stmt2 = c.prepareStatement("SELECT * FROM MONSTER WHERE NAME_M = ? ");
+	// stmt2.setString(1, nom);
+	//
+	// ResultSet rs = stmt2.executeQuery();
+	//
+	// i.setName(rs.getString(1));
+	// i.setHP(rs.getInt(3));
+	// i.setAtk(rs.getInt(4));
+	// i.setDef(rs.getInt(5));
+	// i.setVel(rs.getInt(6));
+	//
+	// stmt2.close();
+	//
+	// } catch (Exception e) {
+	// System.out.println(e.getClass().getName() + ": " + e.getMessage());
+	// }
+	// return i;
+	// }
 
-	public static LinkedList<Monster> selectAllMonsters () {
+	public static LinkedList<Monster> selectAllMonsters() {
 		LinkedList<Monster> s = new LinkedList<>();
 		try {
 
@@ -247,9 +246,9 @@ public class BD {
 
 				if (type.equals(Type.WATER.toString())) {
 					s.add(new MonsterWater(name, lifePoints, attack, defense, speed));
-				}else if (type.equals(Type.FIRE.toString())) {
+				} else if (type.equals(Type.FIRE.toString())) {
 					s.add(new MonsterFire(name, lifePoints, attack, defense, speed));
-				}else if (type.equals(Type.PLANT.toString())) {
+				} else if (type.equals(Type.PLANT.toString())) {
 					s.add(new MonsterPlant(name, lifePoints, attack, defense, speed));
 				}
 			}
@@ -260,33 +259,38 @@ public class BD {
 			System.out.println(e.getClass().getName() + ": " + e.getMessage());
 		}
 
-
 		return s;
 	}
 
 	public static void main(String[] args) throws SQLException {
 		startBD();
-		// b.insert("PLAYER(NAME_P, PASSWORD)", "('IZAI','123')");
-		// b.insert("LEVEL(NAME_L, TXT)", "('MONTAÑA1','ES LA HORA DE LUCHAR')");
-		// b.insert("LP", "('IZA','MONTAÑA1')");
-		// System.out.println(b.select("PLAYER"));
-		//		MonsterPlant mon = new MonsterPlant("Plantita",100,100,100,100);
-		//		MonsterFire mon2 = new MonsterFire("Fuegillo",10,10,10,10);
-		//		MonsterWater mon3 = new MonsterWater("Gotita",50,50,50,50);
-		//		createMonster(mon);
-		//		createMonster(mon2);
-		//		createMonster(mon3);
-		// System.out.println(selectMonster("Popeye"));
-		//		LinkedList<Monster> s = selectAllMonsters();
-		//		System.out.println(s.get(0));
-		//		System.out.println(s.get(1));
-		//		System.out.println(s.get(2));
+		LinkedList<Monster> bdMonter = new LinkedList<>();
 
-		//createJugador("it", "po");
+		MonsterPlant catercute = new MonsterPlant("Catercute", 100, 100, 100, 100);
+		MonsterPlant weepinutor = new MonsterPlant("Weepinutor", 10, 10, 10, 10);
+		MonsterPlant venulax = new MonsterPlant("Venulax", 10, 10, 10, 10);
 
-		//System.out.println(selectJugador("KEVIN", "PAPAYA"));
+		MonsterFire moltnx = new MonsterFire("Moltnx", 10, 10, 10, 10);
+		MonsterFire charas = new MonsterFire("Charas", 10, 10, 10, 10);
+		MonsterFire tangizard = new MonsterFire("Tangizard", 10, 10, 10, 10);
 
-		
+		MonsterWater meowcruel = new MonsterWater("Meowcruel", 50, 50, 50, 50);
+		MonsterWater seesect = new MonsterWater("Seesect", 50, 50, 50, 50);
+		MonsterWater mutoise = new MonsterWater("Mutoise", 50, 50, 50, 50);
+
+		bdMonter.add(catercute);
+		bdMonter.add(weepinutor);
+		bdMonter.add(venulax);
+
+		bdMonter.add(moltnx);
+		bdMonter.add(charas);
+		bdMonter.add(tangizard);
+
+		bdMonter.add(meowcruel);
+		bdMonter.add(seesect);
+		bdMonter.add(mutoise);
+
+		createAllMonsters(bdMonter);
 
 	}
 
