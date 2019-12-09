@@ -96,10 +96,10 @@ public class BD {
 		}
 		System.out.println("Table created successfully");
 	}
+	
 
 	public static void create() {
 		try {
-
 			stmt = c.createStatement();
 			String sql = "CREATE TABLE PLAYER ( NAME_P VARCHAR(30) NOT NULL PRIMARY KEY,PASSWORD VARCHAR(30) NOT NULL);";
 			String sql1 = "CREATE TABLE MONSTER ( NAME_M VARCHAR(30) NOT NULL PRIMARY KEY,TYPE VARCHAR(30) NOT NULL, HP INTEGER NOT NULL, ATK INTEGER NOT NULL, DEF INTEGER NOT NULL, VEL INTEGER NOT NULL);";
@@ -209,7 +209,7 @@ public class BD {
 	public static void createMove(Move move) {
 		try {
 
-			stmt2 = c.prepareStatement("INSERT INTO MOVE (NAME_MOV,DMG,PERCENT) VALUES (?,?,?)");
+			stmt2 = c.prepareStatement("INSERT INTO MOVE (NAME_MOV,DMG) VALUES (?,?)");
 			stmt2.setString(1, move.getName());
 			stmt2.setInt(2,move.getDamage());
 			
@@ -289,6 +289,7 @@ public class BD {
 
 	public static void main(String[] args) throws SQLException {
 		startBD();
+		create();
 		LinkedList<Monster> bdMonter = new LinkedList<>();
 		LinkedList<Move> bdMove = new LinkedList<>();
 
