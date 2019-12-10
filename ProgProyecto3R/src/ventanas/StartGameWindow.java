@@ -98,11 +98,6 @@ public class StartGameWindow extends JFrame {
 
 				buttonAccept.setVisible(true);
 
-				/*labelLogin.setText("Introduzca usuario:");
-				labelLogin.setBounds(0, 0, 100, 20);
-				labelLogin.setBackground(new Color(255,175,175));
-				contentpane.add(labelLogin);*/
-
 			}
 		});
 

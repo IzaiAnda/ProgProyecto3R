@@ -161,7 +161,7 @@ public class BD {
 		} catch (Exception e) {
 			System.out.println(e.getClass().getName() + ": " + e.getMessage());
 			if(selectJugador(nom)) {
-				System.out.println("Contraseña incorrecta");
+				System.out.println("Contraseï¿½a incorrecta");
 			}else {
 				System.out.println("No existe Usuario con ese nombre");
 			}
@@ -322,8 +322,8 @@ public class BD {
 	public static void main(String[] args) throws SQLException {
 		startBD();
 		// b.insert("PLAYER(NAME_P, PASSWORD)", "('IZAI','123')");
-		// b.insert("LEVEL(NAME_L, TXT)", "('MONTAÑA1','ES LA HORA DE LUCHAR')");
-		// b.insert("LP", "('IZA','MONTAÑA1')");
+		// b.insert("LEVEL(NAME_L, TXT)", "('MONTAï¿½A1','ES LA HORA DE LUCHAR')");
+		// b.insert("LP", "('IZA','MONTAï¿½A1')");
 		// System.out.println(b.select("PLAYER"));
 		MonsterPlant mon = new MonsterPlant("Plantita",100,100,100,100);
 		MonsterFire mon2 = new MonsterFire("Fuegillo",10,10,10,10);
@@ -337,9 +337,10 @@ public class BD {
 		//		System.out.println(s.get(1));
 		//		System.out.println(s.get(2));
 
-		//createJugador("it", "po");
+		createJugador("kevin", "kevin");
 
 		//System.out.println(selectJugador("KEVIN", "PAPAYA"));
+		closeBD();
 
 	}
 
