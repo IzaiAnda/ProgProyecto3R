@@ -91,6 +91,8 @@ public class PokedexWindow extends JFrame {
 		
 		addMonsters(list);
 		
+		
+		
 		itemName = new JMenuItem("Name");
 		menuOrder.add(itemName);
 		itemName.addActionListener(new ActionListener() {
@@ -149,6 +151,8 @@ public class PokedexWindow extends JFrame {
 		add(tabla);
 		setSize(altura, anchura);
 		setTitle("MonsterWiki");
+		
+		
 	}
 
 	public static void compareAdd(List<? extends Monster> list, int i){
@@ -174,5 +178,6 @@ public class PokedexWindow extends JFrame {
 	public static void main(String[] args) {
 		PokedexWindow pokedexWindow = new PokedexWindow(750, 422);
 		pokedexWindow.setVisible(true);
+		
 	}
 }

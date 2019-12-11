@@ -1,5 +1,6 @@
 package baseJuego;
 
+import ventanas.Pokedex;
 import ventanas.StartGameWindow;
 import baseJuego.BD;
 
@@ -12,6 +13,9 @@ public class Main {
 		StartGameWindow starWindow = new StartGameWindow(750, 422);
 
 		starWindow.setVisible(true);
+		
+		
+
 
 	}
 
