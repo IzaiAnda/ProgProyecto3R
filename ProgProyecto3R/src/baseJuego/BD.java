@@ -30,6 +30,7 @@ public class BD {
 		try {
 			logger.setLevel(Level.FINEST);
 			logger.addHandler(new FileHandler("LoggerBD.xml"));
+			
 		} catch (Exception e) {
 		}
 	}
