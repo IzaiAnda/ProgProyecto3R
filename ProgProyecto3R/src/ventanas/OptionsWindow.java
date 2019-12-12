@@ -5,12 +5,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -19,6 +22,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import baseJuego.Main;
 
 public class OptionsWindow extends JFrame {
 
@@ -34,25 +39,7 @@ public class OptionsWindow extends JFrame {
 	private JButton buttonBack = new JButton();
 	private JCheckBox checkMusic = new JCheckBox();
 	
-	public static void playMusic(String filepath) {
-
-		try {
-			
-			File musicpath = new File(filepath);
-			
-			if (musicpath.exists()) {
-				AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicpath);
-				Clip clip = AudioSystem.getClip();
-				clip.start();
-			}else {
-				System.out.println("cant find file");
-			}
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-	}
-		
-	}
+	
 
 	public OptionsWindow(int altura, int anchura) {
 		contentpane = new JPanel();
@@ -99,13 +86,34 @@ public class OptionsWindow extends JFrame {
 			}
 		});
 		
+		buttonSave.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(checkMusic.isSelected()==true) {
+					Main m = new Main();
+					try {
+						m.Sonido();
+					} catch (LineUnavailableException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (UnsupportedAudioFileException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}else {
+					
+				}
+				
+			}
+		});
 		
 	}
 	
 	public static void main(String[] args) {
-		Path currentDir = Paths.get("/music/M1.mp3");
-		
-		playMusic("/music/M1.mp3");
 		
 	}
 }
