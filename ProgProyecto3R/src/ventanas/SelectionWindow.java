@@ -82,8 +82,8 @@ public class SelectionWindow extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				PokedexWindow pokedexWindow = new PokedexWindow(750, 422);
-				pokedexWindow.setVisible(true);
+				/*PokedexWindow pokedexWindow = new PokedexWindow(750, 422);
+				pokedexWindow.setVisible(true);*/
 				
 				Pokedex pokedex = new Pokedex();
 				pokedex.setVisible(true);
@@ -97,9 +97,6 @@ public class SelectionWindow extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				MovementsWindow movementsWindow = new MovementsWindow(750, 422);
 				movementsWindow.setVisible(true);
-				
-				Pokedex ventana = new Pokedex();
-				ventana.setVisible(true);
 
 			}
 		});
