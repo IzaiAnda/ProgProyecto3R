@@ -11,6 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -34,11 +35,12 @@ public class PokedexWindow extends JFrame {
 	private JMenuItem itemDefense;
 	private JMenuItem itemSpeed;
 	private static JTable tabla;
+	JScrollPane scroll = new JScrollPane();
 	private static DefaultTableModel modelo= new DefaultTableModel();;
 	
 	public static void addMonsters(List<? extends Monster> list) {
 		
-		Vector<String> titles = new Vector<>();
+		/*Vector<String> titles = new Vector<>();
 		titles.add("Name");
 		titles.add("Type");
 		titles.add("LifePoints");
@@ -46,7 +48,7 @@ public class PokedexWindow extends JFrame {
 		titles.add("Defense");
 		titles.add("Speed");
 		
-		modelo.addRow(titles);
+		modelo.addRow(titles);*/ //No es necesario
 		
 		for (Monster monster : list) {
 			Vector<String> monsters = new Vector<>();
@@ -148,7 +150,8 @@ public class PokedexWindow extends JFrame {
 			}
 		});
 		tabla = new JTable(modelo);
-		add(tabla);
+		scroll.setViewportView(tabla);
+		add(scroll);
 		setSize(altura, anchura);
 		setTitle("MonsterWiki");
 		

@@ -288,6 +288,31 @@ public class BD {
 
 		return s;
 	}
+	
+	public static LinkedList<Move> selectAllMoves() {
+		LinkedList<Move> s = new LinkedList<>();
+		try {
+
+			stmt2 = c.prepareStatement("SELECT * FROM MOVE");
+			ResultSet rs = stmt2.executeQuery();
+
+			while (rs.next()) {
+
+				String name = rs.getString(1);
+				int damage = rs.getInt(2);
+	
+				s.add(new Move(name, damage));
+				
+			}
+
+			stmt2.close();
+
+		} catch (Exception e) {
+			System.out.println(e.getClass().getName() + ": " + e.getMessage());
+		}
+
+		return s;
+	}
 
 	public static void main(String[] args) throws SQLException {
 		startBD();
@@ -324,17 +349,27 @@ public class BD {
 
 		createAllMonsters(bdMonter);
 		
-		Move ascuas = new Move("Ascuas", 75);
-		Move lluevehojas = new Move("LlueveHojas", 75);
-		Move pistolaAgua = new Move("Pistola Agua", 75);
+		Move ascuas = new Move("Ascuas", 60);
+		Move lluevehojas = new Move("LlueveHojas", 120);
+		Move pistolaAgua = new Move("Pistola Agua", 55);
+		Move ataqueRapido = new Move("Ataque rapido", 50);
+		Move placaje = new Move("Placaje", 50);
+		Move arañazo = new Move("arañazo", 35);
+
+
 
 		
 		bdMove.add(ascuas);
 		bdMove.add(lluevehojas);
 		bdMove.add(pistolaAgua);
+		bdMove.add(ataqueRapido);
+		bdMove.add(placaje);
+		bdMove.add(arañazo);
 
-		
+
 		createAllMoves(bdMove);
+		
+		
 		closeBD();
 
 	}

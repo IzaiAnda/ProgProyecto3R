@@ -1,5 +1,6 @@
 package ventanas;
 
+import java.awt.Color;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -25,6 +26,10 @@ import monsters.Monster;
 
 public class Pokedex extends JFrame{
 
+		/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 		static int count = 0;
 		
 	public Pokedex() {
@@ -93,7 +98,7 @@ public class Pokedex extends JFrame{
 		
 		container.setSize(100, 100);
 		setLayout(null);
-		scrPane.setBounds(10, 50, 400, 300);
+		scrPane.setBounds(10, 50, 150, 300);
 		this.add(scrPane);
 		
 		image.setBounds(525, 15, 180, 180);
@@ -111,10 +116,6 @@ public class Pokedex extends JFrame{
 		
 		search.setBounds(210, 15, 75, 25);
 		this.add(search);
-		
-		monsters.setLineWrap(true);
-        monsters.setWrapStyleWord(true);
-        monsters.setEditable(false);
 		
         back.setBounds(300, 15, 75, 25);
 		this.add(back);
