@@ -9,10 +9,10 @@ import moves.Move;
 public class Combate{
 
 
-	
+
 	// efectividad(1 normal, 2 ventaja), ataque del pokemon, poder del ataque,
 	// defensa del enemigo
-	
+
 	public static int calculo(boolean advantage, int attack, int power, int defense) {
 
 		int exit = 0;
@@ -27,29 +27,45 @@ public class Combate{
 
 		return exit;
 	}
-	
-	public static Monster damageTaken(Monster attacker, Monster defender, Move action) {
-		
-		boolean advantage = defender.efectividad(attacker.getType());
-		
-		int damageDone = calculo(advantage, attacker.getAttack(), action.getDamage(), defender.getDefense());
-		int defenderLifePoints = defender.getLifePoints() -damageDone ;
-		
-		defender.setLifePoints(defenderLifePoints);
-		return defender;
-		
-	}
-	
-	public static void main(String[] args) {
-		
-		 MonsterPlant mon = new MonsterPlant("Plantita",100,100,100,100);
-		 MonsterFire mon2 = new MonsterFire("Fuegillo",100,100,100,100);
-		 MonsterWater mon3 = new MonsterWater("Gotita",50,50,50,50);
 
-		 Move move = new Move("Llamarada", 10);
-		
-		System.out.println(damageTaken(mon, mon2, move));
-		
+	public static void damageTaken(Monster attacker, Monster defender, Move action) {
+
+		boolean advantage = defender.efectividad(attacker.getType());
+
+		int damageDone = calculo(advantage, attacker.getAttack(), action.getDamage(), defender.getDefense());
+		int defenderLifePoints = defender.getLifePoints() - damageDone ;
+
+		defender.setLifePoints(defenderLifePoints);
+
+	}
+
+	public static void combat(Monster a, Monster b, Move aM, Move bM) {
+		if (a.getSpeed()>b.getSpeed()) {
+			damageTaken(a, b, aM);
+			if (b.getLifePoints()>0) {
+				damageTaken(b, a, bM);
+			}
+		}else {
+			damageTaken(b, a, aM);
+			if (a.getLifePoints()>0) {
+				damageTaken(a, b, aM);
+			}
+		}
+	}
+
+	public static void main(String[] args) {
+
+		MonsterPlant mon = new MonsterPlant("Plantita",100,100,100,100);
+		MonsterFire mon2 = new MonsterFire("Fuegillo",100,100,100,100);
+		MonsterWater mon3 = new MonsterWater("Gotita",50,50,50,50);
+
+		Move move = new Move("Llamarada", 10);
+
+		combat(mon, mon2, move, move);
+
+		System.out.println(mon);
+		System.out.println(mon2);
+
 	}
 
 }

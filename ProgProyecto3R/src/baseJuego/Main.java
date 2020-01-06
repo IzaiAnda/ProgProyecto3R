@@ -1,6 +1,5 @@
 package baseJuego;
 
-import ventanas.Pokedex;
 import ventanas.StartGameWindow;
 import baseJuego.BD;
 

@@ -37,7 +37,10 @@ public class CombatWindow<V> extends JFrame {
 	MonsterFire mon2 = new MonsterFire("Fuegillo", 10, 10, 10, 10);
 	MonsterWater mon3 = new MonsterWater("Gotita", 50, 50, 50, 50);
 	
-	ArrayList<Monster> monstruos = new ArrayList<Monster>();
+	ArrayList<Monster> monstersIA = new ArrayList<Monster>();
+	HashMap<Monster, Move[]> movesIA = new HashMap<Monster, Move[]>();
+	
+	ArrayList<Monster> monstersP = new ArrayList<Monster>();
 	HashMap<Monster, Move[]> moves = new HashMap<Monster, Move[]>();
 	
 	Move mp1= new Move("Hoja Afilada", 50);
@@ -83,9 +86,17 @@ public class CombatWindow<V> extends JFrame {
 
 	public CombatWindow(int altura, int anchura) {
 		
+		monstersIA.add(mon);
+		monstersIA.add(mon2);
+		monstersIA.add(mon3);
+		
 		moves.put(mon, mp);
 		moves.put(mon2, mf);
 		moves.put(mon3, mw);
+		
+		movesIA.put(mon, mp);
+		movesIA.put(mon2, mf);
+		movesIA.put(mon3, mw);
 		
 		add(arriba,BorderLayout.CENTER);
 		add(abajo,BorderLayout.SOUTH);
@@ -167,6 +178,7 @@ public class CombatWindow<V> extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				historial.append("1\n");
 				pokemonActual = 0;
+				botonesMonster.setVisible(false);
 				post(0);
 
 			}
@@ -178,6 +190,7 @@ public class CombatWindow<V> extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				historial.append("2\n");
 				pokemonActual = 1;
+				botonesMonster.setVisible(false);
 				post(1);
 
 			}
@@ -189,6 +202,7 @@ public class CombatWindow<V> extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				historial.append("3\n");
 				pokemonActual = 2;
+				botonesMonster.setVisible(false);
 				post(2);
 
 			}
@@ -200,6 +214,7 @@ public class CombatWindow<V> extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				historial.append("4\n");
 				pokemonActual = 3;
+				botonesMonster.setVisible(false);
 				post(3);
 
 			}
@@ -216,18 +231,24 @@ public class CombatWindow<V> extends JFrame {
 		});
 
 	}
-
+	/* Orden del combate
+	 * startCombat
+	 * selectMonster
+	 * post
+	 * ataques
+	 * 
+	 */
 	public void startCombat() {
-		monstruos.add(mon);
-		monstruos.add(mon2);
-		monstruos.add(mon3);
+		monstersP.add(mon);
+		monstersP.add(mon2);
+		monstersP.add(mon3);
 
 		stop = true;
 
 		historial.append("Estás luchando contra Joven Chano!\n");
 		historial.append("Joven Chano: Te desafio!\n");
 
-		historial.append("Joven Chano saca a " + mon3.getName() + "\n");
+		historial.append("Joven Chano saca a " + monstersIA.get(0).getName() + "\n");
 		historial.append("---------------------\n");
 		selectMonster();
 
@@ -236,7 +257,7 @@ public class CombatWindow<V> extends JFrame {
 	public void post(int i){
 		historial.append("---------------------\n");
 
-		historial.append("Has ado a: " + monstruos.get(i).getName() + "\n");
+		historial.append("Has ado a: " + monstersP.get(i).getName() + "\n");
 		historial.append("      \n");
 		historial.append("¿Que quieres hacer? (1/2)\n");
 		historial.append("     Luchar\n");
@@ -249,10 +270,10 @@ public class CombatWindow<V> extends JFrame {
 	public void ataques() {
 		historial.append("Que ataque quiere sacar?\n");
 		
-		Move[] movesm = moves.get(monstruos.get(pokemonActual));
+		Move[] movesM = moves.get(monstersP.get(pokemonActual));
 		
 		for (int i = 0; i < 4; i++) {
-			JButton a =  new JButton(movesm[i].getName());
+			JButton a =  new JButton(movesM[i].getName());
 			botonesAtaques.add(a);
 		}
 		
@@ -263,7 +284,7 @@ public class CombatWindow<V> extends JFrame {
 	public void selectMonster() {
 		historial.append("Que pokemon quiere sacar? (1/2/3)\n");
 		for (int i = 0; i < moves.size(); i++) {
-			historial.append(i+1 + ": " + monstruos.get(i).getName() + "\n");
+			historial.append(i+1 + ": " + monstersP.get(i).getName() + "\n");
 		}
 		
 		botonesMonster.setVisible(true);
