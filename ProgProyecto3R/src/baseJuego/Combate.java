@@ -46,7 +46,7 @@ public class Combate{
 				damageTaken(b, a, bM);
 			}
 		}else {
-			damageTaken(b, a, aM);
+			damageTaken(b, a, bM);
 			if (a.getLifePoints()>0) {
 				damageTaken(a, b, aM);
 			}
@@ -62,6 +62,13 @@ public class Combate{
 		Move move = new Move("Llamarada", 10);
 
 		combat(mon, mon2, move, move);
+
+		System.out.println(mon);
+		System.out.println(mon2);
+		
+		Move move2 = new Move("Llamarada", 20);
+
+		combat(mon, mon2, move, move2);
 
 		System.out.println(mon);
 		System.out.println(mon2);
