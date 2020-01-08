@@ -187,10 +187,10 @@ public class CombatWindow<V> extends JFrame {
 
 		stop = true;
 		
-		historial.append("Estás luchando contra "+ nomIA +"\n");
+		historial.append("Estas luchando contra "+ nomIA +"\n");
 		historial.append( nomIA + ": " + txtIA + "\n");
 
-		historial.append(nomIA + " saca a " + monstersIA.get(0).getName() + "\n");
+		historial.append(nomIA + " saca a " + monstersIA.get(0).getName() + "\n\n");
 
 		sacarPokemon();
 
@@ -227,9 +227,9 @@ public class CombatWindow<V> extends JFrame {
 	public void post(int i){
 		historial.append("---------------------\n");
 
-		historial.append("Has ado a: " + monstersP.get(i).getName() + "\n");
+		historial.append("Has sacado a: " + monstersP.get(i).getName() + "\n");
 		historial.append("      \n");
-		historial.append("¿Que quieres hacer? \n");
+		historial.append("�Que quieres hacer? \n");
 
 		botonesJugar.setVisible(true);
 
@@ -241,7 +241,7 @@ public class CombatWindow<V> extends JFrame {
 		
 		botonesAtaques.setVisible(false);
 
-		historial.append("Que ataque quiere usar?\n");
+		historial.append("Que ataque quiere usar?\n\n");
 
 		Move[] movesM = moves.get(monstersP.get(monsterActualInt));
 		Move[] movesMIA = movesIA.get(monstersIA.get(0));
@@ -258,13 +258,14 @@ public class CombatWindow<V> extends JFrame {
 					for (int j = 0; j < movesM.length; j++) {
 						if(movesM[j].getName().equals(a.getText())) {
 							y=j;
+							historial.append("Has usado: " + movesM[j].getName() + "\n");
 						}				
 					};
 					
 					Combate.combat(monstersP.get(monsterActualInt), monstersIA.get(0), movesM[new Integer(y)], movesMIA[0]);
 					
 					if (monstersP.get(monsterActualInt).getLifePoints()<=0&&monstersIA.get(0).getLifePoints()<=0) {
-						historial.append("Te han devilitado a tu mounstruo a la vez que has devilitado al mounstruo enemigo !!\n");
+						historial.append("Te han debilitado a tu mounstruo a la vez que has devilitado al mounstruo enemigo !!\n\n");
 						monstersP.remove(monsterActualInt);
 						monstersIA.remove(0);
 						if (monstersP.isEmpty()) {
@@ -272,11 +273,11 @@ public class CombatWindow<V> extends JFrame {
 						}else if (monstersIA.isEmpty()) {
 							youWin();
 						}else {
-							historial.append(nomIA+" a sacado a " + monstersIA.get(0).getName()+"\n");
+							historial.append(nomIA+" a sacado a " + monstersIA.get(0).getName()+"\n\n");
 							sacarPokemon();
 						}
 					}else if(monstersP.get(monsterActualInt).getLifePoints()<=0) {
-						historial.append("Te han devilitado a tu mounstruo!!\n");
+						historial.append("Te han debilitado a tu mounstruo!!\n\n");
 						monstersP.remove(monsterActualInt);
 						if (monstersP.isEmpty()) {
 							youLose();
@@ -284,18 +285,18 @@ public class CombatWindow<V> extends JFrame {
 							sacarPokemon();
 						}
 					}else if(monstersIA.get(0).getLifePoints()<=0) {
-						historial.append("Has devilitado al mounstruo enemigo!!\n");
+						historial.append("Has debilitado al mounstruo enemigo!!\n\n");
 						monstersIA.remove(0);
 						if (monstersIA.isEmpty()) {
 							youWin();
 						}else {
 							historial.append(nomIA+" a sacado a " + monstersIA.get(0)+"\n");
-							historial.append( monstersP.get(monsterActualInt).getName() + " se ha quedado con " + monstersP.get(monsterActualInt).getLifePoints() + " puntos de vida.\n");
+							historial.append( monstersP.get(monsterActualInt).getName() + " se ha quedado con " + monstersP.get(monsterActualInt).getLifePoints() + " puntos de vida.\n\n");
 							ataques();
 						}
 					}else {
 						historial.append( monstersP.get(monsterActualInt).getName() + " se ha quedado con " + monstersP.get(monsterActualInt).getLifePoints() + " puntos de vida.\n");
-						historial.append( monstersIA.get(0).getName() + " de "+nomIA+"  se ha quedado con " + monstersIA.get(0).getLifePoints() + " puntos de vida.\n");
+						historial.append( monstersIA.get(0).getName() + " de "+nomIA+"  se ha quedado con " + monstersIA.get(0).getLifePoints() + " puntos de vida.\n\n");
 						ataques();
 					}
 
