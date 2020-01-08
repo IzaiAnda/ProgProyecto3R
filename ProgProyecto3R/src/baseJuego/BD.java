@@ -402,26 +402,48 @@ public class BD {
 		MonsterPlant catercute = new MonsterPlant("Catercute", 100, 100, 100, 100);
 		MonsterPlant weepinutor = new MonsterPlant("Weepinutor", 10, 10, 10, 10);
 		MonsterPlant venulax = new MonsterPlant("Venulax", 10, 10, 10, 10);
+		MonsterPlant golbasaur = new MonsterPlant("Golbasaur", 10, 10, 10, 10);
+		MonsterPlant caternite = new MonsterPlant("Caternite", 10, 10, 10, 10);
+		MonsterPlant metadrill = new MonsterPlant("Metadrill", 10, 10, 10, 10);
+		MonsterPlant metadrio = new MonsterPlant("Metadrio", 10, 10, 10, 10);
 
 		MonsterFire moltnx = new MonsterFire("Moltnx", 10, 10, 10, 10);
 		MonsterFire charas = new MonsterFire("Charas", 10, 10, 10, 10);
 		MonsterFire tangizard = new MonsterFire("Tangizard", 10, 10, 10, 10);
+		MonsterFire beemeleon = new MonsterFire("Beemeleon", 10, 10, 10, 10);
+		MonsterFire growther = new MonsterFire("Growther", 10, 10, 10, 10);
+		MonsterFire moltvee = new MonsterFire("Moltvee", 10, 10, 10, 10);
+		MonsterFire flaredon = new MonsterFire("Flaredon", 10, 10, 10, 10);
 
 		MonsterWater meowcruel = new MonsterWater("Meowcruel", 50, 50, 50, 50);
 		MonsterWater seesect = new MonsterWater("Seesect", 50, 50, 50, 50);
 		MonsterWater mutoise = new MonsterWater("Mutoise", 50, 50, 50, 50);
+		MonsterWater omachamp = new MonsterWater("Omachamp", 50, 50, 50, 50);
+		MonsterWater tauras = new MonsterWater("Tauras", 50, 50, 50, 50);
+		MonsterWater dewpuff = new MonsterWater("Dewpuff", 50, 50, 50, 50);
 
 		bdMonter.add(catercute);
 		bdMonter.add(weepinutor);
 		bdMonter.add(venulax);
+		bdMonter.add(golbasaur);
+		bdMonter.add(caternite);
+		bdMonter.add(metadrill);
+		bdMonter.add(metadrio);
 
 		bdMonter.add(moltnx);
 		bdMonter.add(charas);
 		bdMonter.add(tangizard);
+		bdMonter.add(beemeleon);
+		bdMonter.add(growther);
+		bdMonter.add(moltvee);
+		bdMonter.add(flaredon);
 
 		bdMonter.add(meowcruel);
 		bdMonter.add(seesect);
 		bdMonter.add(mutoise);
+		bdMonter.add(omachamp);
+		bdMonter.add(tauras);
+		bdMonter.add(dewpuff);
 
 		createAllMonsters(bdMonter);
 
