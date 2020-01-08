@@ -12,6 +12,7 @@ import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import level.Enemy;
 import monsters.Monster;
 import monsters.Monster.Type;
 import monsters.MonsterFire;
@@ -352,10 +353,10 @@ public class BD {
 
 	String sql4 = "CREATE TABLE ENEMY ( NAME_E VARCHAR(30) NOT NULL PRIMARY KEY,TXT VARCHAR(30) NOT NULL);";
 
-	public static void createLevel(String nom, String txt) {
+	public static void createEnemy(String nom, String txt) {
 		try {
 
-			stmt2 = c.prepareStatement("INSERT INTO LEVEL (NAME_E,TXT) VALUES (?, ?)");
+			stmt2 = c.prepareStatement("INSERT INTO ENEMY (NAME_E,TXT) VALUES (?, ?)");
 			stmt2.setString(1, nom);
 			stmt2.setString(2, txt);
 			stmt2.executeUpdate();
@@ -367,29 +368,22 @@ public class BD {
 		}
 	}
 
-	public static String selectLevel() {
-		LinkedList<Move> s = new LinkedList<>();
+	public static Enemy selectEnemy(String name) {
+		Enemy s = new Enemy();
 		try {
 
-			stmt2 = c.prepareStatement("SELECT * FROM LEVEL");
+			stmt2 = c.prepareStatement("SELECT NAME_E,TXT FROM LEVEL WHERE NAME_E=?");
+			stmt2.setString(1, name);
 			ResultSet rs = stmt2.executeQuery();
-
-			while (rs.next()) {
-
-				String name = rs.getString(1);
-				int damage = rs.getInt(2);
-
-				s.add(new Move(name, damage));
-
-			}
-
+			
+			s = new Enemy(rs.getString(1),rs.getString(2));
 			stmt2.close();
 
 		} catch (Exception e) {
 			System.out.println(e.getClass().getName() + ": " + e.getMessage());
 		}
 
-		return "";
+		return s;
 	}
 
 	String sql5 = "CREATE TABLE LEVEL ( NAME_L VARCHAR(30) NOT NULL,NAME_M VARCHAR(30) NOT NULL, PI INTEGER NOT NULL, PRIMARY KEY (NAME_L, NAME_M), FOREIGN KEY (NAME_M) REFERENCES MONSTER(NAME_M),FOREIGN KEY (NAME_L) REFERENCES LEVEL(NAME_L));";
