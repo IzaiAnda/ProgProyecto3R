@@ -1,6 +1,5 @@
 package ventanas;
 
-import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -89,6 +88,17 @@ public class Pokedex extends JFrame {
 		buttons.add(mons14);
 		JButton mons15 = new JButton();
 		buttons.add(mons15);
+		JButton mons16 = new JButton();
+		buttons.add(mons16);
+		JButton mons17 = new JButton();
+		buttons.add(mons17);
+		JButton mons18 = new JButton();
+		buttons.add(mons18);
+		JButton mons19 = new JButton();
+		buttons.add(mons19);
+		JButton mons20 = new JButton();
+		buttons.add(mons20);
+
 
 		for (int i = 0; i < monsterList.size(); i++) {
 			buttons.get(i).setText(monsterList.get(i).getName());
@@ -241,6 +251,21 @@ public class Pokedex extends JFrame {
 
 		monsters.add(mons15);
 		mons15.setBounds(5, 425, 120, 25);
+		
+		monsters.add(mons16);
+		mons16.setBounds(5, 455, 120, 25);
+
+		monsters.add(mons17);
+		mons17.setBounds(5, 485, 120, 25);
+		
+		monsters.add(mons18);
+		mons18.setBounds(5, 515, 120, 25);
+		
+		monsters.add(mons19);
+		mons19.setBounds(5, 545, 120, 25);
+		
+		monsters.add(mons20);
+		mons20.setBounds(5, 575, 120, 25);
 		
 		
 		
