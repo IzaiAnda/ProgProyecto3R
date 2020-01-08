@@ -30,7 +30,7 @@ public class BD {
 		try {
 			logger.setLevel(Level.FINEST);
 			logger.addHandler(new FileHandler("LoggerBD.xml"));
-			
+
 		} catch (Exception e) {
 		}
 	}
@@ -97,25 +97,23 @@ public class BD {
 		}
 		System.out.println("Table created successfully");
 	}
-	
 
+	// LA IDEA ES QUE AYA UN INT EN TU PERSONAJE QUE TE DIGA QUE NIVEL ERES, DEPENDE DE TU NIVEL CARGAS LOS V	INELES ANTERIORES.
 	public static void create() {
 		try {
 			stmt = c.createStatement();
-			String sql = "CREATE TABLE PLAYER ( NAME_P VARCHAR(30) NOT NULL PRIMARY KEY,PASSWORD VARCHAR(30) NOT NULL);";
+			String sql = "CREATE TABLE PLAYER ( NAME_P VARCHAR(30) NOT NULL PRIMARY KEY,PASSWORD VARCHAR(30) NOT NULL, LEVEL_P INTEGER NOT NULL);";
 			String sql1 = "CREATE TABLE MONSTER ( NAME_M VARCHAR(30) NOT NULL PRIMARY KEY,TYPE VARCHAR(30) NOT NULL, HP INTEGER NOT NULL, ATK INTEGER NOT NULL, DEF INTEGER NOT NULL, VEL INTEGER NOT NULL);";
 			String sql2 = "CREATE TABLE MOVE ( NAME_MOV VARCHAR(30) NOT NULL PRIMARY KEY,DMG INTEGER NOT NULL);";
 			String sql3 = "CREATE TABLE MM ( NAME_M VARCHAR(30) NOT NULL, NAME_MOV VARCHAR(30) NOT NULL, PRIMARY KEY (NAME_M, NAME_MOV), FOREIGN KEY (NAME_M) REFERENCES MONSTER(NAME_M),FOREIGN KEY (NAME_MOV) REFERENCES MOVE(NAME_MOV));";
-			String sql4 = "CREATE TABLE LEVEL ( NAME_L VARCHAR(30) NOT NULL PRIMARY KEY,TXT VARCHAR(30) NOT NULL);";
-			String sql5 = "CREATE TABLE LM ( NAME_L VARCHAR(30) NOT NULL,NAME_M VARCHAR(30) NOT NULL, PI INTEGER NOT NULL, PRIMARY KEY (NAME_L, NAME_M), FOREIGN KEY (NAME_M) REFERENCES MONSTER(NAME_M),FOREIGN KEY (NAME_L) REFERENCES LEVEL(NAME_L));";
-			String sql6 = "CREATE TABLE LP ( NAME_P VARCHAR(30) NOT NULL,NAME_L VARCHAR(30) NOT NULL, PRIMARY KEY (NAME_P, NAME_L), FOREIGN KEY (NAME_P) REFERENCES PLAYER(NAME_P),FOREIGN KEY (NAME_L) REFERENCES LEVEL(NAME_L));";
+			String sql4 = "CREATE TABLE ENEMY ( NAME_E VARCHAR(30) NOT NULL PRIMARY KEY,TXT VARCHAR(30) NOT NULL);";
+			String sql5 = "CREATE TABLE LEVEL ( NAME_L VARCHAR(30) NOT NULL, NAME_E VARCHAR(30) NOT NULL,NAME_M VARCHAR(30) NOT NULL, PRIMARY KEY (NAME_E, NAME_L), FOREIGN KEY (NAME_M) REFERENCES MONSTER(NAME_M),FOREIGN KEY (NAME_E) REFERENCES ENEMY(NAME_E));";
 			stmt.executeUpdate(sql);
 			stmt.executeUpdate(sql1);
 			stmt.executeUpdate(sql2);
 			stmt.executeUpdate(sql3);
 			stmt.executeUpdate(sql5);
 			stmt.executeUpdate(sql4);
-			stmt.executeUpdate(sql6);
 			stmt.close();
 			c.commit();
 
@@ -169,9 +167,10 @@ public class BD {
 	public static void createJugador(String nom, String pass) {
 		try {
 
-			stmt2 = c.prepareStatement("INSERT INTO PLAYER (NAME_P,PASSWORD) VALUES (?, ?)");
+			stmt2 = c.prepareStatement("INSERT INTO PLAYER (NAME_P,PASSWORD,LEVEL_P) VALUES (?, ?,?)");
 			stmt2.setString(1, nom);
 			stmt2.setString(2, pass);
+			stmt2.setInt(3, 1);
 			stmt2.executeUpdate();
 			stmt2.close();
 			c.commit();
@@ -207,14 +206,14 @@ public class BD {
 		}
 
 	}
-	
+
 	public static void createMove(Move move) {
 		try {
 
 			stmt2 = c.prepareStatement("INSERT INTO MOVE (NAME_MOV,DMG) VALUES (?,?)");
 			stmt2.setString(1, move.getName());
 			stmt2.setInt(2,move.getDamage());
-			
+
 			stmt2.executeUpdate();
 			stmt2.close();
 			c.commit();
@@ -223,7 +222,7 @@ public class BD {
 			System.out.println(e.getClass().getName() + ": " + e.getMessage());
 		}
 	}
-	
+
 	public static void createAllMoves(List<? extends Move> lista) {
 
 		for (Move move : lista) {
@@ -231,29 +230,6 @@ public class BD {
 		}
 
 	}
-
-	// public static Monster selectMonster (String nom) {
-	// Monster i = new Monster();
-	// try {
-	//
-	// stmt2 = c.prepareStatement("SELECT * FROM MONSTER WHERE NAME_M = ? ");
-	// stmt2.setString(1, nom);
-	//
-	// ResultSet rs = stmt2.executeQuery();
-	//
-	// i.setName(rs.getString(1));
-	// i.setHP(rs.getInt(3));
-	// i.setAtk(rs.getInt(4));
-	// i.setDef(rs.getInt(5));
-	// i.setVel(rs.getInt(6));
-	//
-	// stmt2.close();
-	//
-	// } catch (Exception e) {
-	// System.out.println(e.getClass().getName() + ": " + e.getMessage());
-	// }
-	// return i;
-	// }
 
 	public static LinkedList<Monster> selectAllMonsters() {
 		LinkedList<Monster> s = new LinkedList<>();
@@ -288,7 +264,28 @@ public class BD {
 
 		return s;
 	}
-	
+
+	public static LinkedList<Move> selectMove(String nomMov, LinkedList<Move> s) {
+		try {
+
+			stmt2 = c.prepareStatement("SELECT * FROM MOVE WHERE NAME_MOV=?");
+			stmt2.setString(1, nomMov);
+			ResultSet rs = stmt2.executeQuery();
+
+			String name = rs.getString(1);
+			int damage = rs.getInt(2);
+
+			s.add(new Move(name, damage));
+
+			stmt2.close();
+
+		} catch (Exception e) {
+			System.out.println(e.getClass().getName() + ": " + e.getMessage());
+		}
+
+		return s;
+	}
+
 	public static LinkedList<Move> selectAllMoves() {
 		LinkedList<Move> s = new LinkedList<>();
 		try {
@@ -300,9 +297,9 @@ public class BD {
 
 				String name = rs.getString(1);
 				int damage = rs.getInt(2);
-	
+
 				s.add(new Move(name, damage));
-				
+
 			}
 
 			stmt2.close();
@@ -313,6 +310,91 @@ public class BD {
 
 		return s;
 	}
+
+	public static void createMM(String nomMon, String nomMov) {
+		try {
+
+			stmt2 = c.prepareStatement("INSERT INTO MM (NAME_M,NAME_MOV) VALUES (?, ?)");
+			stmt2.setString(1, nomMon);
+			stmt2.setString(2, nomMov);
+			stmt2.executeUpdate();
+			stmt2.close();
+			c.commit();
+
+		} catch (Exception e) {
+			System.out.println(e.getClass().getName() + ": " + e.getMessage());
+		}
+	}
+
+	public static LinkedList<Move> selectMM(String nomMon) {
+		LinkedList<String> names = new LinkedList<>();
+		LinkedList<Move> s = new LinkedList<>();
+		try {
+			stmt2 = c.prepareStatement("SELECT NAME_M,NAME_MOV FROM MM WHERE NAME_M=?");
+			stmt2.setString(1, nomMon);
+			ResultSet rs = stmt2.executeQuery();
+			while (rs.next()) {
+				names.add(new String(rs.getString(2)));	
+			}
+
+			stmt2.close();
+
+			for (int i = 0; i < names.size(); i++) {
+				s = selectMove(names.get(i), s);
+			}
+
+		} catch (Exception e) {
+			System.out.println(e.getClass().getName() + ": " + e.getMessage());
+
+		}
+		return s;
+	}
+
+	String sql4 = "CREATE TABLE ENEMY ( NAME_E VARCHAR(30) NOT NULL PRIMARY KEY,TXT VARCHAR(30) NOT NULL);";
+
+	public static void createLevel(String nom, String txt) {
+		try {
+
+			stmt2 = c.prepareStatement("INSERT INTO LEVEL (NAME_E,TXT) VALUES (?, ?)");
+			stmt2.setString(1, nom);
+			stmt2.setString(2, txt);
+			stmt2.executeUpdate();
+			stmt2.close();
+			c.commit();
+
+		} catch (Exception e) {
+			System.out.println(e.getClass().getName() + ": " + e.getMessage());
+		}
+	}
+
+	public static String selectLevel() {
+		LinkedList<Move> s = new LinkedList<>();
+		try {
+
+			stmt2 = c.prepareStatement("SELECT * FROM LEVEL");
+			ResultSet rs = stmt2.executeQuery();
+
+			while (rs.next()) {
+
+				String name = rs.getString(1);
+				int damage = rs.getInt(2);
+
+				s.add(new Move(name, damage));
+
+			}
+
+			stmt2.close();
+
+		} catch (Exception e) {
+			System.out.println(e.getClass().getName() + ": " + e.getMessage());
+		}
+
+		return "";
+	}
+
+	String sql5 = "CREATE TABLE LEVEL ( NAME_L VARCHAR(30) NOT NULL,NAME_M VARCHAR(30) NOT NULL, PI INTEGER NOT NULL, PRIMARY KEY (NAME_L, NAME_M), FOREIGN KEY (NAME_M) REFERENCES MONSTER(NAME_M),FOREIGN KEY (NAME_L) REFERENCES LEVEL(NAME_L));";
+
+
 
 	public static void main(String[] args) throws SQLException {
 		startBD();
@@ -348,28 +430,28 @@ public class BD {
 		bdMonter.add(mutoise);
 
 		createAllMonsters(bdMonter);
-		
+
 		Move ascuas = new Move("Ascuas", 60);
 		Move lluevehojas = new Move("LlueveHojas", 120);
 		Move pistolaAgua = new Move("Pistola Agua", 55);
 		Move ataqueRapido = new Move("Ataque rapido", 50);
 		Move placaje = new Move("Placaje", 50);
-		Move arañazo = new Move("arañazo", 35);
+		Move araniazo = new Move("arañazo", 35);
 
-
-
-		
 		bdMove.add(ascuas);
 		bdMove.add(lluevehojas);
 		bdMove.add(pistolaAgua);
 		bdMove.add(ataqueRapido);
 		bdMove.add(placaje);
-		bdMove.add(arañazo);
-
+		bdMove.add(araniazo);
 
 		createAllMoves(bdMove);
-		
-		
+
+		createMM(catercute.getName(), lluevehojas.getName());
+		createMM(catercute.getName(), placaje.getName());
+
+
+
 		closeBD();
 
 	}

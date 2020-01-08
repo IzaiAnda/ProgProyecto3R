@@ -45,11 +45,14 @@ public class Combate{
 			if (b.getLifePoints()>0) {
 				damageTaken(b, a, bM);
 			}
-		}else {
+		}else if (a.getSpeed()<b.getSpeed()){
 			damageTaken(b, a, bM);
 			if (a.getLifePoints()>0) {
 				damageTaken(a, b, aM);
 			}
+		}else {
+			damageTaken(a, b, aM);
+			damageTaken(b, a, bM);
 		}
 	}
 
