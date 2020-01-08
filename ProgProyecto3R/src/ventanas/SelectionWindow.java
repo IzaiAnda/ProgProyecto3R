@@ -33,29 +33,29 @@ public class SelectionWindow extends JFrame {
 		setContentPane(contentpane);
 		contentpane.setLayout(null);
 
-		buttonCombat.setText("COMBATE");
-		buttonCombat.setBackground(new Color(255, 175, 175));
-		buttonCombat.setBounds(200, 100, 100, 20);
+		//buttonCombat.setText("COMBATE");
+		buttonCombat.setIcon(new ImageIcon(StartGameWindow.class.getResource("/images/button_combate.png")));
+		buttonCombat.setBounds(140, 100, 160, 44);
 		contentpane.add(buttonCombat);
 
-		buttonPokedex.setText("DEUSTMON");
-		buttonPokedex.setBackground(new Color(255, 175, 175));
-		buttonPokedex.setBounds(350, 100, 100, 20);
+		//buttonPokedex.setText("DEUSTMON");
+		buttonPokedex.setIcon(new ImageIcon(StartGameWindow.class.getResource("/images/button_deustmons.png")));
+		buttonPokedex.setBounds(400, 100, 188, 45);
 		contentpane.add(buttonPokedex);
 
-		buttonMovements.setText("MOVIMIENTOS");
-		buttonMovements.setBackground(new Color(255, 175, 175));
-		buttonMovements.setBounds(200, 200, 100, 20);
+		//buttonMovements.setText("MOVIMIENTOS");
+		buttonMovements.setIcon(new ImageIcon(StartGameWindow.class.getResource("/images/button_movimientos.png")));
+		buttonMovements.setBounds(110, 200, 212, 44);
 		contentpane.add(buttonMovements);
 
-		buttonOptions.setText("OPCIONES");
-		buttonOptions.setBackground(new Color(255, 175, 175));
-		buttonOptions.setBounds(350, 200, 100, 20);
+		//buttonOptions.setText("OPCIONES");
+		buttonOptions.setIcon(new ImageIcon(StartGameWindow.class.getResource("/images/button_opciones.png")));
+		buttonOptions.setBounds(415, 200, 161, 45);
 		contentpane.add(buttonOptions);
 
-		buttonExit.setText("SALIR");
-		buttonExit.setBackground(new Color(255, 175, 175));
-		buttonExit.setBounds(400, 300, 100, 20);
+		//buttonExit.setText("SALIR");
+		buttonExit.setIcon(new ImageIcon(StartGameWindow.class.getResource("/images/button_salir.png")));
+		buttonExit.setBounds(600, 300, 100, 45);
 		contentpane.add(buttonExit);
 
 		labelBackground.setIcon(new ImageIcon(StartGameWindow.class.getResource("/images/back2.jpg")));

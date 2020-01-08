@@ -47,14 +47,13 @@ public class StartGameWindow extends JFrame {
 		labelMonster.setBounds(25, -80, altura, anchura);
 		contentpane.add(labelMonster);
 
-		buttonPlay.setText("Pulse para jugar");
-		buttonPlay.setBackground(new Color(255, 175, 175));
-		buttonPlay.setBounds(250, 300, 200, 20);
+		buttonPlay.setBounds(250, 300, 255, 50);
+		buttonPlay.setIcon(new ImageIcon(StartGameWindow.class.getResource("/images/button_pulse.png")));
 		contentpane.add(buttonPlay);
 
-		buttonAccept.setText("Aceptar");
-		buttonAccept.setBackground(new Color(255, 175, 175));
-		buttonAccept.setBounds(500, 300, 100, 20);
+		//buttonAccept.setBackground(new Color(255, 175, 175));
+		buttonAccept.setBounds(500, 310, 145, 47);
+		buttonAccept.setIcon(new ImageIcon(StartGameWindow.class.getResource("/images/button_aceptar.png")));
 		contentpane.add(buttonAccept);
 		buttonAccept.setVisible(false);
 
@@ -63,7 +62,7 @@ public class StartGameWindow extends JFrame {
 		contentpane.add(labelUser);
 		labelUser.setVisible(false);
 
-		labelPass.setText("ContraseÃ±a:");
+		labelPass.setText("Contraseña:");
 		labelPass.setBounds(250, 330, 200, 20);
 		contentpane.add(labelPass);
 		labelPass.setVisible(false);
@@ -76,6 +75,7 @@ public class StartGameWindow extends JFrame {
 		setSize(altura, anchura);
 		setTitle("DeustMon");
 
+		
 
 		//Eventos
 
@@ -91,9 +91,11 @@ public class StartGameWindow extends JFrame {
 				labelPass.setVisible(true);
 
 				textLogin.setBounds(250, 300, 200, 20);
+				//textLogin.setBackground(new Color(195,195,195));
 				contentpane.add(textLogin);
 
 				textPass.setBounds(250,350,200,20);
+				//textPass.setBackground(new Color(195,195,195));
 				contentpane.add(textPass);
 
 				repaint();

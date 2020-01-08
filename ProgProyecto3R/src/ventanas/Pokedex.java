@@ -6,6 +6,8 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -25,19 +27,20 @@ import javax.swing.SwingUtilities;
 import baseJuego.BD;
 import monsters.Monster;
 
-public class Pokedex extends JFrame {
+public class Pokedex extends JFrame{
 
 	static ImageIcon icon;
 
 	private static final long serialVersionUID = 1L;
 	static int count = 0;
+	
+	
 
 	public Pokedex() {
 
 		this.setSize(800, 420);
 
-		JPanel container = new JPanel();
-		JTextArea monsters = new JTextArea("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n  ");
+		JTextArea monsters = new JTextArea("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n  ");
 		JScrollPane scrPane = new JScrollPane(monsters);
 		JTextField searcher = new JTextField();
 		JLabel image = new JLabel();
@@ -52,7 +55,7 @@ public class Pokedex extends JFrame {
 		monsterList = BD.selectAllMonsters();
 		PokedexWindow.addMonsters(monsterList);
 		
-		
+		System.out.println(monsterList.size());
 
 		ArrayList<JButton> buttons = new ArrayList<JButton>();
 		
@@ -102,13 +105,12 @@ public class Pokedex extends JFrame {
 
 		for (int i = 0; i < monsterList.size(); i++) {
 			buttons.get(i).setText(monsterList.get(i).getName());
-			buttons.get(i).setFont(font);
+			//buttons.get(i).setFont(font);
 		}
 
 		JTextArea monstersData = new JTextArea();
 
 		//container.setSize(800, 400);
-		
 		
 		
 		setLayout(null);
@@ -206,6 +208,9 @@ public class Pokedex extends JFrame {
 			}
 
 		});
+		
+		
+
 
 		monsters.add(mons1);
 		mons1.setBounds(5, 5, 120, 25);
@@ -269,6 +274,7 @@ public class Pokedex extends JFrame {
 		
 		
 		
+		
 	}
 	
 	
@@ -276,5 +282,6 @@ public class Pokedex extends JFrame {
 		Pokedex pokedex = new Pokedex();
 		pokedex.setVisible(true);
 	}
+
 
 }

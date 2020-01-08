@@ -393,7 +393,8 @@ public class BD {
 	public static void main(String[] args) throws SQLException {
 		startBD();
 
-		create();
+		//create();
+		
 		LinkedList<Monster> bdMonter = new LinkedList<>();
 		LinkedList<Move> bdMove = new LinkedList<>();
 
