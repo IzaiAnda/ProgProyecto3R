@@ -80,7 +80,7 @@ public class CombatWindow<V> extends JFrame {
 		return null;
 	}
 	
-	public CombatWindow(int altura, int anchura, LevelGame lg, Player p) {
+	public CombatWindow(int altura, int anchura, LevelGame lg, Player p) { //aqui esta el problema
 		
 		player = p;
 		levelGame = lg;
