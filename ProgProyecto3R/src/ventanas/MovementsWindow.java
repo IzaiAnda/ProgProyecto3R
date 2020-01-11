@@ -41,11 +41,19 @@ public class MovementsWindow extends JFrame {
 	private JMenuItem moveDamage;
 	private static JTable tabla;
 	JScrollPane scroll = new JScrollPane();
-	private static DefaultTableModel modelo= new DefaultTableModel();;
+	private static DefaultTableModel modelo= new DefaultTableModel();
+
+	public static void createColums() {
+		modelo.addColumn("Name");
+		modelo.addColumn("Damage");
+	}
+	
 
 	
 	public static void addMoves(List<? extends Move> list) {
-			
+		
+			removeAllRows();
+		
 			for (Move move : list) {
 				Vector<String> moves = new Vector<>();
 				moves.add(move.getName());
@@ -77,8 +85,10 @@ public class MovementsWindow extends JFrame {
 		
 		menuOrder.addSeparator();
 		
-		modelo.addColumn("Name");
-		modelo.addColumn("Damage");
+		if(!(modelo.getColumnCount() > 0)) {
+			createColums();
+		}
+		
 		
 		LinkedList<Move> list = BD.selectAllMoves();
 		
@@ -134,6 +144,7 @@ public class MovementsWindow extends JFrame {
 		movementsWindow.setVisible(true);
 		
 	}
+	
 	
 
 }
