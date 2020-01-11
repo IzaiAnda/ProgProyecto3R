@@ -10,6 +10,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.Map;
 import java.util.Scanner;
 
 import javax.swing.Box;
@@ -24,6 +27,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 import baseJuego.Combate;
+import level.LevelGame;
+import level.Player;
 import monsters.Monster;
 import monsters.MonsterFire;
 import monsters.MonsterPlant;
@@ -36,40 +41,6 @@ public class CombatWindow<V> extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	MonsterPlant mon = new MonsterPlant("Plantita", 100, 100, 100, 100);
-	MonsterFire mon2 = new MonsterFire("Fuegillo", 10, 10, 10, 10);
-	MonsterWater mon3 = new MonsterWater("Gotita", 50, 50, 50, 50);
-
-	MonsterPlant mon4 = new MonsterPlant("Plantita", 100, 100, 100, 100);
-	MonsterFire mon5 = new MonsterFire("Fuegillo", 10, 10, 10, 10);
-	MonsterWater mon6 = new MonsterWater("Gotita", 50, 50, 50, 50);
-
-	ArrayList<Monster> monstersIA = new ArrayList<Monster>();
-	HashMap<Monster, Move[]> movesIA = new HashMap<Monster, Move[]>();
-
-	ArrayList<Monster> monstersP = new ArrayList<Monster>();
-	HashMap<Monster, Move[]> moves = new HashMap<Monster, Move[]>();
-
-	Move mp1= new Move("Hoja Afilada", 10);
-	Move mp2= new Move("Llueve Hojas", 0);
-	Move mp3= new Move("Canto Amor", 0);
-	Move mp4= new Move("Tamborrilero", 50);
-	Move[] mp = {mp1,mp2,mp3,mp4};
-
-	Move mf1= new Move("Lanza llamas", 0);
-	Move mf2= new Move("Bola de fuego", 10);
-	Move mf3= new Move("Dia soleado", 20);
-	Move mf4= new Move("Mechero", 30);
-	Move[] mf = {mf1,mf2,mf3,mf4};
-
-	Move mw1= new Move("Pistola Agua", 50);
-	Move mw2= new Move("Burbuja", 50);
-	Move mw3= new Move("LLovizna", 50);
-	Move mw4= new Move("Cascada", 50);
-	Move[] mw = {mw1,mw2,mw3,mw4};
-
-	String nomIA = "Joven Chano";
-	String txtIA = "Te desafio!";
 	
 	private GridLayout grid = new GridLayout(2, 2);
 	private JPanel arriba = new JPanel();
@@ -88,22 +59,38 @@ public class CombatWindow<V> extends JFrame {
 	private JScrollPane scroll;
 	private boolean stop;
 	private String monsterActual;
+	private Player player;
+	private LevelGame levelGame;
+	private LinkedList<Monster> monsters;
+	private LinkedList<Monster> monstersEnemy;
 	int y;
+	
+	public LinkedList<Monster> MonsterHashMapToList(HashMap<Monster, LinkedList<Move>> hp) {
+		
+		LinkedList<Monster> r = new LinkedList<Monster>();
+		
+		Iterator it = hp.entrySet().iterator();
 
-	public CombatWindow(int altura, int anchura) {
+		while (it.hasNext()) {
+			Map.Entry pair = (Map.Entry)it.next();
+			r.add((Monster) pair.getKey());
+			it.remove(); // avoids a ConcurrentModificationException
+		}
+		
+		return null;
+	}
+	
+	public CombatWindow(int altura, int anchura, LevelGame lg, Player p) {
+		
+		player = p;
+		levelGame = lg;
 
-		monstersIA.add(mon6);
-		monstersIA.add(mon5);
-		monstersIA.add(mon4);
+		monsters = MonsterHashMapToList(lg.getMonsters());
+		monstersEnemy = MonsterHashMapToList(lg.getMonstersEnemy());
 
-		moves.put(mon, mp);
-		moves.put(mon2, mf);
-		moves.put(mon3, mw);
-
-		movesIA.put(mon4, mp);
-		movesIA.put(mon5, mf);
-		movesIA.put(mon6, mw);
-
+		
+		System.out.println(lg.getMonstersEnemy());
+		
 		add(arriba,BorderLayout.CENTER);
 		add(abajo,BorderLayout.SOUTH);
 
@@ -181,17 +168,13 @@ public class CombatWindow<V> extends JFrame {
 	 * 
 	 */
 	public void startCombat() {
-		monstersP.add(mon);
-		monstersP.add(mon2);
-		monstersP.add(mon3);
 
 		stop = true;
+		historial.append("Estas luchando contra "+ levelGame.getEnemy().getName() +"\n");
+		historial.append( levelGame.getEnemy().getName() + ": " + levelGame.getEnemy().getText() + "\n");
+
+		historial.append(levelGame.getEnemy().getName() + " saca a " + monstersEnemy.get(0).getName() + "\n\n");
 		
-		historial.append("Estas luchando contra "+ nomIA +"\n");
-		historial.append( nomIA + ": " + txtIA + "\n");
-
-		historial.append(nomIA + " saca a " + monstersIA.get(0).getName() + "\n\n");
-
 		sacarPokemon();
 
 	}
@@ -202,8 +185,8 @@ public class CombatWindow<V> extends JFrame {
 		botonesAtaques.setVisible(false);		
 		botonesMonster.removeAll();
 		
-		for (Integer i = 0; i < monstersP.size(); i++) {
-			historial.append(i + ": " + monstersP.get(i).getName() + "\n");
+		for (Integer i = 0; i < monsters.size(); i++) {
+			historial.append(i + ": " + monsters.get(i).getName() + "\n");
 			JButton option1 = new JButton();
 			option1.setBounds(420, 320, 100, 20);
 			option1.setText(i.toString());
@@ -227,7 +210,7 @@ public class CombatWindow<V> extends JFrame {
 	public void post(int i){
 		historial.append("---------------------\n");
 
-		historial.append("Has sacado a: " + monstersP.get(i).getName() + "\n");
+		historial.append("Has sacado a: " + monsters.get(i).getName() + "\n");
 		historial.append("      \n");
 		historial.append("¿Que quieres hacer? \n");
 
@@ -243,60 +226,60 @@ public class CombatWindow<V> extends JFrame {
 
 		historial.append("Que ataque quiere usar?\n\n");
 
-		Move[] movesM = moves.get(monstersP.get(monsterActualInt));
-		Move[] movesMIA = movesIA.get(monstersIA.get(0));
+		LinkedList<Move> movesM = levelGame.getMonsters().get(monsters.get(monsterActualInt));
+		LinkedList<Move> movesMIA = levelGame.getMonstersEnemy().get(monstersEnemy.get(0));
 
 		botonesAtaques.removeAll();
 
 		for (int i = 0; i < 4; i++) {
-			JButton a =  new JButton(movesM[i].getName());
+			JButton a =  new JButton(movesM.get(i).getName());
 			a.addActionListener(new ActionListener() {
 
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					
-					for (int j = 0; j < movesM.length; j++) {
-						if(movesM[j].getName().equals(a.getText())) {
+					for (int j = 0; j < movesM.size(); j++) {
+						if(movesM.get(j).getName().equals(a.getText())) {
 							y=j;
-							historial.append("Has usado: " + movesM[j].getName() + "\n");
+							historial.append("Has usado: " + movesM.get(j).getName() + "\n");
 						}				
 					};
 					
-					Combate.combat(monstersP.get(monsterActualInt), monstersIA.get(0), movesM[new Integer(y)], movesMIA[0]);
+					Combate.combat(monsters.get(monsterActualInt), monstersEnemy.get(0), movesM.get(y), movesMIA.get(0));
 					
-					if (monstersP.get(monsterActualInt).getLifePoints()<=0&&monstersIA.get(0).getLifePoints()<=0) {
+					if (monsters.get(monsterActualInt).getLifePoints()<=0&&monstersEnemy.get(0).getLifePoints()<=0) {
 						historial.append("Te han debilitado a tu mounstruo a la vez que has devilitado al mounstruo enemigo !!\n\n");
-						monstersP.remove(monsterActualInt);
-						monstersIA.remove(0);
-						if (monstersP.isEmpty()) {
+						monsters.remove(monsterActualInt);
+						monstersEnemy.remove(0);
+						if (monsters.isEmpty()) {
 							youLose();
-						}else if (monstersIA.isEmpty()) {
+						}else if (monstersEnemy.isEmpty()) {
 							youWin();
 						}else {
-							historial.append(nomIA+" a sacado a " + monstersIA.get(0).getName()+"\n\n");
+							historial.append(levelGame.getEnemy().getName()+" a sacado a " + monstersEnemy.get(0).getName()+"\n\n");
 							sacarPokemon();
 						}
-					}else if(monstersP.get(monsterActualInt).getLifePoints()<=0) {
+					}else if(monsters.get(monsterActualInt).getLifePoints()<=0) {
 						historial.append("Te han debilitado a tu mounstruo!!\n\n");
-						monstersP.remove(monsterActualInt);
-						if (monstersP.isEmpty()) {
+						monsters.remove(monsterActualInt);
+						if (monsters.isEmpty()) {
 							youLose();
 						}else {
 							sacarPokemon();
 						}
-					}else if(monstersIA.get(0).getLifePoints()<=0) {
+					}else if(monstersEnemy.get(0).getLifePoints()<=0) {
 						historial.append("Has debilitado al mounstruo enemigo!!\n\n");
-						monstersIA.remove(0);
-						if (monstersIA.isEmpty()) {
+						monstersEnemy.remove(0);
+						if (monstersEnemy.isEmpty()) {
 							youWin();
 						}else {
-							historial.append(nomIA+" a sacado a " + monstersIA.get(0)+"\n");
-							historial.append( monstersP.get(monsterActualInt).getName() + " se ha quedado con " + monstersP.get(monsterActualInt).getLifePoints() + " puntos de vida.\n\n");
+							historial.append(levelGame.getEnemy().getName()+" a sacado a " + monstersEnemy.get(0)+"\n");
+							historial.append( monsters.get(monsterActualInt).getName() + " se ha quedado con " + monsters.get(monsterActualInt).getLifePoints() + " puntos de vida.\n\n");
 							ataques();
 						}
 					}else {
-						historial.append( monstersP.get(monsterActualInt).getName() + " se ha quedado con " + monstersP.get(monsterActualInt).getLifePoints() + " puntos de vida.\n");
-						historial.append( monstersIA.get(0).getName() + " de "+nomIA+"  se ha quedado con " + monstersIA.get(0).getLifePoints() + " puntos de vida.\n\n");
+						historial.append( monsters.get(monsterActualInt).getName() + " se ha quedado con " + monsters.get(monsterActualInt).getLifePoints() + " puntos de vida.\n");
+						historial.append( monstersEnemy.get(0).getName() + " de "+levelGame.getEnemy().getName()+"  se ha quedado con " + monstersEnemy.get(0).getLifePoints() + " puntos de vida.\n\n");
 						ataques();
 					}
 
@@ -311,7 +294,7 @@ public class CombatWindow<V> extends JFrame {
 	
 	public void youLose(){
 		historial.append("\n---------------------\n");
-		JOptionPane.showConfirmDialog(null, nomIA + " ha debilitado a todos tus pokemons.\nHas perdido!!!", "Confirmar salida", JOptionPane.DEFAULT_OPTION);
+		JOptionPane.showConfirmDialog(null, levelGame.getEnemy().getName() + " ha debilitado a todos tus pokemons.\nHas perdido!!!", "Confirmar salida", JOptionPane.DEFAULT_OPTION);
 		finish();
 	}
 	public void youWin() {
@@ -323,7 +306,7 @@ public class CombatWindow<V> extends JFrame {
 	
 	public void finish() {
 		
-		LevelsWindow levelsWindow = new LevelsWindow(750, 422);
+		LevelsWindow levelsWindow = new LevelsWindow(750, 422, player);
 		levelsWindow.setVisible(true);
 		CombatWindow.this.dispose();
 	}

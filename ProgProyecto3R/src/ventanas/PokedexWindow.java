@@ -93,8 +93,6 @@ public class PokedexWindow extends JFrame {
 		
 		addMonsters(list);
 		
-		
-		
 		itemName = new JMenuItem("Name");
 		menuOrder.add(itemName);
 		itemName.addActionListener(new ActionListener() {

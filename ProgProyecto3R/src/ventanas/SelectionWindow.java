@@ -11,6 +11,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import level.Player;
+
 public class SelectionWindow extends JFrame {
 
 	/**
@@ -71,7 +73,7 @@ public class SelectionWindow extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				LevelsWindow levelsWindow = new LevelsWindow(750, 422);
+				LevelsWindow levelsWindow = new LevelsWindow(750, 422, new Player("", 0));
 				levelsWindow.setVisible(true);
 				SelectionWindow.this.dispose();
 

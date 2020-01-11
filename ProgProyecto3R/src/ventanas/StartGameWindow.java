@@ -130,8 +130,8 @@ public class StartGameWindow extends JFrame {
 							@Override
 							public void run() {
 
-								JOptionPane.showInputDialog("DONE");
-
+								JOptionPane.showConfirmDialog(null, "DONE", "Confirmar salida", JOptionPane.DEFAULT_OPTION);
+								
 							}
 						});
 
