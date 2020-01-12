@@ -3,7 +3,6 @@ package ventanas;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 import javax.swing.ImageIcon;
@@ -28,7 +27,7 @@ public class LevelsWindow extends JFrame {
 	private JPanel contentpane = new JPanel();
 	private JLabel labelBackground = new JLabel();
 	private JButton buttonBack = new JButton();
-	private LinkedList<LevelGame> levels = BD.selectAllLevelsUnder(5);
+	private LinkedList<LevelGame> levels ;
 	
 	public LevelsWindow(int altura, int anchura, Player player) {
 		contentpane = new JPanel();
@@ -37,7 +36,7 @@ public class LevelsWindow extends JFrame {
 		setContentPane(contentpane);
 		contentpane.setLayout(null);
 		
-
+		levels = BD.selectAllLevelsUnder(player.getLevel());
 		
 		for (int i = 0; i < levels.size(); i++) {
 			JButton buttonCombat = new JButton();
@@ -45,13 +44,11 @@ public class LevelsWindow extends JFrame {
 			buttonCombat.setBackground(new Color(255, 175, 175));
 			buttonCombat.setBounds(150, 200, 100, 20);
 			contentpane.add(buttonCombat);
-			System.out.println(levels.get(i));
 			buttonCombat.addActionListener(new ActionListener() {
 
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					System.out.println(levels.get(Integer.parseInt(buttonCombat.getText())));
-					CombatWindow combatWindow = new CombatWindow(750, 422,levels.get(Integer.parseInt(buttonCombat.getText())),player);
+					CombatWindow combatWindow = new CombatWindow(750, 422,levels.get(Integer.parseInt(buttonCombat.getText())).getName(),player);
 					combatWindow.setVisible(true);
 					LevelsWindow.this.dispose();
 

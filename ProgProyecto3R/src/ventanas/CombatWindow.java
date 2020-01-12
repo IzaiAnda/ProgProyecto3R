@@ -26,6 +26,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
+import baseJuego.BD;
 import baseJuego.Combate;
 import level.LevelGame;
 import level.Player;
@@ -70,26 +71,22 @@ public class CombatWindow<V> extends JFrame {
 		LinkedList<Monster> r = new LinkedList<Monster>();
 		
 		Iterator it = hp.entrySet().iterator();
-
-		while (it.hasNext()) {
-			Map.Entry pair = (Map.Entry)it.next();
-			r.add((Monster) pair.getKey());
-			it.remove(); // avoids a ConcurrentModificationException
-		}
 		
-		return null;
+		do {
+			Map.Entry pair = (Map.Entry)it.next();	
+			r.add((Monster) pair.getKey());
+		} while (it.hasNext());
+		
+		return r;
 	}
 	
-	public CombatWindow(int altura, int anchura, LevelGame lg, Player p) { //aqui esta el problema
+	public CombatWindow(int altura, int anchura, String slg, Player p) { 
 		
 		player = p;
-		levelGame = lg;
-
-		monsters = MonsterHashMapToList(lg.getMonsters());
-		monstersEnemy = MonsterHashMapToList(lg.getMonstersEnemy());
-
+		levelGame = BD.selectLevel(slg);
 		
-		System.out.println(lg.getMonstersEnemy());
+		monsters = MonsterHashMapToList(levelGame.getMonsters());
+		monstersEnemy = MonsterHashMapToList(levelGame.getMonstersEnemy());
 		
 		add(arriba,BorderLayout.CENTER);
 		add(abajo,BorderLayout.SOUTH);
@@ -299,8 +296,11 @@ public class CombatWindow<V> extends JFrame {
 	}
 	public void youWin() {
 		historial.append("\n---------------------\n");
-		JOptionPane.showConfirmDialog(null, "Ha debilitado a todos tus pokemons.\nHas ganado!!!Has ganado!!!", "Confirmar salida", JOptionPane.DEFAULT_OPTION);
-		//Actualizar BD
+		JOptionPane.showConfirmDialog(null, "Has debilitado a todos sus pokemons.\nHas ganado!!!", "Confirmar salida", JOptionPane.DEFAULT_OPTION);
+		if (player.getLevel()<levelGame.getDifficulty()) {
+			player.setLevel(levelGame.getDifficulty());
+			BD.updateJugador(player);
+		}
 		finish();
 	}
 	

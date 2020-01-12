@@ -18,6 +18,7 @@ import java.util.logging.Logger;
 
 import level.Enemy;
 import level.LevelGame;
+import level.Player;
 import monsters.Monster;
 import monsters.Monster.Type;
 import monsters.MonsterFire;
@@ -169,6 +170,21 @@ public class BD {
 
 		}
 		return i;
+	}
+	
+	public static void updateJugador(Player p) {
+
+		try {
+			stmt2 = c.prepareStatement("UPDATE PLAYER SET LEVEL_P = ? WHERE NAME_P = ?");
+			stmt2.setInt(1, p.getLevel());
+			stmt2.setString(2, p.getName());
+			stmt2.executeUpdate();
+			stmt2.close();
+
+		} catch (Exception e) {
+			System.out.println(e.getClass().getName() + ": " + e.getMessage());
+
+		}
 	}
 
 	public static void createJugador(String nom, String pass) {
@@ -536,7 +552,7 @@ public class BD {
 		try {
 
 			stmt2 = c.prepareStatement("SELECT * FROM LEVEL WHERE DIFFICULTY<=?");
-			stmt2.setInt(1, level);
+			stmt2.setInt(1, level+1);
 			ResultSet rs = stmt2.executeQuery();
 
 			while (rs.next()) {
@@ -565,6 +581,36 @@ public class BD {
 		}
 
 		return s;
+	}
+	
+	public static LevelGame selectLevel(String level) {
+		LevelGame r = null;
+		
+		try {
+
+			stmt2 = c.prepareStatement("SELECT * FROM LEVEL WHERE NAME_L<=?");
+			stmt2.setString(1, level);
+			ResultSet rs = stmt2.executeQuery();
+			
+			r = new LevelGame(level, selectEnemy(rs.getString(2)), new HashMap<Monster, LinkedList<Move>>(), new HashMap<Monster, LinkedList<Move>>(), rs.getInt(4));
+			
+			while (rs.next()) {
+				
+				if (rs.getInt(5) == 0) {
+					r.addMonsters(selectMonster(rs.getString(3)),selectMM(rs.getString(3)));
+				} else {
+					r.addMonstersEnemy(selectMonster(rs.getString(3)),selectMM(rs.getString(3)));
+				}
+				
+			}
+
+			stmt2.close();
+
+		} catch (Exception e) {
+			System.out.println(e.getClass().getName() + ": " + e.getMessage());
+		}
+
+		return r;
 	}
 
 	public static void main(String[] args) throws SQLException {
@@ -660,8 +706,9 @@ public class BD {
 		
 
 		//createLevel(lg);
-
-
+		
+		System.out.println(selectLevel(lg.getName()));
+		
 		closeBD();
 
 	}
