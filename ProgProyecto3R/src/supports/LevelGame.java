@@ -1,4 +1,4 @@
-package level;
+package supports;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -75,7 +75,7 @@ public class LevelGame {
 				
 			}
 			
-			r += r +"{"+ pair.getKey() + " ("+ s + ")" + "}, ";
+			r += r + pair.getKey() + " ("+ s + ")";
 			
 			it.remove(); // avoids a ConcurrentModificationException
 		}
@@ -88,21 +88,6 @@ public class LevelGame {
 		return "LevelGame [name=" + name + ", enemy=" + enemy +  ", monstersEnemy="
 				+ HashtoString(monstersEnemy) + ", monsters=" + HashtoString(monsters)
 				+ ", difficulty=" + difficulty + "]";
-	}
-	
-	public static void main(String[] args) {
-		LevelGame lg = new LevelGame("popeye", new Enemy("popoyeye", "hi"), new HashMap<Monster, LinkedList<Move>>(), new HashMap<Monster, LinkedList<Move>>(), 0);
-		
-		LinkedList<Move> mos = new LinkedList<Move>();
-		mos.add(new Move("tutu", 0));
-		mos.add(new Move("jasjas", 0));
-		
-		lg.addMonsters(new MonsterFire("ourtuño", 0, 0, 0, 0), mos);
-		
-		System.out.println(lg);
-		
-	}
-	
-	
+	}	
 	
 }

@@ -11,7 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import level.Player;
+import supports.Player;
 
 public class SelectionWindow extends JFrame {
 

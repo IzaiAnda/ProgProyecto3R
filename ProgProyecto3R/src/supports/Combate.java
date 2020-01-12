@@ -1,4 +1,4 @@
-package baseJuego;
+package supports;
 
 import monsters.Monster;
 import monsters.MonsterFire;
@@ -54,28 +54,6 @@ public class Combate{
 			damageTaken(a, b, aM);
 			damageTaken(b, a, bM);
 		}
-	}
-
-	public static void main(String[] args) {
-
-		MonsterPlant mon = new MonsterPlant("Plantita",100,100,100,100);
-		MonsterFire mon2 = new MonsterFire("Fuegillo",100,100,100,100);
-		MonsterWater mon3 = new MonsterWater("Gotita",50,50,50,50);
-
-		Move move = new Move("Llamarada", 10);
-
-		combat(mon, mon2, move, move);
-
-		System.out.println(mon);
-		System.out.println(mon2);
-		
-		Move move2 = new Move("Llamarada", 20);
-
-		combat(mon, mon2, move, move2);
-
-		System.out.println(mon);
-		System.out.println(mon2);
-
 	}
 
 }

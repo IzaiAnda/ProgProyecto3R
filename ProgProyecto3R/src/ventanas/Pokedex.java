@@ -39,21 +39,19 @@ public class Pokedex extends JFrame{
 	public Pokedex() {
 
 		this.setSize(800, 420);
-
+		this.setLocation(500, 250);
 		JTextArea monsters = new JTextArea("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n  ");
 		JScrollPane scrPane = new JScrollPane(monsters);
 		JTextField searcher = new JTextField();
 		JLabel image = new JLabel();
 		JButton search = new JButton("Search");
 		JButton back = new JButton("Back");
-		Font font = new Font("Serif Bold", Font.BOLD, 14);
 		JLabel labelBackGround = new JLabel();
 		JLabel backImage = new JLabel();
 		
 		LinkedList<Monster> monsterList = new LinkedList<Monster>();
 
 		monsterList = BD.selectAllMonsters();
-		PokedexWindow.addMonsters(monsterList);
 		
 		System.out.println(monsterList.size());
 
@@ -105,14 +103,10 @@ public class Pokedex extends JFrame{
 
 		for (int i = 0; i < monsterList.size(); i++) {
 			buttons.get(i).setText(monsterList.get(i).getName());
-			//buttons.get(i).setFont(font);
 		}
 
 		JTextArea monstersData = new JTextArea();
-
-		//container.setSize(800, 400);
-		
-		
+	
 		setLayout(null);
 		scrPane.setBounds(10, 50, 150, 320);
 		this.add(scrPane);
@@ -276,12 +270,5 @@ public class Pokedex extends JFrame{
 		
 		
 	}
-	
-	
-	public static void main(String[] args) {
-		Pokedex pokedex = new Pokedex();
-		pokedex.setVisible(true);
-	}
-
 
 }

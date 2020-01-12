@@ -48,7 +48,7 @@ public class OptionsWindow extends JFrame {
 		setContentPane(contentpane);
 		contentpane.setLayout(null);
 		
-		labelMusic.setText("Música");;//musica
+		labelMusic.setText("Música");//musica
 		labelMusic.setBounds(300, 150, 100, 20);
 		contentpane.add(labelMusic);
 		
@@ -67,7 +67,7 @@ public class OptionsWindow extends JFrame {
 		labelBackground.setBounds(0, 0, altura, anchura);
 		contentpane.add(labelBackground);
 
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setLocation(500, 250);
 		setSize(altura, anchura);
 		setTitle("DeustMon");
 
@@ -77,8 +77,6 @@ public class OptionsWindow extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				SelectionWindow selectionWindow = new SelectionWindow(750, 422,"3");
-				selectionWindow.setVisible(true);
 				OptionsWindow.this.dispose();
 
 			}
@@ -111,7 +109,4 @@ public class OptionsWindow extends JFrame {
 		
 	}
 	
-	public static void main(String[] args) {
-		
-	}
 }

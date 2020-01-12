@@ -16,15 +16,15 @@ import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import level.Enemy;
-import level.LevelGame;
-import level.Player;
 import monsters.Monster;
 import monsters.Monster.Type;
 import monsters.MonsterFire;
 import monsters.MonsterPlant;
 import monsters.MonsterWater;
 import moves.Move;
+import supports.Enemy;
+import supports.LevelGame;
+import supports.Player;
 
 public class BD {
 

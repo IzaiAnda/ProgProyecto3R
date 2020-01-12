@@ -6,7 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import baseJuego.BD;
-import level.Player;
+import supports.Player;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;

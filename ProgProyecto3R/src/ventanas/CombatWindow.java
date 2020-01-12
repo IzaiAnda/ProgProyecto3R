@@ -27,14 +27,14 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 import baseJuego.BD;
-import baseJuego.Combate;
-import level.LevelGame;
-import level.Player;
 import monsters.Monster;
 import monsters.MonsterFire;
 import monsters.MonsterPlant;
 import monsters.MonsterWater;
 import moves.Move;
+import supports.Combate;
+import supports.LevelGame;
+import supports.Player;
 
 public class CombatWindow<V> extends JFrame {
 
@@ -93,10 +93,10 @@ public class CombatWindow<V> extends JFrame {
 		monsters = MonsterHashMapToList(levelGame.getMonsters());
 		monstersEnemy = MonsterHashMapToList(levelGame.getMonstersEnemy());
 		
-		imagePkm.setBounds(180, 100, 180, 180);
+		imagePkm.setBounds(20, 100, 180, 180);
 		add(imagePkm);
 		
-		imageEnemy.setBounds(20, 10, 180, 180);
+		imageEnemy.setBounds(180, 10, 180, 180);
 		add(imageEnemy);
 		
 		add(arriba,BorderLayout.CENTER);
