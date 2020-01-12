@@ -28,7 +28,7 @@ public class SelectionWindow extends JFrame {
 	private JButton buttonOptions = new JButton();
 	private JButton buttonExit = new JButton();
 
-	public SelectionWindow(int altura, int anchura) {
+	public SelectionWindow(int altura, int anchura, String nom) {
 		contentpane = new JPanel();
 
 		contentpane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -73,7 +73,7 @@ public class SelectionWindow extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				LevelsWindow levelsWindow = new LevelsWindow(750, 422, new Player("", 0));
+				LevelsWindow levelsWindow = new LevelsWindow(750, 422, nom);
 				levelsWindow.setVisible(true);
 				SelectionWindow.this.dispose();
 

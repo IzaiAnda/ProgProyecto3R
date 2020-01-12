@@ -28,15 +28,18 @@ public class LevelsWindow extends JFrame {
 	private JLabel labelBackground = new JLabel();
 	private JButton buttonBack = new JButton();
 	private LinkedList<LevelGame> levels ;
+	private Player p;
 	
-	public LevelsWindow(int altura, int anchura, Player player) {
+	public LevelsWindow(int altura, int anchura, String nom) {
 		contentpane = new JPanel();
-
+		
+		p = BD.selectJugadorClass(nom);
+		
 		contentpane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentpane);
 		contentpane.setLayout(null);
 		
-		levels = BD.selectAllLevelsUnder(player.getLevel());
+		levels = BD.selectAllLevelsUnder(p.getLevel());
 		
 		for (int i = 0; i < levels.size(); i++) {
 			JButton buttonCombat = new JButton();
@@ -48,7 +51,7 @@ public class LevelsWindow extends JFrame {
 
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					CombatWindow combatWindow = new CombatWindow(750, 422,levels.get(Integer.parseInt(buttonCombat.getText())).getName(),player);
+					CombatWindow combatWindow = new CombatWindow(750, 422,levels.get(Integer.parseInt(buttonCombat.getText())).getName(),nom);
 					combatWindow.setVisible(true);
 					LevelsWindow.this.dispose();
 
@@ -74,7 +77,7 @@ public class LevelsWindow extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				SelectionWindow selectionWindow = new SelectionWindow(750, 422);
+				SelectionWindow selectionWindow = new SelectionWindow(750, 422, nom);
 				selectionWindow.setVisible(true);
 				LevelsWindow.this.dispose();
 

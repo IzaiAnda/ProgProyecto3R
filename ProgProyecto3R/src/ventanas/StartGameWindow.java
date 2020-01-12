@@ -6,6 +6,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import baseJuego.BD;
+import level.Player;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -113,7 +115,7 @@ public class StartGameWindow extends JFrame {
 				String nom = textLogin.getText();
 				String pass = textPass.getText();
 				if(BD.selectJugador(nom, pass)) {
-					SelectionWindow ventana2 = new SelectionWindow(750,422);
+					SelectionWindow ventana2 = new SelectionWindow(750,422,nom);
 					ventana2.setVisible(true);
 					StartGameWindow.this.dispose();
 				}else {

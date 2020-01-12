@@ -132,27 +132,6 @@ public class BD {
 		System.out.println("Table created successfully");
 	}
 
-	public String select(String code) {
-		String i = "No hay nada";
-		try {
-
-			stmt = c.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM " + code + ";");
-
-			i = rs.getString(1);
-
-			rs.close();
-			stmt.close();
-
-		} catch (Exception e) {
-			logger.log(Level.SEVERE, e.getClass().getName() + ": " + e.getMessage());
-			System.exit(0);
-		}
-		logger.log(Level.FINER, "Operation done successfully");
-
-		return i;
-	}
-
 	public static boolean selectJugador(String nom, String pass) {
 		boolean i = false;
 		try {
@@ -163,6 +142,22 @@ public class BD {
 			if (rs.getString(1).equals(nom) && rs.getString(2).equals(pass)) {
 				i = true;
 			}
+			stmt2.close();
+
+		} catch (Exception e) {
+			System.out.println(e.getClass().getName() + ": " + e.getMessage());
+
+		}
+		return i;
+	}
+	
+	public static Player selectJugadorClass(String nom) {
+		Player i = new Player(nom, 0);
+		try {
+			stmt2 = c.prepareStatement("SELECT LEVEL_P FROM PLAYER WHERE NAME_P=?");
+			stmt2.setString(1, nom);
+			ResultSet rs = stmt2.executeQuery();
+			i.setLevel(rs.getInt(1));
 			stmt2.close();
 
 		} catch (Exception e) {
@@ -616,12 +611,12 @@ public class BD {
 	public static void main(String[] args) throws SQLException {
 		startBD();
 
-//		create();
+		create();
 
 		LinkedList<Monster> bdMonter = new LinkedList<>();
 		LinkedList<Move> bdMove = new LinkedList<>();
 
-//		createJugador("kevin", "kevin");
+		createJugador("kevin", "kevin");
 
 		MonsterPlant catercute = new MonsterPlant("Catercute", 100, 100, 100, 100);
 		MonsterPlant weepinutor = new MonsterPlant("Weepinutor", 10, 10, 10, 10);
@@ -669,7 +664,7 @@ public class BD {
 		bdMonter.add(tauras);
 		bdMonter.add(dewpuff);
 
-//		createAllMonsters(bdMonter);
+		createAllMonsters(bdMonter);
 
 		Move ascuas = new Move("Ascuas", 60);
 		Move lluevehojas = new Move("LlueveHojas", 120);
@@ -685,27 +680,27 @@ public class BD {
 		bdMove.add(placaje);
 		bdMove.add(araniazo);
 
-//		createAllMoves(bdMove);
-//
-//		createMM(catercute, lluevehojas);
-//		createMM(catercute, ataqueRapido);
-//		createMM(catercute, placaje);
-//		createMM(catercute, araniazo);
-//
-//		createMM(moltnx, ascuas);
-//		createMM(moltnx, ataqueRapido);
-//		createMM(moltnx, placaje);
-//		createMM(moltnx, araniazo);	
+		createAllMoves(bdMove);
+
+		createMM(catercute, lluevehojas);
+		createMM(catercute, ataqueRapido);
+		createMM(catercute, placaje);
+		createMM(catercute, araniazo);
+
+		createMM(moltnx, ascuas);
+		createMM(moltnx, ataqueRapido);
+		createMM(moltnx, placaje);
+		createMM(moltnx, araniazo);	
 
 		Enemy jovenChano = new Enemy("Joven Chano", "Te desafio!!");
-		//createEnemy(jovenChano);
+		createEnemy(jovenChano);
 
 		LevelGame lg = new LevelGame("Pueblo Paleta", jovenChano, new HashMap<Monster, LinkedList<Move>>(), new HashMap<Monster, LinkedList<Move>>(), 0);
 		lg.addMonsters(catercute, selectMM(catercute));
 		lg.addMonstersEnemy(moltnx, selectMM(moltnx));
 		
 
-		//createLevel(lg);
+		createLevel(lg);
 		
 		System.out.println(selectLevel(lg.getName()));
 		

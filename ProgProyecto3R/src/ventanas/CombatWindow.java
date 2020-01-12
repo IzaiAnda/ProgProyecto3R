@@ -80,9 +80,9 @@ public class CombatWindow<V> extends JFrame {
 		return r;
 	}
 	
-	public CombatWindow(int altura, int anchura, String slg, Player p) { 
+	public CombatWindow(int altura, int anchura, String slg, String nom) { 
 		
-		player = p;
+		player = BD.selectJugadorClass(nom);
 		levelGame = BD.selectLevel(slg);
 		
 		monsters = MonsterHashMapToList(levelGame.getMonsters());
@@ -139,7 +139,7 @@ public class CombatWindow<V> extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				SelectionWindow selectionWindow = new SelectionWindow(750, 422);
+				SelectionWindow selectionWindow = new SelectionWindow(750, 422, nom);
 				selectionWindow.setVisible(true);
 				CombatWindow.this.dispose();
 
@@ -306,7 +306,7 @@ public class CombatWindow<V> extends JFrame {
 	
 	public void finish() {
 		
-		LevelsWindow levelsWindow = new LevelsWindow(750, 422, player);
+		LevelsWindow levelsWindow = new LevelsWindow(750, 422, player.getName());
 		levelsWindow.setVisible(true);
 		CombatWindow.this.dispose();
 	}
