@@ -115,7 +115,7 @@ public class BD {
 			String sql2 = "CREATE TABLE MOVE ( NAME_MOV VARCHAR(30) NOT NULL PRIMARY KEY,DMG INTEGER NOT NULL);";
 			String sql3 = "CREATE TABLE MM ( NAME_M VARCHAR(30) NOT NULL, NAME_MOV VARCHAR(30) NOT NULL, PRIMARY KEY (NAME_M, NAME_MOV), FOREIGN KEY (NAME_M) REFERENCES MONSTER(NAME_M),FOREIGN KEY (NAME_MOV) REFERENCES MOVE(NAME_MOV));";
 			String sql4 = "CREATE TABLE ENEMY ( NAME_E VARCHAR(30) NOT NULL PRIMARY KEY,TXT VARCHAR(30) NOT NULL);";
-			String sql5 = "CREATE TABLE LEVEL ( NAME_L VARCHAR(30) NOT NULL, NAME_E VARCHAR(30) NOT NULL,NAME_M VARCHAR(30) NOT NULL,DIFFICULTY INTEGER NOT NULL, ENEMY INTEGER NOT NULL,PRIMARY KEY (NAME_L,NAME_E,NAME_M), FOREIGN KEY (NAME_M) REFERENCES MONSTER(NAME_M),FOREIGN KEY (NAME_E) REFERENCES ENEMY(NAME_E));";
+			String sql5 = "CREATE TABLE LEVEL ( NAME_L VARCHAR(30) NOT NULL, NAME_E VARCHAR(30) NOT NULL,NAME_M VARCHAR(30) NOT NULL,DIFFICULTY INTEGER NOT NULL, ENEMY INTEGER NOT NULL,PRIMARY KEY (NAME_L,NAME_E,NAME_M,ENEMY), FOREIGN KEY (NAME_M) REFERENCES MONSTER(NAME_M),FOREIGN KEY (NAME_E) REFERENCES ENEMY(NAME_E));";
 			// LEVEL.ENEMY es un in 0/1 para decir si es o no el mounstruo del enemigo 1:si
 			stmt.executeUpdate(sql);
 			stmt.executeUpdate(sql1);
@@ -618,12 +618,12 @@ public class BD {
 	public static void main(String[] args) throws SQLException {
 		startBD();
 
-		//create();
+		create();
 
 		LinkedList<Monster> bdMonter = new LinkedList<>();
 		LinkedList<Move> bdMove = new LinkedList<>();
 
-		//createJugador("kevin", "kevin");
+		createJugador("kevin", "kevin");
 
 		MonsterPlant catercute = new MonsterPlant("Catercute", 100, 100, 100, 100);
 		MonsterPlant weepinutor = new MonsterPlant("Weepinutor", 10, 10, 10, 10);
@@ -671,7 +671,7 @@ public class BD {
 		bdMonter.add(tauras);
 		bdMonter.add(dewpuff);
 
-		//createAllMonsters(bdMonter);
+		createAllMonsters(bdMonter);
 
 		Move ascuas = new Move("Ascuas", 60);
 		Move lanzallamas = new Move("Lanzallamas", 100);
@@ -728,41 +728,40 @@ public class BD {
 		bdMove.add(ataqueRapido);
 		bdMove.add(placaje);
 		bdMove.add(araniazo);
+		createAllMoves(bdMove);
 
-//		createAllMoves(bdMove);
-//
-//		createMM(catercute, lluevehojas);
-//		createMM(catercute, ataqueRapido);
-//		createMM(catercute, placaje);
-//		createMM(catercute, araniazo);
-//
-//		createMM(weepinutor, picotazo);
-//		createMM(weepinutor, placaje);
-//		createMM(weepinutor, hojaAfilada);
-//		createMM(weepinutor, rayoSolar);
-//
-//		createMM(venulax, picotazo);
-//		createMM(venulax, placaje);
-//		createMM(venulax, hojaAfilada);
-//		createMM(venulax, rayoSolar);
-//
-//		createMM(golbasaur, picotazo);
-//		createMM(golbasaur, placaje);
-//		createMM(golbasaur, hojaAfilada);
-//		createMM(golbasaur, rayoSolar);
-//
-//		createMM(moltnx, ascuas);
-//		createMM(moltnx, ataqueRapido);
-//		createMM(moltnx, placaje);
-//		createMM(moltnx, araniazo);
-//
-//		createMM(flaredon, ascuas);
-//		createMM(flaredon, lanzallamas);
-//		createMM(flaredon, giroFuego);
-//		createMM(flaredon, araniazo);
+		createMM(catercute, lluevehojas);
+		createMM(catercute, ataqueRapido);
+		createMM(catercute, placaje);
+		createMM(catercute, araniazo);
+
+		createMM(weepinutor, picotazo);
+		createMM(weepinutor, placaje);
+		createMM(weepinutor, hojaAfilada);
+		createMM(weepinutor, rayoSolar);
+
+		createMM(venulax, picotazo);
+		createMM(venulax, placaje);
+		createMM(venulax, hojaAfilada);
+		createMM(venulax, rayoSolar);
+
+		createMM(golbasaur, picotazo);
+		createMM(golbasaur, placaje);
+		createMM(golbasaur, hojaAfilada);
+		createMM(golbasaur, rayoSolar);
+
+		createMM(moltnx, ascuas);
+		createMM(moltnx, ataqueRapido);
+		createMM(moltnx, placaje);
+		createMM(moltnx, araniazo);
+
+		createMM(flaredon, ascuas);
+		createMM(flaredon, lanzallamas);
+		createMM(flaredon, giroFuego);
+		createMM(flaredon, araniazo);
 
 		Enemy jovenChano = new Enemy("Joven Chano", "Te desafio!!");
-//		createEnemy(jovenChano);
+		createEnemy(jovenChano);
 
 		LevelGame level1 = new LevelGame("Pueblo Paleta", jovenChano, new HashMap<Monster, LinkedList<Move>>(),
 				new HashMap<Monster, LinkedList<Move>>(), 0);
@@ -772,12 +771,12 @@ public class BD {
 		level1.addMonstersEnemy(moltnx, selectMM(moltnx));
 		level1.addMonstersEnemy(flaredon, selectMM(flaredon));
 
-//		createLevel(level1);
+		createLevel(level1);
 
 		System.out.println(selectLevel(level1.getName()));
 
 		Enemy domingueroPaco = new Enemy("Dominguero Paco", "Jojojo, no vencerás a mis plantas!!");
-//		createEnemy(domingueroPaco);
+		createEnemy(domingueroPaco);
 
 		LevelGame level2 = new LevelGame("Ciudad Olivo", domingueroPaco, new HashMap<Monster, LinkedList<Move>>(),
 				new HashMap<Monster, LinkedList<Move>>(), 0);
@@ -789,12 +788,61 @@ public class BD {
 		level2.addMonstersEnemy(weepinutor, selectMM(weepinutor));
 		level2.addMonstersEnemy(catercute, selectMM(catercute));
 
-//		createLevel(level2);
+		createLevel(level2);
 
 		System.out.println(selectLevel(level2.getName()));
 		
-//		createJugador("a", "a");
+		createJugador("a", "a");
 
+		
+		createMM(tangizard,ataqueRapido);
+		createMM(tangizard,giroFuego);
+		createMM(tangizard,patadaIgnea);
+		createMM(tangizard,rayoSolar);
+		
+		createMM(omachamp,placaje);
+		createMM(omachamp,ataqueRapido);
+		createMM(omachamp,araniazo);
+		createMM(omachamp,latigoCepa);
+		
+		createMM(mutoise,picotazo);
+		createMM(mutoise,lluevehojas);
+		createMM(mutoise,araniazo);
+		createMM(mutoise,lanzallamas);
+		
+		createMM(tauras,golpe);
+		createMM(tauras,remolino);
+		createMM(tauras,surf);
+		createMM(tauras,placaje);
+		
+		createMM(dewpuff,placaje);
+		createMM(dewpuff,ascuas);
+		createMM(dewpuff,lanzallamas);
+		createMM(dewpuff,araniazo);
+		
+		
+		createMM(meowcruel,hidrobomba);
+		createMM(meowcruel,surf);
+		createMM(meowcruel,rayoBurbuja);
+		createMM(meowcruel,latigoCepa);
+		Enemy giovanni = new Enemy("Giovanni", "Mas quisieras vencerme!!");
+		createEnemy(giovanni);
+
+		LevelGame level3 = new LevelGame("Ciudad Roble", giovanni, new HashMap<Monster, LinkedList<Move>>(),
+				new HashMap<Monster, LinkedList<Move>>(), 0);
+		
+		level3.addMonsters(tangizard, selectMM(tangizard));
+		level3.addMonsters(omachamp, selectMM(omachamp));
+		level3.addMonsters(meowcruel, selectMM(meowcruel));
+
+		level3.addMonstersEnemy(mutoise, selectMM(mutoise));
+		level3.addMonstersEnemy(tauras, selectMM(tauras));
+		level3.addMonstersEnemy(dewpuff, selectMM(dewpuff));
+
+		
+		createLevel(level3);
+		
+		
 		closeBD();
 
 	}
