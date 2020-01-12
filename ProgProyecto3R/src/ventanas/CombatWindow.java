@@ -62,9 +62,14 @@ public class CombatWindow<V> extends JFrame {
 	private String monsterActual;
 	private Player player;
 	private LevelGame levelGame;
+	private JLabel imagePkm = new JLabel();
+	private JLabel imageEnemy = new JLabel();
+	private ImageIcon iconPkm;
+	private ImageIcon iconEnemy;
 	private LinkedList<Monster> monsters;
 	private LinkedList<Monster> monstersEnemy;
 	int y;
+
 	
 	public LinkedList<Monster> MonsterHashMapToList(HashMap<Monster, LinkedList<Move>> hp) {
 		
@@ -87,6 +92,12 @@ public class CombatWindow<V> extends JFrame {
 		
 		monsters = MonsterHashMapToList(levelGame.getMonsters());
 		monstersEnemy = MonsterHashMapToList(levelGame.getMonstersEnemy());
+		
+		imagePkm.setBounds(180, 100, 180, 180);
+		add(imagePkm);
+		
+		imageEnemy.setBounds(20, 10, 180, 180);
+		add(imageEnemy);
 		
 		add(arriba,BorderLayout.CENTER);
 		add(abajo,BorderLayout.SOUTH);
@@ -130,9 +141,7 @@ public class CombatWindow<V> extends JFrame {
 		setSize(altura, anchura);
 		setTitle("DeustMon");
 
-		// historial.append("Estas luchando contra Joven Chano!\n");
-		// historial.append("Joven Chano: ï¿½Te desafio!\n");
-		// testeando
+		
 		startCombat();
 
 		run.addActionListener(new ActionListener() {
@@ -171,6 +180,8 @@ public class CombatWindow<V> extends JFrame {
 		historial.append( levelGame.getEnemy().getName() + ": " + levelGame.getEnemy().getText() + "\n");
 
 		historial.append(levelGame.getEnemy().getName() + " saca a " + monstersEnemy.get(0).getName() + "\n\n");
+		iconEnemy = new ImageIcon(Pokedex.class.getResource("/images/monsters/" + monstersEnemy.get(0).getName() + ".png"));
+		imageEnemy.setIcon(iconEnemy);
 		
 		sacarPokemon();
 
@@ -210,6 +221,8 @@ public class CombatWindow<V> extends JFrame {
 		historial.append("Has sacado a: " + monsters.get(i).getName() + "\n");
 		historial.append("      \n");
 		historial.append("¿Que quieres hacer? \n");
+		iconPkm = new ImageIcon(Pokedex.class.getResource("/images/monsters/" + monsters.get(i).getName() + ".png"));
+		imagePkm.setIcon(iconPkm);
 
 		botonesJugar.setVisible(true);
 
@@ -254,6 +267,8 @@ public class CombatWindow<V> extends JFrame {
 							youWin();
 						}else {
 							historial.append(levelGame.getEnemy().getName()+" a sacado a " + monstersEnemy.get(0).getName()+"\n\n");
+							iconEnemy = new ImageIcon(Pokedex.class.getResource("/images/monsters/" + monstersEnemy.get(0).getName() + ".png"));
+							imageEnemy.setIcon(iconEnemy);
 							sacarPokemon();
 						}
 					}else if(monsters.get(monsterActualInt).getLifePoints()<=0) {

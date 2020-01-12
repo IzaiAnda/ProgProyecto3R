@@ -105,7 +105,8 @@ public class BD {
 		System.out.println("Table created successfully");
 	}
 
-	// LA IDEA ES QUE AYA UN INT EN TU PERSONAJE QUE TE DIGA QUE NIVEL ERES, DEPENDE DE TU NIVEL CARGAS LOS V	INELES ANTERIORES.
+	// LA IDEA ES QUE AYA UN INT EN TU PERSONAJE QUE TE DIGA QUE NIVEL ERES, DEPENDE
+	// DE TU NIVEL CARGAS LOS V INELES ANTERIORES.
 	public static void create() {
 		try {
 			stmt = c.createStatement();
@@ -115,7 +116,7 @@ public class BD {
 			String sql3 = "CREATE TABLE MM ( NAME_M VARCHAR(30) NOT NULL, NAME_MOV VARCHAR(30) NOT NULL, PRIMARY KEY (NAME_M, NAME_MOV), FOREIGN KEY (NAME_M) REFERENCES MONSTER(NAME_M),FOREIGN KEY (NAME_MOV) REFERENCES MOVE(NAME_MOV));";
 			String sql4 = "CREATE TABLE ENEMY ( NAME_E VARCHAR(30) NOT NULL PRIMARY KEY,TXT VARCHAR(30) NOT NULL);";
 			String sql5 = "CREATE TABLE LEVEL ( NAME_L VARCHAR(30) NOT NULL, NAME_E VARCHAR(30) NOT NULL,NAME_M VARCHAR(30) NOT NULL,DIFFICULTY INTEGER NOT NULL, ENEMY INTEGER NOT NULL,PRIMARY KEY (NAME_L,NAME_E,NAME_M), FOREIGN KEY (NAME_M) REFERENCES MONSTER(NAME_M),FOREIGN KEY (NAME_E) REFERENCES ENEMY(NAME_E));";
-			//LEVEL.ENEMY es un in 0/1 para decir si es o no el mounstruo del enemigo 1:si
+			// LEVEL.ENEMY es un in 0/1 para decir si es o no el mounstruo del enemigo 1:si
 			stmt.executeUpdate(sql);
 			stmt.executeUpdate(sql1);
 			stmt.executeUpdate(sql2);
@@ -150,7 +151,7 @@ public class BD {
 		}
 		return i;
 	}
-	
+
 	public static Player selectJugadorClass(String nom) {
 		Player i = new Player(nom, 0);
 		try {
@@ -166,7 +167,7 @@ public class BD {
 		}
 		return i;
 	}
-	
+
 	public static void updateJugador(Player p) {
 
 		try {
@@ -230,7 +231,7 @@ public class BD {
 
 			stmt2 = c.prepareStatement("INSERT INTO MOVE (NAME_MOV,DMG) VALUES (?,?)");
 			stmt2.setString(1, move.getName());
-			stmt2.setInt(2,move.getDamage());
+			stmt2.setInt(2, move.getDamage());
 
 			stmt2.executeUpdate();
 			stmt2.close();
@@ -401,7 +402,7 @@ public class BD {
 			stmt2.setString(1, nomMon);
 			ResultSet rs = stmt2.executeQuery();
 			while (rs.next()) {
-				names.add(new String(rs.getString(2)));	
+				names.add(new String(rs.getString(2)));
 			}
 
 			stmt2.close();
@@ -425,7 +426,7 @@ public class BD {
 			stmt2.setString(1, mon.getName());
 			ResultSet rs = stmt2.executeQuery();
 			while (rs.next()) {
-				names.add(new String(rs.getString(2)));	
+				names.add(new String(rs.getString(2)));
 			}
 
 			stmt2.close();
@@ -440,7 +441,6 @@ public class BD {
 		}
 		return s;
 	}
-
 
 	public static void createEnemy(String nom, String txt) {
 		try {
@@ -480,7 +480,7 @@ public class BD {
 			stmt2.setString(1, name);
 			ResultSet rs = stmt2.executeQuery();
 
-			s = new Enemy(rs.getString(1),rs.getString(2));
+			s = new Enemy(rs.getString(1), rs.getString(2));
 			stmt2.close();
 
 		} catch (Exception e) {
@@ -490,7 +490,6 @@ public class BD {
 		return s;
 	}
 
-
 	public static void createLevel(LevelGame level) {
 		try {
 
@@ -498,11 +497,12 @@ public class BD {
 
 			while (it.hasNext()) {
 
-				Map.Entry pair = (Map.Entry)it.next();
+				Map.Entry pair = (Map.Entry) it.next();
 
 				Monster m = (Monster) pair.getKey();
 
-				stmt2 = c.prepareStatement("INSERT INTO LEVEL (NAME_L,NAME_E,NAME_M,DIFFICULTY,ENEMY) VALUES (?, ?, ?, ?, ?)");
+				stmt2 = c.prepareStatement(
+						"INSERT INTO LEVEL (NAME_L,NAME_E,NAME_M,DIFFICULTY,ENEMY) VALUES (?, ?, ?, ?, ?)");
 				stmt2.setString(1, level.getName());
 				stmt2.setString(2, level.getEnemy().getName());
 				stmt2.setString(3, m.getName());
@@ -519,11 +519,12 @@ public class BD {
 
 			while (it2.hasNext()) {
 
-				Map.Entry pair = (Map.Entry)it2.next();
+				Map.Entry pair = (Map.Entry) it2.next();
 
 				Monster m = (Monster) pair.getKey();
 
-				stmt2 = c.prepareStatement("INSERT INTO LEVEL (NAME_L,NAME_E,NAME_M,DIFFICULTY,ENEMY) VALUES (?, ?, ?, ?, ?)");
+				stmt2 = c.prepareStatement(
+						"INSERT INTO LEVEL (NAME_L,NAME_E,NAME_M,DIFFICULTY,ENEMY) VALUES (?, ?, ?, ?, ?)");
 				stmt2.setString(1, level.getName());
 				stmt2.setString(2, level.getEnemy().getName());
 				stmt2.setString(3, m.getName());
@@ -547,17 +548,22 @@ public class BD {
 		try {
 
 			stmt2 = c.prepareStatement("SELECT * FROM LEVEL WHERE DIFFICULTY<=?");
-			stmt2.setInt(1, level+1);
+			stmt2.setInt(1, level + 1);
 			ResultSet rs = stmt2.executeQuery();
 
 			while (rs.next()) {
 				if (!training.containsKey(rs.getObject(1))) {
-					training.put(rs.getString(1), new LevelGame(rs.getString(1), selectEnemy(rs.getString(2)), new HashMap<Monster, LinkedList<Move>>(), new HashMap<Monster, LinkedList<Move>>(), rs.getInt(4)));
+					training.put(rs.getString(1),
+							new LevelGame(rs.getString(1), selectEnemy(rs.getString(2)),
+									new HashMap<Monster, LinkedList<Move>>(), new HashMap<Monster, LinkedList<Move>>(),
+									rs.getInt(4)));
 				}
 				if (rs.getInt(5) == 0) {
-					training.get(rs.getString(1)).addMonsters(selectMonster(rs.getString(3)),selectMM(rs.getString(3)));
+					training.get(rs.getString(1)).addMonsters(selectMonster(rs.getString(3)),
+							selectMM(rs.getString(3)));
 				} else {
-					training.get(rs.getString(1)).addMonstersEnemy(selectMonster(rs.getString(3)),selectMM(rs.getString(3)));
+					training.get(rs.getString(1)).addMonstersEnemy(selectMonster(rs.getString(3)),
+							selectMM(rs.getString(3)));
 				}
 			}
 
@@ -570,33 +576,34 @@ public class BD {
 		Iterator it = training.entrySet().iterator();
 
 		while (it.hasNext()) {
-			Map.Entry pair = (Map.Entry)it.next();
+			Map.Entry pair = (Map.Entry) it.next();
 			s.add((LevelGame) pair.getValue());
 			it.remove(); // avoids a ConcurrentModificationException
 		}
 
 		return s;
 	}
-	
+
 	public static LevelGame selectLevel(String level) {
 		LevelGame r = null;
-		
+
 		try {
 
 			stmt2 = c.prepareStatement("SELECT * FROM LEVEL WHERE NAME_L<=?");
 			stmt2.setString(1, level);
 			ResultSet rs = stmt2.executeQuery();
-			
-			r = new LevelGame(level, selectEnemy(rs.getString(2)), new HashMap<Monster, LinkedList<Move>>(), new HashMap<Monster, LinkedList<Move>>(), rs.getInt(4));
-			
+
+			r = new LevelGame(level, selectEnemy(rs.getString(2)), new HashMap<Monster, LinkedList<Move>>(),
+					new HashMap<Monster, LinkedList<Move>>(), rs.getInt(4));
+
 			while (rs.next()) {
-				
+
 				if (rs.getInt(5) == 0) {
-					r.addMonsters(selectMonster(rs.getString(3)),selectMM(rs.getString(3)));
+					r.addMonsters(selectMonster(rs.getString(3)), selectMM(rs.getString(3)));
 				} else {
-					r.addMonstersEnemy(selectMonster(rs.getString(3)),selectMM(rs.getString(3)));
+					r.addMonstersEnemy(selectMonster(rs.getString(3)), selectMM(rs.getString(3)));
 				}
-				
+
 			}
 
 			stmt2.close();
@@ -667,15 +674,57 @@ public class BD {
 		createAllMonsters(bdMonter);
 
 		Move ascuas = new Move("Ascuas", 60);
+		Move lanzallamas = new Move("Lanzallamas", 100);
+		Move giroFuego = new Move("Giro fuego", 45);
+		Move patadaIgnea = new Move("Patada ignea", 50);
+		Move ruedaFuego = new Move("Rueda fuego", 50);
+		Move fuegoFatuo = new Move("Fuego fatuo", 30);
+
 		Move lluevehojas = new Move("LlueveHojas", 120);
-		Move pistolaAgua = new Move("Pistola Agua", 55);
+		Move hojaAguda = new Move("Hoja aguda", 55);
+		Move latigoCepa = new Move("Latigo cepa", 45);
+		Move hojaAfilada = new Move("Hoja afilada", 60);
+		Move energiBola = new Move("EnergiBola", 65);
+		Move rayoSolar = new Move("Rayo solar", 100);
+
+		Move pistolaAgua = new Move("Pistola Agua", 60);
+		Move burbuja = new Move("Burbuja", 45);
+		Move cascada = new Move("Cascada", 55);
+		Move surf = new Move("Surf", 60);
+		Move remolino = new Move("Remolino", 40);
+		Move rayoBurbuja = new Move("Rayo burbuja", 55);
+		Move hidrobomba = new Move("Hidrobomba", 100);
+
+		Move picotazo = new Move("Picotazo", 60);
+		Move golpe = new Move("Golpe", 45);
 		Move ataqueRapido = new Move("Ataque rapido", 50);
 		Move placaje = new Move("Placaje", 50);
-		Move araniazo = new Move("araÃ±azo", 35);
+		Move araniazo = new Move("Arañazo", 35);
 
 		bdMove.add(ascuas);
+		bdMove.add(lanzallamas);
+		bdMove.add(giroFuego);
+		bdMove.add(patadaIgnea);
+		bdMove.add(ruedaFuego);
+		bdMove.add(fuegoFatuo);
+
 		bdMove.add(lluevehojas);
+		bdMove.add(hojaAguda);
+		bdMove.add(latigoCepa);
+		bdMove.add(hojaAfilada);
+		bdMove.add(energiBola);
+		bdMove.add(rayoSolar);
+
 		bdMove.add(pistolaAgua);
+		bdMove.add(burbuja);
+		bdMove.add(cascada);
+		bdMove.add(surf);
+		bdMove.add(remolino);
+		bdMove.add(rayoBurbuja);
+		bdMove.add(hidrobomba);
+
+		bdMove.add(picotazo);
+		bdMove.add(golpe);
 		bdMove.add(ataqueRapido);
 		bdMove.add(placaje);
 		bdMove.add(araniazo);
@@ -687,23 +736,63 @@ public class BD {
 		createMM(catercute, placaje);
 		createMM(catercute, araniazo);
 
+		createMM(weepinutor, picotazo);
+		createMM(weepinutor, placaje);
+		createMM(weepinutor, hojaAfilada);
+		createMM(weepinutor, rayoSolar);
+
+		createMM(venulax, picotazo);
+		createMM(venulax, placaje);
+		createMM(venulax, hojaAfilada);
+		createMM(venulax, rayoSolar);
+
+		createMM(golbasaur, picotazo);
+		createMM(golbasaur, placaje);
+		createMM(golbasaur, hojaAfilada);
+		createMM(golbasaur, rayoSolar);
+
 		createMM(moltnx, ascuas);
 		createMM(moltnx, ataqueRapido);
 		createMM(moltnx, placaje);
-		createMM(moltnx, araniazo);	
+		createMM(moltnx, araniazo);
+
+		createMM(flaredon, ascuas);
+		createMM(flaredon, lanzallamas);
+		createMM(flaredon, giroFuego);
+		createMM(flaredon, araniazo);
 
 		Enemy jovenChano = new Enemy("Joven Chano", "Te desafio!!");
 		createEnemy(jovenChano);
 
-		LevelGame lg = new LevelGame("Pueblo Paleta", jovenChano, new HashMap<Monster, LinkedList<Move>>(), new HashMap<Monster, LinkedList<Move>>(), 0);
-		lg.addMonsters(catercute, selectMM(catercute));
-		lg.addMonstersEnemy(moltnx, selectMM(moltnx));
-		
+		LevelGame level1 = new LevelGame("Pueblo Paleta", jovenChano, new HashMap<Monster, LinkedList<Move>>(),
+				new HashMap<Monster, LinkedList<Move>>(), 0);
+		level1.addMonsters(catercute, selectMM(catercute));
+		level1.addMonsters(golbasaur, selectMM(golbasaur));
 
-		createLevel(lg);
-		
-		System.out.println(selectLevel(lg.getName()));
-		
+		level1.addMonstersEnemy(moltnx, selectMM(moltnx));
+		level1.addMonstersEnemy(flaredon, selectMM(flaredon));
+
+		createLevel(level1);
+
+		System.out.println(selectLevel(level1.getName()));
+
+		Enemy domingueroPaco = new Enemy("Dominguero Paco", "Jojojo, no vencerás a mis plantas!!");
+		createEnemy(domingueroPaco);
+
+		LevelGame level2 = new LevelGame("Ciudad Olivo", jovenChano, new HashMap<Monster, LinkedList<Move>>(),
+				new HashMap<Monster, LinkedList<Move>>(), 0);
+		level2.addMonsters(weepinutor, selectMM(weepinutor));
+		level2.addMonsters(moltnx, selectMM(moltnx));
+		level2.addMonsters(flaredon, selectMM(flaredon));
+
+		level2.addMonstersEnemy(golbasaur, selectMM(golbasaur));
+		level2.addMonstersEnemy(weepinutor, selectMM(weepinutor));
+		level2.addMonstersEnemy(catercute, selectMM(catercute));
+
+		createLevel(level2);
+
+		System.out.println(selectLevel(level2.getName()));
+
 		closeBD();
 
 	}
