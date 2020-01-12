@@ -48,24 +48,22 @@ public class OptionsWindow extends JFrame {
 		setContentPane(contentpane);
 		contentpane.setLayout(null);
 		
-		labelMusic.setText("Musica");
-		labelMusic.setBounds(250, 150, 100, 20);
+		labelMusic.setText("Música");;//musica
+		labelMusic.setBounds(300, 150, 100, 20);
 		contentpane.add(labelMusic);
 		
-		checkMusic.setBounds(300, 150, 15, 15);
+		checkMusic.setBounds(350, 150, 21, 21);
 		contentpane.add(checkMusic);
 
-		buttonBack.setText("Atras");
-		buttonBack.setBackground(new Color(255, 175, 175));
-		buttonBack.setBounds(200, 250, 100, 20);
+		buttonBack.setIcon(new ImageIcon(OptionsWindow.class.getResource("/images/button_salir.png")));//atras
+		buttonBack.setBounds(600, 300, 100, 45);
 		contentpane.add(buttonBack);
 		
-		buttonSave.setText("Guardar");
-		buttonSave.setBackground(new Color(255, 175, 175));
-		buttonSave.setBounds(400, 250, 100, 20);
+		buttonSave.setIcon(new ImageIcon(OptionsWindow.class.getResource("/images/button_guardar.png")));//guardar
+		buttonSave.setBounds(300, 230, 125, 40);
 		contentpane.add(buttonSave);
 		
-		labelBackground.setIcon(new ImageIcon(StartGameWindow.class.getResource("/images/back2.jpg")));
+		labelBackground.setIcon(new ImageIcon(OptionsWindow.class.getResource("/images/back2.jpg")));
 		labelBackground.setBounds(0, 0, altura, anchura);
 		contentpane.add(labelBackground);
 
@@ -79,7 +77,7 @@ public class OptionsWindow extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				SelectionWindow selectionWindow = new SelectionWindow(750, 422);
+				SelectionWindow selectionWindow = new SelectionWindow(750, 422,"3");
 				selectionWindow.setVisible(true);
 				OptionsWindow.this.dispose();
 

@@ -41,12 +41,20 @@ public class LevelsWindow extends JFrame {
 		
 		levels = BD.selectAllLevelsUnder(p.getLevel());
 		
+		
 		for (int i = 0; i < levels.size(); i++) {
+			System.out.println(levels.size());
 			JButton buttonCombat = new JButton();
+			buttonCombat.setIcon(new ImageIcon(StartGameWindow.class.getResource("/images/button_"+ i +".png")));
 			buttonCombat.setText(Integer.toString(i));
-			buttonCombat.setBackground(new Color(255, 175, 175));
-			buttonCombat.setBounds(150, 200, 100, 20);
+			int bounds1 = 150;
+			int bounds2 = 150;
+			buttonCombat.setBounds(bounds1, bounds2, 60, 40);
 			contentpane.add(buttonCombat);
+
+			bounds1 =+ 70;
+					
+			
 			buttonCombat.addActionListener(new ActionListener() {
 
 				@Override
@@ -58,17 +66,18 @@ public class LevelsWindow extends JFrame {
 				}
 			});
 		}
+		
 
-
-		labelBackground.setIcon(new ImageIcon(StartGameWindow.class.getResource("/images/back2.jpg")));
+		buttonBack.setIcon(new ImageIcon(StartGameWindow.class.getResource("/images/button_salir.png")));
+		buttonBack.setBounds(600, 300, 100, 45);
+		contentpane.add(buttonBack);
+	
+		
+		labelBackground.setIcon(new ImageIcon(StartGameWindow.class.getResource("/images/FightWall.jpg")));
 		labelBackground.setBounds(0, 0, altura, anchura);
 		contentpane.add(labelBackground);
 
-		buttonBack.setText("Atrás");
-		buttonBack.setBackground(new Color(255, 175, 175));
-		buttonBack.setBounds(150, 250, 100, 20);
-		contentpane.add(buttonBack);
-
+	
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(altura, anchura);
 		setTitle("DeustMon");
