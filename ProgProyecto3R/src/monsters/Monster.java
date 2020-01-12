@@ -8,14 +8,14 @@ public abstract class Monster {
 		PLANT,
 		WATER
 	}
-	
+
 	private String name;
 	private int lifePoints;
 	private int attack;
 	private int defense;
 	private int speed;
 	private Type type;
-	
+
 	public Monster(String name, int lifePoints, int attack, int defense, int speed, Type type) {
 		super();
 		this.name = name;
@@ -61,11 +61,11 @@ public abstract class Monster {
 	public void setSpeed(int speed) {
 		this.speed = speed;
 	}
-	
+
 	public Type getType() {
 		return type;
 	}
-	
+
 	public String getTypeString() {
 		return String.valueOf(this.getType());
 	}

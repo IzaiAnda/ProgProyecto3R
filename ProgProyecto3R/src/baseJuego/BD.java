@@ -6,7 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -789,36 +788,36 @@ public class BD {
 		createLevel(level2);
 
 		System.out.println(selectLevel(level2.getName()));
-		
+
 		createJugador("a", "a");
 
-		
+
 		createMM(tangizard,ataqueRapido);
 		createMM(tangizard,giroFuego);
 		createMM(tangizard,patadaIgnea);
 		createMM(tangizard,rayoSolar);
-		
+
 		createMM(omachamp,placaje);
 		createMM(omachamp,ataqueRapido);
 		createMM(omachamp,araniazo);
 		createMM(omachamp,latigoCepa);
-		
+
 		createMM(mutoise,picotazo);
 		createMM(mutoise,lluevehojas);
 		createMM(mutoise,araniazo);
 		createMM(mutoise,lanzallamas);
-		
+
 		createMM(tauras,golpe);
 		createMM(tauras,remolino);
 		createMM(tauras,surf);
 		createMM(tauras,placaje);
-		
+
 		createMM(dewpuff,placaje);
 		createMM(dewpuff,ascuas);
 		createMM(dewpuff,lanzallamas);
 		createMM(dewpuff,araniazo);
-		
-		
+
+
 		createMM(meowcruel,hidrobomba);
 		createMM(meowcruel,surf);
 		createMM(meowcruel,rayoBurbuja);
@@ -828,7 +827,7 @@ public class BD {
 
 		LevelGame level3 = new LevelGame("Ciudad Roble", giovanni, new HashMap<Monster, LinkedList<Move>>(),
 				new HashMap<Monster, LinkedList<Move>>(), 0);
-		
+
 		level3.addMonsters(tangizard, selectMM(tangizard));
 		level3.addMonsters(omachamp, selectMM(omachamp));
 		level3.addMonsters(meowcruel, selectMM(meowcruel));
@@ -837,10 +836,10 @@ public class BD {
 		level3.addMonstersEnemy(tauras, selectMM(tauras));
 		level3.addMonstersEnemy(dewpuff, selectMM(dewpuff));
 
-		
+
 		createLevel(level3);
-		
-		
+
+
 		closeBD();
 
 	}

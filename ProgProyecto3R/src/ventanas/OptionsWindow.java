@@ -38,8 +38,8 @@ public class OptionsWindow extends JFrame {
 	private JLabel labelMusic = new JLabel();
 	private JButton buttonBack = new JButton();
 	private JCheckBox checkMusic = new JCheckBox();
-	
-	
+
+
 
 	public OptionsWindow(int altura, int anchura) {
 		contentpane = new JPanel();
@@ -47,22 +47,22 @@ public class OptionsWindow extends JFrame {
 		contentpane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentpane);
 		contentpane.setLayout(null);
-		
+
 		labelMusic.setText("Música");//musica
 		labelMusic.setBounds(300, 150, 100, 20);
 		contentpane.add(labelMusic);
-		
+
 		checkMusic.setBounds(350, 150, 21, 21);
 		contentpane.add(checkMusic);
 
 		buttonBack.setIcon(new ImageIcon(OptionsWindow.class.getResource("/images/button_salir.png")));//atras
 		buttonBack.setBounds(600, 300, 100, 45);
 		contentpane.add(buttonBack);
-		
+
 		buttonSave.setIcon(new ImageIcon(OptionsWindow.class.getResource("/images/button_guardar.png")));//guardar
 		buttonSave.setBounds(300, 230, 125, 40);
 		contentpane.add(buttonSave);
-		
+
 		labelBackground.setIcon(new ImageIcon(OptionsWindow.class.getResource("/images/back2.jpg")));
 		labelBackground.setBounds(0, 0, altura, anchura);
 		contentpane.add(labelBackground);
@@ -81,9 +81,9 @@ public class OptionsWindow extends JFrame {
 
 			}
 		});
-		
+
 		buttonSave.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if(checkMusic.isSelected()==true) {
@@ -101,12 +101,12 @@ public class OptionsWindow extends JFrame {
 						e1.printStackTrace();
 					}
 				}else {
-					
+
 				}
-				
+
 			}
 		});
-		
+
 	}
-	
+
 }

@@ -7,12 +7,12 @@ public class CompareMSpeed implements Comparator<Monster>{
 	@Override
 	public int compare(Monster a, Monster b) {
 		// TODO Auto-generated method stub
-		
+
 		if (Integer.compare(a.getSpeed(), b.getSpeed())==0) {
 			CompareMName comp = new CompareMName();
 			return comp.compare(a, b);
 		}
-		
+
 		return Integer.compare(b.getSpeed(), a.getSpeed());
 	}
 

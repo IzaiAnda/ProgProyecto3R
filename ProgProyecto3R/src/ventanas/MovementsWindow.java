@@ -34,7 +34,7 @@ public class MovementsWindow extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	private JMenuBar barr;
 	private JMenu menuOrder;
 	private JMenuItem moveName;
@@ -47,57 +47,57 @@ public class MovementsWindow extends JFrame {
 		modelo.addColumn("Name");
 		modelo.addColumn("Damage");
 	}
-	
 
-	
+
+
 	public static void addMoves(List<? extends Move> list) {
-		
-			removeAllRows();
-		
-			for (Move move : list) {
-				Vector<String> moves = new Vector<>();
-				moves.add(move.getName());
-				moves.add(Integer.toString(move.getDamage()));
-				
-				modelo.addRow(moves);
-			}
-			
+
+		removeAllRows();
+
+		for (Move move : list) {
+			Vector<String> moves = new Vector<>();
+			moves.add(move.getName());
+			moves.add(Integer.toString(move.getDamage()));
+
+			modelo.addRow(moves);
 		}
 
+	}
 
-	
+
+
 	private static void removeAllRows() {
 		if (modelo.getRowCount() > 0) {
-		    for (int i = modelo.getRowCount() - 1; i > -1; i--) {
-		    	modelo.removeRow(i);
-		    }
+			for (int i = modelo.getRowCount() - 1; i > -1; i--) {
+				modelo.removeRow(i);
+			}
 		}
 	}
 
 
 	public MovementsWindow(int altura, int anchura) {
-		
+
 		barr = new JMenuBar();
 		setJMenuBar(barr);
-		
+
 		menuOrder = new JMenu("OrderBy");
 		barr.add(menuOrder);	
-		
+
 		menuOrder.addSeparator();
-		
+
 		if(!(modelo.getColumnCount() > 0)) {
 			createColums();
 		}
-		
-		
+
+
 		LinkedList<Move> list = BD.selectAllMoves();
-		
+
 		addMoves(list);
-		
+
 		moveName = new JMenuItem("Name");
 		menuOrder.add(moveName);
 		moveName.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				compareAdd(list,0);//0 = ordered by name
@@ -106,45 +106,45 @@ public class MovementsWindow extends JFrame {
 		moveDamage = new JMenuItem("Damage");
 		menuOrder.add(moveDamage);
 		moveDamage.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				compareAdd(list,1);//1 = ordered by type
 			}
 		});
-		
+
 		tabla = new JTable(modelo);
 		tabla.setEnabled(false);
 		scroll.setViewportView(tabla);
 		scroll.setOpaque(false);
 		scroll.setBackground(Color.BLUE);
 		add(scroll);
-		
+
 
 		setSize(altura, anchura);
 		setLocation(500, 250);
 		setTitle("Moves");
 	}
-	
+
 	public static void compareAdd(List<? extends Move> list, int i){
-		
+
 		if (i == 0) {
 			Collections.sort(list, new CompareMoveName());
 		}else if(i == 1) {
 			Collections.sort(list, new CompareMoveDamage());
 		}
-		
+
 		removeAllRows();
 		addMoves(list);
 		tabla.repaint();
 	}
-	
+
 	public static void main(String[] args) {
 		MovementsWindow movementsWindow = new MovementsWindow(750, 422);
 		movementsWindow.setVisible(true);
-		
+
 	}
-	
-	
+
+
 
 }

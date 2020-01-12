@@ -33,8 +33,8 @@ public class Pokedex extends JFrame{
 
 	private static final long serialVersionUID = 1L;
 	static int count = 0;
-	
-	
+
+
 
 	public Pokedex() {
 
@@ -48,16 +48,16 @@ public class Pokedex extends JFrame{
 		JButton back = new JButton("Back");
 		JLabel labelBackGround = new JLabel();
 		JLabel backImage = new JLabel();
-		
+
 		LinkedList<Monster> monsterList = new LinkedList<Monster>();
 
 		monsterList = BD.selectAllMonsters();
-		
+
 		System.out.println(monsterList.size());
 
 		ArrayList<JButton> buttons = new ArrayList<JButton>();
-		
-		
+
+
 		JLabel title = new JLabel("Monsters");
 		JButton mons1 = new JButton();
 		buttons.add(mons1);
@@ -106,14 +106,14 @@ public class Pokedex extends JFrame{
 		}
 
 		JTextArea monstersData = new JTextArea();
-	
+
 		setLayout(null);
 		scrPane.setBounds(10, 50, 150, 320);
 		this.add(scrPane);
 
 		image.setBounds(525, 15, 180, 180);
 		this.add(image);
-		
+
 		backImage.setBounds(485, 15, 270, 330);
 		this.add(backImage);
 
@@ -131,14 +131,14 @@ public class Pokedex extends JFrame{
 
 		back.setBounds(300, 15, 75, 25);
 		this.add(back);
-		
+
 		labelBackGround.setBounds(0, 0, 800, 400);
 		this.add(labelBackGround);
-		
+
 		labelBackGround.setIcon(new ImageIcon(Pokedex.class.getResource("/images/backPok.png")));
-		
+
 		backImage.setIcon(new ImageIcon(Pokedex.class.getResource("/images/backImg.jpg")));
-		
+
 
 		for (int i = 0; i < monsterList.size(); i++) {
 
@@ -149,8 +149,8 @@ public class Pokedex extends JFrame{
 			int attack = monsterList.get(count).getAttack();
 			int defense = monsterList.get(count).getDefense();
 			int speed = monsterList.get(count).getSpeed();
-			
-			
+
+
 
 			buttons.get(i).addActionListener(new ActionListener() {
 
@@ -169,8 +169,8 @@ public class Pokedex extends JFrame{
 			});
 
 		}
-		
-		
+
+
 
 		back.addActionListener(new ActionListener() {
 
@@ -202,8 +202,8 @@ public class Pokedex extends JFrame{
 			}
 
 		});
-		
-		
+
+
 
 
 		monsters.add(mons1);
@@ -250,25 +250,25 @@ public class Pokedex extends JFrame{
 
 		monsters.add(mons15);
 		mons15.setBounds(5, 425, 120, 25);
-		
+
 		monsters.add(mons16);
 		mons16.setBounds(5, 455, 120, 25);
 
 		monsters.add(mons17);
 		mons17.setBounds(5, 485, 120, 25);
-		
+
 		monsters.add(mons18);
 		mons18.setBounds(5, 515, 120, 25);
-		
+
 		monsters.add(mons19);
 		mons19.setBounds(5, 545, 120, 25);
-		
+
 		monsters.add(mons20);
 		mons20.setBounds(5, 575, 120, 25);
-		
-		
-		
-		
+
+
+
+
 	}
 
 }

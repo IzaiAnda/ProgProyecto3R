@@ -30,17 +30,17 @@ public class LevelsWindow extends JFrame {
 	private JButton buttonBack = new JButton();
 	private LinkedList<LevelGame> levels ;
 	private Player p;
-	
+
 	public LevelsWindow(int altura, int anchura, String nom) {
 		contentpane = new JPanel();
-		
+
 		p = BD.selectJugadorClass(nom);
-		
+
 		setContentPane(contentpane);
 		contentpane.setLayout(null);
-		
+
 		levels = BD.selectAllLevelsUnder(p.getLevel());
-		
+
 		JButton button1 = new JButton();
 		button1.setIcon(new ImageIcon(StartGameWindow.class.getResource("/images/button_0.png")));
 		button1.setBounds(150, 150, 60, 40);
@@ -50,25 +50,25 @@ public class LevelsWindow extends JFrame {
 		JButton button3 = new JButton();
 		button3.setIcon(new ImageIcon(StartGameWindow.class.getResource("/images/button_2.png")));
 		button3.setBounds(290, 150, 60, 40);
-		
+
 		LinkedList<String> names = new LinkedList<String>();
-		
+
 		for (LevelGame levelGame : levels) {
-            names.add(levelGame.getName());
-        }
-		
+			names.add(levelGame.getName());
+		}
+
 		ArrayList<JButton> buttons = new ArrayList<JButton>();
-		
+
 		buttons.add(button1);
 		buttons.add(button2);
 		buttons.add(button3);
-		
+
 		for (int i = 0; i < buttons.size(); i++) {
-				
+
 			contentpane.add(buttons.get(i));
-			
+
 			String name = names.get(i);
-			
+
 			buttons.get(i).addActionListener(new ActionListener() {
 
 				@Override
@@ -76,24 +76,24 @@ public class LevelsWindow extends JFrame {
 					CombatWindow combatWindow = new CombatWindow(750, 422,name,nom);
 					combatWindow.setVisible(true);
 					LevelsWindow.this.dispose();
-					
+
 				}
 			});}
-	
-			
-		
-		
+
+
+
+
 
 		buttonBack.setIcon(new ImageIcon(StartGameWindow.class.getResource("/images/button_salir.png")));
 		buttonBack.setBounds(600, 300, 100, 45);
 		contentpane.add(buttonBack);
-	
-		
+
+
 		labelBackground.setIcon(new ImageIcon(StartGameWindow.class.getResource("/images/FightWall.jpg")));
 		labelBackground.setBounds(0, 0, altura, anchura);
 		contentpane.add(labelBackground);
 
-	
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(altura, anchura);
 		setTitle("DeustMon");

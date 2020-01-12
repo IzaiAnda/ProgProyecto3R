@@ -30,13 +30,13 @@ public class Move {
 		this.damage = damage;
 	}
 
-//	public int getPercent() {
-//		return percent;
-//	}
-//
-//	public void setPercent(int percent) {
-//		this.percent = percent;
-//	}
+	//	public int getPercent() {
+	//		return percent;
+	//	}
+	//
+	//	public void setPercent(int percent) {
+	//		this.percent = percent;
+	//	}
 
 	@Override
 	public String toString() {

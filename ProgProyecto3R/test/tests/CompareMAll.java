@@ -17,13 +17,13 @@ import monsters.MonsterWater;
 
 
 public class CompareMAll {
-	
+
 	Monster a = new MonsterFire("a", 1, 2, 3, 4);
 	Monster b = new MonsterPlant("b", 2, 3, 4, 1);
 	Monster c = new MonsterWater("c", 3, 4, 1, 2);
 	List list = new ArrayList<Monster>();
 	List list2 = new ArrayList<Monster>();
-	
+
 	@Test
 	public void test() {
 		list.add(a);
@@ -33,9 +33,9 @@ public class CompareMAll {
 		list2.add(c);
 		list2.add(b);
 		list2.add(a);
-		
+
 		assertEquals(list, list2);
-		
+
 	}
-	
+
 }

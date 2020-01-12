@@ -77,7 +77,7 @@ public class StartGameWindow extends JFrame {
 		setSize(altura, anchura);
 		setTitle("DeustMon");
 
-		
+
 
 		//Eventos
 
@@ -133,7 +133,7 @@ public class StartGameWindow extends JFrame {
 							public void run() {
 
 								JOptionPane.showConfirmDialog(null, "DONE", "Confirmar salida", JOptionPane.DEFAULT_OPTION);
-								
+
 							}
 						});
 

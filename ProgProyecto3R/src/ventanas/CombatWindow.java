@@ -42,7 +42,7 @@ public class CombatWindow<V> extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	private GridLayout grid = new GridLayout(2, 2);
 	private JPanel arriba = new JPanel();
 	private JPanel abajo = new JPanel();
@@ -70,35 +70,35 @@ public class CombatWindow<V> extends JFrame {
 	private LinkedList<Monster> monstersEnemy;
 	int y;
 
-	
+
 	public LinkedList<Monster> MonsterHashMapToList(HashMap<Monster, LinkedList<Move>> hp) {
-		
+
 		LinkedList<Monster> r = new LinkedList<Monster>();
-		
+
 		Iterator it = hp.entrySet().iterator();
-		
+
 		do {
 			Map.Entry pair = (Map.Entry)it.next();	
 			r.add((Monster) pair.getKey());
 		} while (it.hasNext());
-		
+
 		return r;
 	}
-	
+
 	public CombatWindow(int altura, int anchura, String slg, String nom) { 
-		
+
 		player = BD.selectJugadorClass(nom);
 		levelGame = BD.selectLevel(slg);
-		
+
 		monsters = MonsterHashMapToList(levelGame.getMonsters());
 		monstersEnemy = MonsterHashMapToList(levelGame.getMonstersEnemy());
-		
+
 		imagePkm.setBounds(20, 100, 180, 180);
 		add(imagePkm);
-		
+
 		imageEnemy.setBounds(180, 10, 180, 180);
 		add(imageEnemy);
-		
+
 		add(arriba,BorderLayout.CENTER);
 		add(abajo,BorderLayout.SOUTH);
 
@@ -141,7 +141,7 @@ public class CombatWindow<V> extends JFrame {
 		setSize(altura, anchura);
 		setTitle("DeustMon");
 
-		
+
 		startCombat();
 
 		run.addActionListener(new ActionListener() {
@@ -182,7 +182,7 @@ public class CombatWindow<V> extends JFrame {
 		historial.append(levelGame.getEnemy().getName() + " saca a " + monstersEnemy.get(0).getName() + "\n\n");
 		iconEnemy = new ImageIcon(Pokedex.class.getResource("/images/monsters/" + monstersEnemy.get(0).getName() + ".png"));
 		imageEnemy.setIcon(iconEnemy);
-		
+
 		sacarPokemon();
 
 	}
@@ -192,7 +192,7 @@ public class CombatWindow<V> extends JFrame {
 		historial.append("Que mounstruo quiere sacar?\n");
 		botonesAtaques.setVisible(false);		
 		botonesMonster.removeAll();
-		
+
 		for (Integer i = 0; i < monsters.size(); i++) {
 			historial.append(i + ": " + monsters.get(i).getName() + "\n");
 			JButton option1 = new JButton();
@@ -229,9 +229,9 @@ public class CombatWindow<V> extends JFrame {
 	}
 
 	public void ataques() {
-		
+
 		int monsterActualInt = Integer.parseInt(monsterActual);
-		
+
 		botonesAtaques.setVisible(false);
 
 		historial.append("Que ataque quiere usar?\n\n");
@@ -247,16 +247,16 @@ public class CombatWindow<V> extends JFrame {
 
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					
+
 					for (int j = 0; j < movesM.size(); j++) {
 						if(movesM.get(j).getName().equals(a.getText())) {
 							y=j;
 							historial.append("Has usado: " + movesM.get(j).getName() + "\n");
 						}				
 					};
-					
+
 					Combate.combat(monsters.get(monsterActualInt), monstersEnemy.get(0), movesM.get(y), movesMIA.get(0));
-					
+
 					if (monsters.get(monsterActualInt).getLifePoints()<=0&&monstersEnemy.get(0).getLifePoints()<=0) {
 						historial.append("Te han debilitado a tu mounstruo a la vez que has devilitado al mounstruo enemigo !!\n\n");
 						monsters.remove(monsterActualInt);
@@ -303,7 +303,7 @@ public class CombatWindow<V> extends JFrame {
 		botonesAtaques.setVisible(true);
 
 	}
-	
+
 	public void youLose(){
 		historial.append("\n---------------------\n");
 		JOptionPane.showConfirmDialog(null, levelGame.getEnemy().getName() + " ha debilitado a todos tus pokemons.\nHas perdido!!!", "Confirmar salida", JOptionPane.DEFAULT_OPTION);
@@ -318,9 +318,9 @@ public class CombatWindow<V> extends JFrame {
 		}
 		finish();
 	}
-	
+
 	public void finish() {
-		
+
 		LevelsWindow levelsWindow = new LevelsWindow(750, 422, player.getName());
 		levelsWindow.setVisible(true);
 		CombatWindow.this.dispose();

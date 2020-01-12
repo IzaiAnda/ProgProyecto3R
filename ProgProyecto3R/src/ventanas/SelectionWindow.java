@@ -86,7 +86,7 @@ public class SelectionWindow extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				/*PokedexWindow pokedexWindow = new PokedexWindow(750, 422);
 				pokedexWindow.setVisible(true);*/
-				
+
 				Pokedex pokedex = new Pokedex();
 				pokedex.setVisible(true);
 
