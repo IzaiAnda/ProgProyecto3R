@@ -102,7 +102,6 @@ public class BD {
 			logger.log(Level.SEVERE, e.getClass().getName() + ": " + e.getMessage());
 			System.exit(0);
 		}
-		System.out.println("Table created successfully");
 	}
 
 	// LA IDEA ES QUE AYA UN INT EN TU PERSONAJE QUE TE DIGA QUE NIVEL ERES, DEPENDE
@@ -130,7 +129,6 @@ public class BD {
 			logger.log(Level.SEVERE, e.getClass().getName() + ": " + e.getMessage());
 			System.exit(0);
 		}
-		System.out.println("Table created successfully");
 	}
 
 	public static boolean selectJugador(String nom, String pass) {
@@ -146,7 +144,7 @@ public class BD {
 			stmt2.close();
 
 		} catch (Exception e) {
-			System.out.println(e.getClass().getName() + ": " + e.getMessage());
+			logger.log(Level.FINE,e.getClass().getName() + ": " + e.getMessage());
 
 		}
 		return i;
@@ -162,7 +160,7 @@ public class BD {
 			stmt2.close();
 
 		} catch (Exception e) {
-			System.out.println(e.getClass().getName() + ": " + e.getMessage());
+			logger.log(Level.FINE,e.getClass().getName() + ": " + e.getMessage());
 
 		}
 		return i;
@@ -178,7 +176,7 @@ public class BD {
 			stmt2.close();
 
 		} catch (Exception e) {
-			System.out.println(e.getClass().getName() + ": " + e.getMessage());
+			logger.log(Level.FINE,e.getClass().getName() + ": " + e.getMessage());
 
 		}
 	}
@@ -195,7 +193,7 @@ public class BD {
 			c.commit();
 
 		} catch (Exception e) {
-			System.out.println(e.getClass().getName() + ": " + e.getMessage());
+			logger.log(Level.FINE,e.getClass().getName() + ": " + e.getMessage());
 		}
 	}
 
@@ -214,7 +212,7 @@ public class BD {
 			c.commit();
 
 		} catch (Exception e) {
-			System.out.println(e.getClass().getName() + ": " + e.getMessage());
+			logger.log(Level.FINE,e.getClass().getName() + ": " + e.getMessage());
 		}
 	}
 
@@ -238,7 +236,7 @@ public class BD {
 			c.commit();
 
 		} catch (Exception e) {
-			System.out.println(e.getClass().getName() + ": " + e.getMessage());
+			logger.log(Level.FINE,e.getClass().getName() + ": " + e.getMessage());
 		}
 	}
 
@@ -278,7 +276,7 @@ public class BD {
 			stmt2.close();
 
 		} catch (Exception e) {
-			System.out.println(e.getClass().getName() + ": " + e.getMessage());
+			logger.log(Level.FINE,e.getClass().getName() + ": " + e.getMessage());
 		}
 
 		return s;
@@ -299,7 +297,7 @@ public class BD {
 			stmt2.close();
 
 		} catch (Exception e) {
-			System.out.println(e.getClass().getName() + ": " + e.getMessage());
+			logger.log(Level.FINE,e.getClass().getName() + ": " + e.getMessage());
 		}
 
 		return s;
@@ -333,7 +331,7 @@ public class BD {
 				}
 			}
 		} catch (Exception e) {
-			System.out.println(e.getClass().getName() + ": " + e.getMessage());
+			logger.log(Level.FINE,e.getClass().getName() + ": " + e.getMessage());
 		}
 
 		return s;
@@ -358,7 +356,7 @@ public class BD {
 			stmt2.close();
 
 		} catch (Exception e) {
-			System.out.println(e.getClass().getName() + ": " + e.getMessage());
+			logger.log(Level.FINE,e.getClass().getName() + ": " + e.getMessage());
 		}
 
 		return s;
@@ -375,7 +373,7 @@ public class BD {
 			c.commit();
 
 		} catch (Exception e) {
-			System.out.println(e.getClass().getName() + ": " + e.getMessage());
+			logger.log(Level.FINE,e.getClass().getName() + ": " + e.getMessage());
 		}
 	}
 
@@ -390,7 +388,7 @@ public class BD {
 			c.commit();
 
 		} catch (Exception e) {
-			System.out.println(e.getClass().getName() + ": " + e.getMessage());
+			logger.log(Level.FINE,e.getClass().getName() + ": " + e.getMessage());
 		}
 	}
 
@@ -412,7 +410,7 @@ public class BD {
 			}
 
 		} catch (Exception e) {
-			System.out.println(e.getClass().getName() + ": " + e.getMessage());
+			logger.log(Level.FINE,e.getClass().getName() + ": " + e.getMessage());
 
 		}
 		return s;
@@ -436,7 +434,7 @@ public class BD {
 			}
 
 		} catch (Exception e) {
-			System.out.println(e.getClass().getName() + ": " + e.getMessage());
+			logger.log(Level.FINE,e.getClass().getName() + ": " + e.getMessage());
 
 		}
 		return s;
@@ -453,7 +451,7 @@ public class BD {
 			c.commit();
 
 		} catch (Exception e) {
-			System.out.println(e.getClass().getName() + ": " + e.getMessage());
+			logger.log(Level.FINE,e.getClass().getName() + ": " + e.getMessage());
 		}
 	}
 
@@ -468,7 +466,7 @@ public class BD {
 			c.commit();
 
 		} catch (Exception e) {
-			System.out.println(e.getClass().getName() + ": " + e.getMessage());
+			logger.log(Level.FINE,e.getClass().getName() + ": " + e.getMessage());
 		}
 	}
 
@@ -484,7 +482,7 @@ public class BD {
 			stmt2.close();
 
 		} catch (Exception e) {
-			System.out.println(e.getClass().getName() + ": " + e.getMessage());
+			logger.log(Level.FINE,e.getClass().getName() + ": " + e.getMessage());
 		}
 
 		return s;
@@ -538,7 +536,7 @@ public class BD {
 			}
 
 		} catch (Exception e) {
-			System.out.println(e.getClass().getName() + ": " + e.getMessage());
+			logger.log(Level.FINE,e.getClass().getName() + ": " + e.getMessage());
 		}
 	}
 
@@ -570,7 +568,7 @@ public class BD {
 			stmt2.close();
 
 		} catch (Exception e) {
-			System.out.println(e.getClass().getName() + ": " + e.getMessage());
+			logger.log(Level.FINE,e.getClass().getName() + ": " + e.getMessage());
 		}
 
 		Iterator it = training.entrySet().iterator();
@@ -609,7 +607,7 @@ public class BD {
 			stmt2.close();
 
 		} catch (Exception e) {
-			System.out.println(e.getClass().getName() + ": " + e.getMessage());
+			logger.log(Level.FINE,e.getClass().getName() + ": " + e.getMessage());
 		}
 
 		return r;
