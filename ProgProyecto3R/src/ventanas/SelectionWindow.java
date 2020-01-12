@@ -117,7 +117,6 @@ public class SelectionWindow extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				;
 				SelectionWindow.this.dispose();
 				System.exit(0);
 

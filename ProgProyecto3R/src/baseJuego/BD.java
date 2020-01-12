@@ -618,12 +618,12 @@ public class BD {
 	public static void main(String[] args) throws SQLException {
 		startBD();
 
-		create();
+		//create();
 
 		LinkedList<Monster> bdMonter = new LinkedList<>();
 		LinkedList<Move> bdMove = new LinkedList<>();
 
-		createJugador("kevin", "kevin");
+		//createJugador("kevin", "kevin");
 
 		MonsterPlant catercute = new MonsterPlant("Catercute", 100, 100, 100, 100);
 		MonsterPlant weepinutor = new MonsterPlant("Weepinutor", 10, 10, 10, 10);
@@ -671,7 +671,7 @@ public class BD {
 		bdMonter.add(tauras);
 		bdMonter.add(dewpuff);
 
-		createAllMonsters(bdMonter);
+		//createAllMonsters(bdMonter);
 
 		Move ascuas = new Move("Ascuas", 60);
 		Move lanzallamas = new Move("Lanzallamas", 100);
@@ -729,40 +729,40 @@ public class BD {
 		bdMove.add(placaje);
 		bdMove.add(araniazo);
 
-		createAllMoves(bdMove);
-
-		createMM(catercute, lluevehojas);
-		createMM(catercute, ataqueRapido);
-		createMM(catercute, placaje);
-		createMM(catercute, araniazo);
-
-		createMM(weepinutor, picotazo);
-		createMM(weepinutor, placaje);
-		createMM(weepinutor, hojaAfilada);
-		createMM(weepinutor, rayoSolar);
-
-		createMM(venulax, picotazo);
-		createMM(venulax, placaje);
-		createMM(venulax, hojaAfilada);
-		createMM(venulax, rayoSolar);
-
-		createMM(golbasaur, picotazo);
-		createMM(golbasaur, placaje);
-		createMM(golbasaur, hojaAfilada);
-		createMM(golbasaur, rayoSolar);
-
-		createMM(moltnx, ascuas);
-		createMM(moltnx, ataqueRapido);
-		createMM(moltnx, placaje);
-		createMM(moltnx, araniazo);
-
-		createMM(flaredon, ascuas);
-		createMM(flaredon, lanzallamas);
-		createMM(flaredon, giroFuego);
-		createMM(flaredon, araniazo);
+//		createAllMoves(bdMove);
+//
+//		createMM(catercute, lluevehojas);
+//		createMM(catercute, ataqueRapido);
+//		createMM(catercute, placaje);
+//		createMM(catercute, araniazo);
+//
+//		createMM(weepinutor, picotazo);
+//		createMM(weepinutor, placaje);
+//		createMM(weepinutor, hojaAfilada);
+//		createMM(weepinutor, rayoSolar);
+//
+//		createMM(venulax, picotazo);
+//		createMM(venulax, placaje);
+//		createMM(venulax, hojaAfilada);
+//		createMM(venulax, rayoSolar);
+//
+//		createMM(golbasaur, picotazo);
+//		createMM(golbasaur, placaje);
+//		createMM(golbasaur, hojaAfilada);
+//		createMM(golbasaur, rayoSolar);
+//
+//		createMM(moltnx, ascuas);
+//		createMM(moltnx, ataqueRapido);
+//		createMM(moltnx, placaje);
+//		createMM(moltnx, araniazo);
+//
+//		createMM(flaredon, ascuas);
+//		createMM(flaredon, lanzallamas);
+//		createMM(flaredon, giroFuego);
+//		createMM(flaredon, araniazo);
 
 		Enemy jovenChano = new Enemy("Joven Chano", "Te desafio!!");
-		createEnemy(jovenChano);
+//		createEnemy(jovenChano);
 
 		LevelGame level1 = new LevelGame("Pueblo Paleta", jovenChano, new HashMap<Monster, LinkedList<Move>>(),
 				new HashMap<Monster, LinkedList<Move>>(), 0);
@@ -772,14 +772,14 @@ public class BD {
 		level1.addMonstersEnemy(moltnx, selectMM(moltnx));
 		level1.addMonstersEnemy(flaredon, selectMM(flaredon));
 
-		createLevel(level1);
+//		createLevel(level1);
 
 		System.out.println(selectLevel(level1.getName()));
 
 		Enemy domingueroPaco = new Enemy("Dominguero Paco", "Jojojo, no vencerás a mis plantas!!");
-		createEnemy(domingueroPaco);
+//		createEnemy(domingueroPaco);
 
-		LevelGame level2 = new LevelGame("Ciudad Olivo", jovenChano, new HashMap<Monster, LinkedList<Move>>(),
+		LevelGame level2 = new LevelGame("Ciudad Olivo", domingueroPaco, new HashMap<Monster, LinkedList<Move>>(),
 				new HashMap<Monster, LinkedList<Move>>(), 0);
 		level2.addMonsters(weepinutor, selectMM(weepinutor));
 		level2.addMonsters(moltnx, selectMM(moltnx));
@@ -789,9 +789,11 @@ public class BD {
 		level2.addMonstersEnemy(weepinutor, selectMM(weepinutor));
 		level2.addMonstersEnemy(catercute, selectMM(catercute));
 
-		createLevel(level2);
+//		createLevel(level2);
 
 		System.out.println(selectLevel(level2.getName()));
+		
+//		createJugador("a", "a");
 
 		closeBD();
 

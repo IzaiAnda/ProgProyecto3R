@@ -41,9 +41,7 @@ public class LevelsWindow extends JFrame {
 		
 		levels = BD.selectAllLevelsUnder(p.getLevel());
 		
-		
 		for (int i = 0; i < levels.size(); i++) {
-			System.out.println(levels.size());
 			JButton buttonCombat = new JButton();
 			buttonCombat.setIcon(new ImageIcon(StartGameWindow.class.getResource("/images/button_"+ i +".png")));
 			buttonCombat.setText(Integer.toString(i));
@@ -53,7 +51,6 @@ public class LevelsWindow extends JFrame {
 			contentpane.add(buttonCombat);
 
 			bounds1 =+ 70;
-					
 			
 			buttonCombat.addActionListener(new ActionListener() {
 
